@@ -3,25 +3,26 @@ import "./Carousel.css";
 
 const slides = [
   {
-    title: "Welcome to HIBS",
-    description:
-      "A warm environment for modern learning, moral values, and academic excellence.",
-    image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=80",
+    title: "",
+    description: "",
+    image: "https://hibs.edu.gh/images/2026/04/23/slide02.jpg",
   },
   {
-    title: "Science and Computer Labs",
-    description:
-      "Fully-equipped labs with dedicated broadband connection and modern facilities.",
-    image:
-      "https://images.unsplash.com/photo-1581093588401-6d5281bbf152?auto=format&fit=crop&w=1400&q=80",
+    // hero slide with overlay text
+    title: "Hilltop International British School (HIBS)",
+    description: "",
+    image: "https://hibs.edu.gh/images/2026/05/08/hibs_slide01.jpg",
+    hero: true,
   },
   {
-    title: "Quality Teachers",
-    description:
-      "Cambridge certified tutors delivering personalized learning to small classes.",
-    image:
-      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=1400&q=80",
+    title: "",
+    description: "",
+    image: "https://hibs.edu.gh/images/2026/05/08/hibs_slide04.jpg",
+  },
+  {
+    title: "",
+    description: "",
+    image: "https://hibs.edu.gh/images/2026/05/08/hibs_slide05.jpg",
   },
 ];
 
@@ -48,13 +49,14 @@ const Carousel = () => {
       >
         {slides.map((slide, index) => (
           <div className="carousel-slide" key={index}>
-            <div className="carousel-card">
+            <div className={`carousel-card ${slide.hero ? "hero-slide" : ""}`}>
               <img
                 src={slide.image}
                 alt={slide.title}
                 className="carousel-image"
               />
               <div className="carousel-copy">
+                {slide.hero && <span className="badge">WELCOME TO</span>}
                 <h2>{slide.title}</h2>
                 <p>{slide.description}</p>
               </div>

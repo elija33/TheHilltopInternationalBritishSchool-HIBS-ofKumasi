@@ -7,8 +7,8 @@ const Body = () => {
       <section className="welcome-section" id="about">
         <div className="welcome-image">
           <img
-            src="https://via.placeholder.com/420x320.png?text=Welcome"
-            alt="School welcome"
+            src={"../../../image/andrew-akwasi-oteng-amoako.jpg"}
+            alt="Andrew Akwasi Oteng-Amoako"
           />
         </div>
         <div className="welcome-copy">

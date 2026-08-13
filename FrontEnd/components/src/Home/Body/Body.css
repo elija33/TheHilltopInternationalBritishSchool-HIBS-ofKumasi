@@ -8,11 +8,11 @@
   grid-template-columns: 1.2fr 1.8fr;
   gap: 2.5rem;
   align-items: start;
-  background: #ffffff;
-  border-radius: 28px;
-  box-shadow: 0 24px 80px rgba(31, 41, 55, 0.08);
+  background: var(--white);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(31, 41, 55, 0.08);
   overflow: hidden;
-  padding: 2.5rem;
+  padding: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -20,23 +20,25 @@
   border-radius: 24px;
   overflow: hidden;
 }
-
 .welcome-image img {
-  width: 100%;
+  width: 252px;
+  height: 301px;
   display: block;
   object-fit: cover;
+  border-radius: 16px;
 }
 
 .welcome-copy h2 {
   margin-top: 0;
-  color: #179636;
-  font-size: 2.5rem;
+  color: var(--green-dark);
+  font-size: 2rem;
   line-height: 1.05;
+  font-weight: 700;
 }
 
 .welcome-copy p {
   margin: 1rem 0;
-  color: #27303f;
+  color: var(--muted);
   font-size: 1rem;
   line-height: 1.85;
 }
