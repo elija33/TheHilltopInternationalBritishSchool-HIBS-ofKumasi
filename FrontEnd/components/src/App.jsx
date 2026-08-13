@@ -23,10 +23,19 @@ const App = () => {
 
             <div className="top-actions">
               <a href="#news" className="top-link">
-                News
+                NEWS
+              </a>
+              <a href="#alumni" className="top-link">
+                ALUMNI
+              </a>
+              <a href="#parents" className="top-link">
+                PARENTS
+              </a>
+              <a href="#jobs" className="top-link">
+                JOBS
               </a>
               <a href="#apply" className="apply-btn">
-                Apply
+                APPLY
               </a>
             </div>
           </div>

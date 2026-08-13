@@ -82,6 +82,7 @@ body {
 /* Top brand row */
 .top-bar {
   background: var(--white);
+  position: relative;
 }
 
 .header-inner {
@@ -116,16 +117,51 @@ body {
 
 /* top strip matching Rowan-like action area */
 .top-actions {
-  display: flex;
-  gap: 1rem;
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  display: inline-flex;
   align-items: center;
+  gap: 0.9rem;
+  background: #ffd83b;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px 0 0 6px;
+  z-index: 40;
 }
 
 .top-actions a {
-  color: var(--muted);
+  color: #1f2937;
   text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.top-actions::after {
+  content: "";
+  position: absolute;
+  right: -22px;
+  top: 0;
+  width: 28px;
+  height: 100%;
+  background: #ffd83b;
+  transform: skewX(-22deg);
+  border-radius: 0 6px 6px 0;
+}
+
+@media (max-width: 720px) {
+  .top-actions {
+    padding: 0.15rem 0.4rem;
+    gap: 0.5rem;
+    right: 6px;
+  }
+  .top-actions a {
+    display: none;
+  }
+  .top-actions .apply-btn {
+    display: inline-block;
+  }
 }
 
 /* Primary navigation row (below the brand) */
