@@ -33,6 +33,12 @@ body {
   line-height: 1.7;
 }
 
+/* Prevent horizontal page scrolling caused by wide elements */
+html,
+body {
+  overflow-x: hidden;
+}
+
 .brand-title {
   margin: 0;
   font-weight: 800;
@@ -177,6 +183,12 @@ body {
   padding: 0.25rem 0;
 }
 
+/* slightly offset primary nav a bit to the right (small nudge) */
+.primary-nav .container {
+  justify-content: flex-start;
+  padding-left: 54px;
+}
+
 .main-nav {
   display: flex;
   gap: 1rem;
@@ -198,9 +210,98 @@ body {
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
+
+/* enforce desired nav link color and non-bold weight */
+.main-nav a {
+  color: #05a861 !important;
+  font-weight: 400 !important;
+}
+
+/* Add dropdown arrow to links with the has-dropdown class without shifting layout */
+.main-nav a.has-dropdown {
+  position: relative;
+}
+.main-nav a.has-dropdown::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  margin-left: 5px; /* gap between text/chevron and next item */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 8px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'><path d='M1 1 L5 5 L9 1' stroke='%2305A861' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 5;
+}
+
+/* ensure the link doesn't clip the chevron */
+.main-nav a.has-dropdown {
+  overflow: visible;
+}
+
+/* If the has-dropdown class is applied to the nav-item wrapper, show the chevron on its anchor */
+.main-nav .nav-item.has-dropdown > a::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  margin-left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 8px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'><path d='M1 1 L5 5 L9 1' stroke='%2305A861' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 5;
+}
+
+.main-nav .nav-item.has-dropdown > a {
+  overflow: visible;
+  position: relative;
+}
+
+/* Dropdown menu styles for nav items */
+.main-nav .nav-item {
+  position: relative;
+  display: inline-block;
+}
+.main-nav .nav-item .dropdown-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  background: var(--white);
+  border: 1px solid #e7eee8;
+  box-shadow: 0 8px 20px rgba(31, 41, 55, 0.08);
+  padding: 8px 0;
+  min-width: 180px;
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  width: max-content; /* expand to fit longest item */
+  white-space: nowrap; /* keep items on one line */
+  border-radius: 6px;
+  z-index: 50;
+}
+.main-nav .nav-item .dropdown-menu li a {
+  display: block;
+  padding: 8px 18px; /* slightly wider padding */
+  color: #05a861;
+  text-decoration: none;
+  font-weight: 500;
+}
+.main-nav .nav-item .dropdown-menu li a:hover {
+  background: #f2f4f1;
+}
+.main-nav .nav-item.has-dropdown:hover .dropdown-menu,
+.main-nav .nav-item.has-dropdown:focus-within .dropdown-menu {
+  display: block;
+}
 .brand-logo {
   width: 348px;
-  height: 80px;
+  max-width: 100%;
+  height: auto;
   object-fit: contain;
   border-radius: 0;
 }
@@ -220,8 +321,9 @@ body {
 .main-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: flex-end;
+  gap: 2.5rem;
+  justify-content: flex-start;
+  margin-left: 8px;
 }
 
 .main-nav a {
