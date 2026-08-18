@@ -1,0 +1,189 @@
+@startuml
+' ER diagram for HIBS portal (term-first)
+!define TABLE(x) entity x << (T,#FFAAAA) >>
+
+TABLE(AcademicYear) {
+  +id : uuid
+  +label : string
+  +start_date : date
+  +end_date : date
+}
+
+TABLE(Term) {
+  +id : uuid
+  +academic_year_id : uuid
+  +name : string
+  +start_date : date
+  +end_date : date
+  +is_current : boolean
+  +published_at : timestamp
+}
+
+TABLE(SchoolDay) {
+  +id : uuid
+  +term_id : uuid
+  +date : date
+  +is_holiday : boolean
+  +closure_reason : string
+}
+
+TABLE(User) {
+  +id : uuid
+  +email : string
+  +name : string
+  +status : string
+  +created_at : timestamp
+}
+
+TABLE(Role) {
+  +id : uuid
+  +name : string
+}
+
+TABLE(UserRole) {
+  +user_id : uuid
+  +role_id : uuid
+  +meta : json
+}
+
+TABLE(Permission) {
+  +id : uuid
+  +name : string
+}
+
+TABLE(RolePermission) {
+  +role_id : uuid
+  +permission_id : uuid
+}
+
+TABLE(Class) {
+  +id : uuid
+  +academic_year_id : uuid
+  +name : string
+  +section : string
+}
+
+TABLE(Enrollment) {
+  +id : uuid
+  +student_id : uuid
+  +class_id : uuid
+  +start_date : date
+  +end_date : date
+  +status : string
+}
+
+TABLE(TeachingAssignment) {
+  +id : uuid
+  +teacher_id : uuid
+  +class_id : uuid
+  +subject_id : uuid
+  +term_id : uuid
+}
+
+TABLE(Assessment) {
+  +id : uuid
+  +class_id : uuid
+  +subject_id : uuid
+  +name : string
+  +date : date
+  +weighting : numeric
+  +term_id : uuid
+}
+
+TABLE(GradeRecord) {
+  +id : uuid
+  +assessment_id : uuid
+  +student_id : uuid
+  +value : numeric
+  +status : string
+  +created_by : uuid
+  +created_at : timestamp
+  +reason : string
+}
+
+TABLE(GradeCorrectionRequest) {
+  +id : uuid
+  +grade_record_id : uuid
+  +requested_by : uuid
+  +reason : string
+  +status : string
+  +processed_by : uuid
+  +processed_at : timestamp
+}
+
+TABLE(AttendanceRecord) {
+  +id : uuid
+  +student_id : uuid
+  +date : date
+  +period : integer
+  +status : string
+  +recorded_by : uuid
+  +created_at : timestamp
+  +term_id : uuid
+}
+
+TABLE(Syllabus) {
+  +id : uuid
+  +subject_id : uuid
+  +class_id : uuid
+  +term_id : uuid
+  +version : integer
+  +content_url : string
+  +uploaded_by : uuid
+  +uploaded_at : timestamp
+}
+
+TABLE(FeeInvoice) {
+  +id : uuid
+  +student_id : uuid
+  +term_id : uuid
+  +total_amount : numeric
+  +issued_at : timestamp
+  +due_date : date
+  +status : string
+}
+
+TABLE(Payment) {
+  +id : uuid
+  +invoice_id : uuid
+  +amount : numeric
+  +method : string
+  +recorded_by : uuid
+  +recorded_at : timestamp
+  +external_txn_id : string
+}
+
+TABLE(AuditLog) {
+  +id : uuid
+  +entity_type : string
+  +entity_id : uuid
+  +action : string
+  +performed_by : uuid
+  +diff : json
+  +timestamp : timestamp
+}
+
+' Relationships
+AcademicYear ||--o{ Term : contains
+Term ||--o{ SchoolDay : has
+AcademicYear ||--o{ Class : contains
+Class ||--o{ Enrollment : has
+User ||--o{ UserRole : has
+Role ||--o{ UserRole : has
+Role ||--o{ RolePermission : has
+Permission ||--o{ RolePermission : has
+Class ||--o{ TeachingAssignment : has
+Term ||--o{ TeachingAssignment : has
+Class ||--o{ Assessment : has
+Assessment ||--o{ GradeRecord : has
+User ||--o{ GradeRecord : has
+GradeRecord ||--o{ GradeCorrectionRequest : has
+User ||--o{ AttendanceRecord : has
+Term ||--o{ AttendanceRecord : has
+Class ||--o{ Syllabus : has
+Term ||--o{ Syllabus : has
+User ||--o{ FeeInvoice : billed_to
+FeeInvoice ||--o{ Payment : has
+User ||--o{ AuditLog : performs
+
+@enduml

@@ -8,6 +8,10 @@ import "./styles.css";
 import ApplicationModal from "./ApplicationModal";
 import ApplyPage from "./ApplyPage";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import WhoWeAre from "./WhoWeAre";
+import StudentLogin from "./Login/StudentLogin";
+import TeacherLogin from "./Login/TeacherLogin";
+import ParentLogin from "./Login/ParentLogin";
 
 const App = () => {
   const [showModal, setShowModal] = useState(false);
@@ -31,14 +35,23 @@ const App = () => {
               <a href="#news" className="top-link">
                 NEWS
               </a>
+              <Link to="/login/student" className="top-link">
+                STUDENTS
+              </Link>
+              <Link to="/login/teacher" className="top-link">
+                TEACHERS
+              </Link>
               <a href="#alumni" className="top-link">
                 ALUMNI
               </a>
-              <a href="#parents" className="top-link">
+              <Link to="/login/parent" className="top-link">
                 PARENTS
-              </a>
+              </Link>
               <a href="#jobs" className="top-link">
                 JOBS
+              </a>
+              <a href="#igcse" className="top-link">
+                IGCSE
               </a>
               <Link to="/apply" className="apply-btn">
                 APPLY
@@ -51,15 +64,34 @@ const App = () => {
           <div className="container">
             <nav className="main-nav">
               <a href="#home">Home</a>
-              <a href="#about" className="has-dropdown">
-                About HIBS
-              </a>
-              <a href="#igcse">IGCSE</a>
+              <div className="nav-item has-dropdown">
+                <a href="#about">About HIBS</a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <Link to="/who">Who We Are</Link>
+                  </li>
+                  <li>
+                    <a href="#board">Board of Directors</a>
+                  </li>
+                  <li>
+                    <a href="#staff">Teaching Staff</a>
+                  </li>
+                  <li>
+                    <a href="#pta">PTA</a>
+                  </li>
+                  <li>
+                    <a href="#visiting">Visiting HIBS</a>
+                  </li>
+                </ul>
+              </div>
               <div className="nav-item has-dropdown">
                 <a href="#admission">Admission</a>
                 <ul className="dropdown-menu">
                   <li>
                     <a href="#alevel">A Level</a>
+                  </li>
+                  <li>
+                    <a href="#admin-staff">Administrative Staff</a>
                   </li>
                 </ul>
               </div>
@@ -80,6 +112,7 @@ const App = () => {
                   </li>
                 </ul>
               </div>
+              <a href="#igcse">IGCSE</a>
               <a href="#faqs">FAQs</a>
               <a href="#media">Media Center</a>
               <a href="#resources">Resources</a>
@@ -121,6 +154,10 @@ const App = () => {
           path="/apply"
           element={<ApplyPage onClose={() => navigate("/")} />}
         />
+        <Route path="/who" element={<WhoWeAre />} />
+        <Route path="/login/student" element={<StudentLogin />} />
+        <Route path="/login/teacher" element={<TeacherLogin />} />
+        <Route path="/login/parent" element={<ParentLogin />} />
       </Routes>
 
       {showModal && (
