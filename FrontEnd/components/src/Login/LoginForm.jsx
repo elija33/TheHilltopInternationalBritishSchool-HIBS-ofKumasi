@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LoginForm = ({ role = "User" }) => {
+const LoginForm = ({ role = "User", redirectTo = "/" }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -10,8 +10,7 @@ const LoginForm = ({ role = "User" }) => {
     e.preventDefault();
     // Placeholder behaviour: in real app, call API and handle auth
     console.log("Login attempt", { role, username });
-    // For now, navigate to root or a dashboard placeholder
-    navigate("/");
+    navigate(redirectTo);
   };
 
   const title = `Log Into The Hilltop ${role} Portal`;
@@ -25,6 +24,7 @@ const LoginForm = ({ role = "User" }) => {
         <input
           id="username"
           name="username"
+          type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Enter username"
@@ -53,7 +53,7 @@ const LoginForm = ({ role = "User" }) => {
 
       <div className="form-links">
         <a href="#forgot-username">Forgot username</a>
-        <span> · </span>
+        <span> </span>
         <a href="#forgot-password">Forgot password</a>
       </div>
     </form>

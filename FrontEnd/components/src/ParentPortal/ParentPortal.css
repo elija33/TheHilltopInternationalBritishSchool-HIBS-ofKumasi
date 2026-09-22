@@ -1,0 +1,128 @@
+.child-switcher {
+  position: relative;
+}
+
+.child-switcher-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.child-switcher-trigger.static {
+  cursor: default;
+}
+
+.child-switcher-trigger .chevron {
+  font-size: 0.7rem;
+  opacity: 0.85;
+}
+
+.child-switcher-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: #fff;
+  border: 1px solid #e7eee8;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(17, 24, 39, 0.15);
+  min-width: 280px;
+  padding: 0.5rem;
+  z-index: 60;
+  color: var(--text);
+}
+
+.child-switcher-group-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding: 0.5rem 0.6rem 0.25rem;
+}
+
+.child-switcher-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0.55rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.child-switcher-item:hover {
+  background: var(--gray-bg);
+}
+
+.child-switcher-item.selected {
+  background: #e3f6e8;
+}
+
+.child-switcher-item.past {
+  color: var(--muted);
+  cursor: default;
+}
+
+.child-switcher-item .name-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.child-switcher-item .name-block .name {
+  font-weight: 600;
+}
+
+.child-switcher-item .name-block .meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.balance-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d64545;
+  flex-shrink: 0;
+}
+
+.household-card {
+  background: var(--gray-bg);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.household-card .total {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.fee-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.past-student-banner {
+  background: #eef1ee;
+  border: 1px solid #d7dcd7;
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font-size: 0.88rem;
+  margin-bottom: 1.25rem;
+}

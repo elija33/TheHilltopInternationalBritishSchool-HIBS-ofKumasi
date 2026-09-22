@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "./Footer/Footer";
 import Body from "./Home/Body/Body";
 import Carousel from "./Home/carousel/Carousel";
@@ -7,52 +7,72 @@ import hibsFooterLogo from "../image/hibs_logofooter.jpg";
 import "./styles.css";
 import ApplicationModal from "./ApplicationModal";
 import ApplyPage from "./ApplyPage";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
 import WhoWeAre from "./WhoWeAre";
 import StudentLogin from "./Login/StudentLogin";
 import TeacherLogin from "./Login/TeacherLogin";
 import ParentLogin from "./Login/ParentLogin";
+import StudentPortalLayout from "./StudentPortal/StudentPortalLayout";
+import StudentHome from "./StudentPortal/Home";
+import StudentGrades from "./StudentPortal/Grades";
+import StudentAttendance from "./StudentPortal/Attendance";
+import StudentSyllabus from "./StudentPortal/Syllabus";
+import StudentProfile from "./StudentPortal/Profile";
+import ParentPortalLayout from "./ParentPortal/ParentPortalLayout";
+import ParentHome from "./ParentPortal/Home";
+import ParentGrades from "./ParentPortal/Grades";
+import ParentAttendance from "./ParentPortal/Attendance";
 
 const App = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.getElementById(location.hash.slice(1));
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location]);
 
   return (
     <div className="app-shell">
       <header className="site-header">
         <div className="top-bar">
           <div className="container header-inner">
-            <a href="#" className="brand">
+            <Link to="/" className="brand">
               <img
                 src={hibsLogo}
                 alt="HIBS logo"
                 className="brand-logo"
                 height={80}
               />
-            </a>
+            </Link>
 
             <div className="top-actions">
-              <a href="#news" className="top-link">
+              <Link to="/#news" className="top-link">
                 NEWS
-              </a>
+              </Link>
               <Link to="/login/student" className="top-link">
                 STUDENTS
               </Link>
               <Link to="/login/teacher" className="top-link">
                 TEACHERS
               </Link>
-              <a href="#alumni" className="top-link">
+              <Link to="/#alumni" className="top-link">
                 ALUMNI
-              </a>
+              </Link>
               <Link to="/login/parent" className="top-link">
                 PARENTS
               </Link>
-              <a href="#jobs" className="top-link">
+              <Link to="/#jobs" className="top-link">
                 JOBS
-              </a>
-              <a href="#igcse" className="top-link">
+              </Link>
+              <Link to="/#igcse" className="top-link">
                 IGCSE
-              </a>
+              </Link>
               <Link to="/apply" className="apply-btn">
                 APPLY
               </Link>
@@ -63,60 +83,60 @@ const App = () => {
         <div className="primary-nav">
           <div className="container">
             <nav className="main-nav">
-              <a href="#home">Home</a>
+              <Link to="/">Home</Link>
               <div className="nav-item has-dropdown">
-                <a href="#about">About HIBS</a>
+                <Link to="/#about">About HIBS</Link>
                 <ul className="dropdown-menu">
                   <li>
                     <Link to="/who">Who We Are</Link>
                   </li>
                   <li>
-                    <a href="#board">Board of Directors</a>
+                    <Link to="/#board">Board of Directors</Link>
                   </li>
                   <li>
-                    <a href="#staff">Teaching Staff</a>
+                    <Link to="/#staff">Teaching Staff</Link>
                   </li>
                   <li>
-                    <a href="#pta">PTA</a>
+                    <Link to="/#pta">PTA</Link>
                   </li>
                   <li>
-                    <a href="#visiting">Visiting HIBS</a>
+                    <Link to="/#visiting">Visiting HIBS</Link>
                   </li>
                 </ul>
               </div>
               <div className="nav-item has-dropdown">
-                <a href="#admission">Admission</a>
+                <Link to="/#admission">Admission</Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <a href="#alevel">A Level</a>
+                    <Link to="/#alevel">A Level</Link>
                   </li>
                   <li>
-                    <a href="#admin-staff">Administrative Staff</a>
+                    <Link to="/#admin-staff">Administrative Staff</Link>
                   </li>
                 </ul>
               </div>
               <div className="nav-item has-dropdown">
-                <a href="#campuslife">Campus Life</a>
+                <Link to="/#campuslife">Campus Life</Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <a href="#boarding">Boarding</a>
+                    <Link to="/#boarding">Boarding</Link>
                   </li>
                   <li>
-                    <a href="#clubs">Clubs &amp; Societies</a>
+                    <Link to="/#clubs">Clubs &amp; Societies</Link>
                   </li>
                   <li>
-                    <a href="#technology">Technology on Campus</a>
+                    <Link to="/#technology">Technology on Campus</Link>
                   </li>
                   <li>
-                    <a href="#sports">Clubs &amp; Societies</a>
+                    <Link to="/#sports">Sports</Link>
                   </li>
                 </ul>
               </div>
-              <a href="#igcse">IGCSE</a>
-              <a href="#faqs">FAQs</a>
-              <a href="#media">Media Center</a>
-              <a href="#resources">Resources</a>
-              <a href="#contact">Contact Us</a>
+              <Link to="/#igcse">IGCSE</Link>
+              <Link to="/#faqs">FAQs</Link>
+              <Link to="/#media">Media Center</Link>
+              <Link to="/#resources">Resources</Link>
+              <Link to="/#contact">Contact Us</Link>
             </nav>
           </div>
         </div>
@@ -158,6 +178,22 @@ const App = () => {
         <Route path="/login/student" element={<StudentLogin />} />
         <Route path="/login/teacher" element={<TeacherLogin />} />
         <Route path="/login/parent" element={<ParentLogin />} />
+
+        <Route path="/portal/student" element={<StudentPortalLayout />}>
+          <Route index element={<StudentHome />} />
+          <Route path="home" element={<StudentHome />} />
+          <Route path="grades" element={<StudentGrades />} />
+          <Route path="attendance" element={<StudentAttendance />} />
+          <Route path="syllabus" element={<StudentSyllabus />} />
+          <Route path="profile" element={<StudentProfile />} />
+        </Route>
+
+        <Route path="/portal/parent/:childId" element={<ParentPortalLayout />}>
+          <Route index element={<ParentHome />} />
+          <Route path="home" element={<ParentHome />} />
+          <Route path="grades" element={<ParentGrades />} />
+          <Route path="attendance" element={<ParentAttendance />} />
+        </Route>
       </Routes>
 
       {showModal && (

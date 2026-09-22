@@ -39,6 +39,11 @@ body {
   overflow-x: hidden;
 }
 
+/* offset anchored sections so the sticky header doesn't cover them when scrolled to */
+[id] {
+  scroll-margin-top: 140px;
+}
+
 .brand-title {
   margin: 0;
   font-weight: 800;
@@ -347,7 +352,7 @@ body {
   min-height: auto;
   background: transparent;
   display: block;
-  padding: 2rem 0;
+  padding: 0;
 }
 
 .hero::before,
@@ -378,9 +383,9 @@ body {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.main-content {
+/* .main-content {
   padding: 4rem 0;
-}
+} */
 
 .welcome-section {
   display: grid;
@@ -405,7 +410,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #4a4f55; /* dark frame */
+  background: #417760; /* dark frame */
   padding: 3rem 1rem;
 }
 
@@ -486,6 +491,10 @@ body {
 .form-links a {
   color: #1170ff;
   text-decoration: none;
+}
+
+.form-links span {
+  margin: 0 3rem;
 }
 
 /* Add a green CTA similar to the example for create account (optional) */
