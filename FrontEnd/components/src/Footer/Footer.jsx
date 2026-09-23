@@ -20,22 +20,31 @@ const Footer = () => {
         <div className="footer-Phones">
           <div className="footer-contact">
             <strong>Find Us</strong>
-            <div>The Hilltop International British School</div>
-            <p>+233 (0) 32 229 9229</p>
-            <p>+233 (0) 26 512 7717</p>
-            <p>+233 (0) 32 219 8394</p>
-            <p>+233 (0) 26 560 9987</p>
+            <div>
+              The Hilltop International British School
+              <p>
+                1 Cecilia Agyei-Amoako Road,
+                <p>Kumasi, Ghana</p>
+              </p>
+              <p>+233 (0) 32 229 9229</p>
+              <p>+233 (0) 26 512 7717</p>
+              <p>+233 (0) 32 219 8394</p>
+              <p>+233 (0) 26 560 9987</p>
+              <p>
+                <strong>Email:</strong> support@hibs.edu.gh
+              </p>
+            </div>
           </div>
         </div>
       </div>
       <div className="footer-contact">
-        <p>
+        {/* <p>
           <strong>Location:</strong> Cecilia Agyei Amoako Road, Daban, near Dr.
           Asafo Adjei Hospital Daban off Ricky Boakye Guinness Depot
-        </p>
-        <p>
+        </p> */}
+        {/* <p>
           <strong>Email:</strong> support@hibs.edu.gh
-        </p>
+        </p> */}
       </div>
 
       <div className="footer-bottom">

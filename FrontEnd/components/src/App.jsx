@@ -9,6 +9,9 @@ import ApplicationModal from "./ApplicationModal";
 import ApplyPage from "./ApplyPage";
 import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
 import WhoWeAre from "./WhoWeAre";
+import BoardOfDirectors from "./AboutHIBS/BoardOfDirectors";
+import AdministrativeStaff from "./Admission/AdministrativeStaff";
+import IGCSE from "./IGCSE/IGCSE";
 import StudentLogin from "./Login/StudentLogin";
 import TeacherLogin from "./Login/TeacherLogin";
 import ParentLogin from "./Login/ParentLogin";
@@ -58,9 +61,6 @@ const App = () => {
               <Link to="/login/student" className="top-link">
                 STUDENTS
               </Link>
-              <Link to="/login/teacher" className="top-link">
-                TEACHERS
-              </Link>
               <Link to="/#alumni" className="top-link">
                 ALUMNI
               </Link>
@@ -70,7 +70,7 @@ const App = () => {
               <Link to="/#jobs" className="top-link">
                 JOBS
               </Link>
-              <Link to="/#igcse" className="top-link">
+              <Link to="/igcse" className="top-link">
                 IGCSE
               </Link>
               <Link to="/apply" className="apply-btn">
@@ -91,7 +91,7 @@ const App = () => {
                     <Link to="/who">Who We Are</Link>
                   </li>
                   <li>
-                    <Link to="/#board">Board of Directors</Link>
+                    <Link to="/board-of-directors">Board of Directors</Link>
                   </li>
                   <li>
                     <Link to="/#staff">Teaching Staff</Link>
@@ -111,7 +111,7 @@ const App = () => {
                     <Link to="/#alevel">A Level</Link>
                   </li>
                   <li>
-                    <Link to="/#admin-staff">Administrative Staff</Link>
+                    <Link to="/administrative-staff">Administrative Staff</Link>
                   </li>
                 </ul>
               </div>
@@ -132,7 +132,7 @@ const App = () => {
                   </li>
                 </ul>
               </div>
-              <Link to="/#igcse">IGCSE</Link>
+              <Link to="/igcse">IGCSE</Link>
               <Link to="/#faqs">FAQs</Link>
               <Link to="/#media">Media Center</Link>
               <Link to="/#resources">Resources</Link>
@@ -175,6 +175,9 @@ const App = () => {
           element={<ApplyPage onClose={() => navigate("/")} />}
         />
         <Route path="/who" element={<WhoWeAre />} />
+        <Route path="/board-of-directors" element={<BoardOfDirectors />} />
+        <Route path="/administrative-staff" element={<AdministrativeStaff />} />
+        <Route path="/igcse" element={<IGCSE />} />
         <Route path="/login/student" element={<StudentLogin />} />
         <Route path="/login/teacher" element={<TeacherLogin />} />
         <Route path="/login/parent" element={<ParentLogin />} />

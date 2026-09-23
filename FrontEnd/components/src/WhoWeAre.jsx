@@ -39,35 +39,68 @@ const WhoWeAre = () => {
 
           <p>
             Accredited by Cambridge Assessment International Education in
-            September 2010, The Hilltop International British School (HIBS)
-            provides a secure and progressive education environment with
-            counselling and guidance services through to the university
-            application level. HIBS admits students from year four through to
-            Upper Six Level and prepares students for the International General
-            Certificate of Secondary Education (IGCSE) and Advanced (A) Level
-            examinations.
+            September 2010, The Hilltop International British School (HIBS),
+            formerly The Hilltop International Science College offers to
+            students the opportunity to sit for the prestigious International
+            Graduate Certificate of Secondary Education (IGCSE) and the
+            Advanced (A) level. HIBS is part of The Hilltop School and a
+            member of the PSGN of the British Council.
+          </p>
+
+          <p>
+            HIBS admits students from year four through to Upper Six Level.
+            We provide a secure and progressive education environment with
+            counseling and guidance services through to the university
+            application level. Our students graduate and undertake
+            undergraduate programmes in medicine, engineering, applied
+            science programmes and business Administration in local and
+            international universities.
           </p>
 
           <h3>Multicultural Community</h3>
           <p>
             A global community of 10 to 19 year olds, children from all over the
-            world are welcome at HIBS. Our community includes students from five
-            different nationals including Lebanon, Equitoria Guinea, Brazil,
-            Nigeria, USA, Mali, Albania, UK and India.
+            world are welcome at the HIBS. Our community includes students from
+            five different nationals including Lebanon, Equitoria Guinnea,
+            Brazil, Nigeria, USA, Mali, Albania, UK and India.
           </p>
 
           <h3>Our Core Values</h3>
           <p>
             We believe that every child has a talent. We train them to exploit
             it in order to maximize their potential, to believe and be confident
-            in themselves, and turn out to be valuable citizens in their
+            in themselves; and turn out to be valuable citizens in their
             society.
+          </p>
+
+          <h3>Our Motto</h3>
+          <p>
+            &ldquo;Excellence, Knowledge and Integrity&rdquo;. Our students aim
+            to achieve academic excellence, to know and understand the
+            environment and the society of abode and to be morally upright.
+          </p>
+
+          <h3>The School&rsquo;s Logo</h3>
+          <p>
+            Our logo which is glowing torch with black and white star in a
+            blue sky over a green hill represents the school logo. The black
+            and white stars symbolize the multiracial and international
+            nature of the school and the green hill represents our
+            ecological friendly environment.
           </p>
 
           <h3>Our Mission</h3>
           <p>
             We seek to provide sound holistic education for academic excellence
             in a guided and secured moral environment.
+          </p>
+
+          <h3>Our Vision</h3>
+          <p>
+            Our Vision is to be a leading school in Ghana and the West Africa
+            sub-region which provides competitive and holistic education with
+            distinction and instill ethical values and moral standards in our
+            pupils and students.
           </p>
         </div>
       </main>

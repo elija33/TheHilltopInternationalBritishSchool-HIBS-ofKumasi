@@ -1,0 +1,45 @@
+.igcse-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.igcse-title {
+  color: #16324f;
+  font-size: 2.4rem;
+  margin: 0 0 1.25rem;
+}
+
+.igcse-container h3 {
+  color: #1f2937;
+  margin: 1.5rem 0 0.25rem;
+}
+
+.igcse-container h4 {
+  color: #1f2937;
+  margin: 0 0 0.75rem;
+}
+
+.igcse-container p {
+  line-height: 1.8;
+  color: #374151;
+}
+
+.igcse-subjects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 2rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.igcse-subjects ul {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+}
+
+.igcse-subjects li {
+  margin: 0.35rem 0;
+  color: #374151;
+}

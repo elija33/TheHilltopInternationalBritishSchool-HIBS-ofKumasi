@@ -1,0 +1,82 @@
+.board-page-title {
+  color: #16324f;
+  font-size: 2.4rem;
+  margin: 0 0 1.5rem;
+}
+
+.board-container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.board-grid {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-0.5 * var(--bs-gutter-x));
+  margin-left: calc(-0.5 * var(--bs-gutter-x));
+}
+
+.board-col {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-top: var(--bs-gutter-y);
+}
+
+@media (min-width: 992px) {
+  .board-col {
+    flex: 0 0 auto;
+    width: 33.33333333%;
+  }
+}
+
+.board-card {
+  height: 100%;
+  background: #fff;
+  border: 1px solid #eceeed;
+  border-radius: 4px;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 45%;
+}
+
+.board-avatar {
+  width: 100%;
+  aspect-ratio: 1 / 1.05;
+  background: #e6e8e7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board-card-body {
+  padding: 1.25rem 1.5rem 1.75rem;
+}
+
+.board-name {
+  margin: 0 0 0.4rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #16324f;
+}
+
+.board-role {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 700;
+  color: #16324f;
+}
+
+.board-bio {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #333;
+  text-align: justify;
+}
