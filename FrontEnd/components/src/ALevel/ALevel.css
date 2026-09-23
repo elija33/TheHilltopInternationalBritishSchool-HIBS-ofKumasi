@@ -1,0 +1,50 @@
+.alevel-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.alevel-title {
+  color: #16324f;
+  font-size: 2.4rem;
+  margin: 0 0 1.25rem;
+}
+
+.alevel-container p {
+  line-height: 1.8;
+  color: #374151;
+}
+
+.alevel-subjects {
+  margin: 0.25rem 0 1.25rem;
+  padding: 0;
+  list-style-position: inside;
+}
+
+.alevel-subjects li {
+  margin: 0.35rem 0;
+  color: #374151;
+}
+
+.alevel-table-wrap {
+  overflow-x: auto;
+  margin-top: 0.5rem;
+}
+
+.alevel-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.alevel-table th,
+.alevel-table td {
+  border: 1px solid #d7dcd7;
+  padding: 0.65rem 0.9rem;
+  text-align: center;
+}
+
+.alevel-table th {
+  font-weight: 700;
+  color: #16324f;
+}

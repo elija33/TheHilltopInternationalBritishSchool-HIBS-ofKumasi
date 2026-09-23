@@ -1,0 +1,102 @@
+.contact-section {
+  padding: 3rem 1.5rem 4rem;
+}
+
+.contact-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.contact-title {
+  color: #16324f;
+  font-size: 2.2rem;
+  margin: 0 0 1.75rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .contact-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.contact-field label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.contact-optional {
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 6px;
+  border: 1px solid #d7dcd7;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #1f2937;
+  box-sizing: border-box;
+}
+
+.contact-field textarea {
+  resize: vertical;
+  padding-bottom: 1.5rem;
+}
+
+.contact-field input::placeholder {
+  color: #9aa1a8;
+}
+
+.contact-char-count {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.6rem;
+  font-size: 0.78rem;
+  color: #9aa1a8;
+}
+
+.contact-submit {
+  align-self: flex-start;
+  background: #11672c;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.contact-submit:hover {
+  background: #0d5223;
+}
+
+.contact-success {
+  color: #11672c;
+  font-size: 0.9rem;
+  margin: 0;
+}

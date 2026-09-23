@@ -10,8 +10,12 @@ import ApplyPage from "./ApplyPage";
 import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
 import WhoWeAre from "./WhoWeAre";
 import BoardOfDirectors from "./AboutHIBS/BoardOfDirectors";
+import VisitingHIBS from "./AboutHIBS/VisitingHIBS";
+import ToursAndOpenDays from "./AboutHIBS/ToursAndOpenDays";
 import AdministrativeStaff from "./Admission/AdministrativeStaff";
 import IGCSE from "./IGCSE/IGCSE";
+import ALevel from "./ALevel/ALevel";
+import ContactUs from "./ContactUs/ContactUs";
 import StudentLogin from "./Login/StudentLogin";
 import TeacherLogin from "./Login/TeacherLogin";
 import ParentLogin from "./Login/ParentLogin";
@@ -100,7 +104,7 @@ const App = () => {
                     <Link to="/#pta">PTA</Link>
                   </li>
                   <li>
-                    <Link to="/#visiting">Visiting HIBS</Link>
+                    <Link to="/visiting-hibs">Visiting HIBS</Link>
                   </li>
                 </ul>
               </div>
@@ -108,7 +112,7 @@ const App = () => {
                 <Link to="/#admission">Admission</Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link to="/#alevel">A Level</Link>
+                    <Link to="/a-level">A Level</Link>
                   </li>
                   <li>
                     <Link to="/administrative-staff">Administrative Staff</Link>
@@ -136,7 +140,7 @@ const App = () => {
               <Link to="/#faqs">FAQs</Link>
               <Link to="/#media">Media Center</Link>
               <Link to="/#resources">Resources</Link>
-              <Link to="/#contact">Contact Us</Link>
+              <Link to="/contact-us">Contact Us</Link>
             </nav>
           </div>
         </div>
@@ -164,8 +168,6 @@ const App = () => {
                   </div>
                 </section>
               </main>
-
-              <Footer />
             </>
           }
         />
@@ -176,8 +178,12 @@ const App = () => {
         />
         <Route path="/who" element={<WhoWeAre />} />
         <Route path="/board-of-directors" element={<BoardOfDirectors />} />
+        <Route path="/visiting-hibs" element={<VisitingHIBS />} />
+        <Route path="/tours-and-open-days" element={<ToursAndOpenDays />} />
         <Route path="/administrative-staff" element={<AdministrativeStaff />} />
         <Route path="/igcse" element={<IGCSE />} />
+        <Route path="/a-level" element={<ALevel />} />
+        <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/login/student" element={<StudentLogin />} />
         <Route path="/login/teacher" element={<TeacherLogin />} />
         <Route path="/login/parent" element={<ParentLogin />} />
@@ -198,6 +204,8 @@ const App = () => {
           <Route path="attendance" element={<ParentAttendance />} />
         </Route>
       </Routes>
+
+      <Footer />
 
       {showModal && (
         <ApplicationModal
