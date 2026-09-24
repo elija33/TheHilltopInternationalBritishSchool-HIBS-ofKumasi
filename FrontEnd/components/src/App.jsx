@@ -16,6 +16,7 @@ import AdministrativeStaff from "./Admission/AdministrativeStaff";
 import IGCSE from "./IGCSE/IGCSE";
 import ALevel from "./ALevel/ALevel";
 import ContactUs from "./ContactUs/ContactUs";
+import FAQs from "./FAQs/FAQs";
 import StudentLogin from "./Login/StudentLogin";
 import TeacherLogin from "./Login/TeacherLogin";
 import ParentLogin from "./Login/ParentLogin";
@@ -137,7 +138,7 @@ const App = () => {
                 </ul>
               </div>
               <Link to="/igcse">IGCSE</Link>
-              <Link to="/#faqs">FAQs</Link>
+              <Link to="/faqs">FAQs</Link>
               <Link to="/#media">Media Center</Link>
               <Link to="/#resources">Resources</Link>
               <Link to="/contact-us">Contact Us</Link>
@@ -184,6 +185,7 @@ const App = () => {
         <Route path="/igcse" element={<IGCSE />} />
         <Route path="/a-level" element={<ALevel />} />
         <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/faqs" element={<FAQs />} />
         <Route path="/login/student" element={<StudentLogin />} />
         <Route path="/login/teacher" element={<TeacherLogin />} />
         <Route path="/login/parent" element={<ParentLogin />} />
