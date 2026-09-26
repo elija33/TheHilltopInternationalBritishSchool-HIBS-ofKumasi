@@ -7,7 +7,13 @@ import hibsFooterLogo from "../image/hibs_logofooter.jpg";
 import "./styles.css";
 import ApplicationModal from "./ApplicationModal";
 import ApplyPage from "./ApplyPage";
-import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import WhoWeAre from "./WhoWeAre";
 import BoardOfDirectors from "./AboutHIBS/BoardOfDirectors";
 import VisitingHIBS from "./AboutHIBS/VisitingHIBS";
@@ -17,6 +23,10 @@ import IGCSE from "./IGCSE/IGCSE";
 import ALevel from "./ALevel/ALevel";
 import ContactUs from "./ContactUs/ContactUs";
 import FAQs from "./FAQs/FAQs";
+import ClubsAndSocieties from "./CampusLife/ClubsAndSocieties";
+import HousingAndDining from "./CampusLife/HousingAndDining";
+import TechnologyOnCampus from "./CampusLife/TechnologyOnCampus";
+import Sports from "./CampusLife/Sports";
 import StudentLogin from "./Login/StudentLogin";
 import TeacherLogin from "./Login/TeacherLogin";
 import ParentLogin from "./Login/ParentLogin";
@@ -124,16 +134,16 @@ const App = () => {
                 <Link to="/#campuslife">Campus Life</Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link to="/#boarding">Boarding</Link>
+                    <Link to="/housing-and-dining">Housing & Dining</Link>
                   </li>
                   <li>
-                    <Link to="/#clubs">Clubs &amp; Societies</Link>
+                    <Link to="/clubs-and-societies">Clubs &amp; Societies</Link>
                   </li>
                   <li>
-                    <Link to="/#technology">Technology on Campus</Link>
+                    <Link to="/technology-on-campus">Technology on Campus</Link>
                   </li>
                   <li>
-                    <Link to="/#sports">Sports</Link>
+                    <Link to="/sports">Sports</Link>
                   </li>
                 </ul>
               </div>
@@ -186,6 +196,10 @@ const App = () => {
         <Route path="/a-level" element={<ALevel />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/faqs" element={<FAQs />} />
+        <Route path="/clubs-and-societies" element={<ClubsAndSocieties />} />
+        <Route path="/housing-and-dining" element={<HousingAndDining />} />
+        <Route path="/technology-on-campus" element={<TechnologyOnCampus />} />
+        <Route path="/sports" element={<Sports />} />
         <Route path="/login/student" element={<StudentLogin />} />
         <Route path="/login/teacher" element={<TeacherLogin />} />
         <Route path="/login/parent" element={<ParentLogin />} />

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./VisitingHIBS.css";
+import hilltopSquare2 from "../../image/hilltop-square2.jpg";
 
 const visitCards = [
   {
@@ -55,7 +56,9 @@ const VisitingHIBS = () => {
       </aside>
 
       <div className="visiting-main">
-        <div className="visiting-hero" />
+        <div className="visiting-hero">
+          <img src={hilltopSquare2} alt="HIBS" />
+        </div>
 
         <div className="visiting-breadcrumb">
           <Link to="/">Home</Link> &raquo; <Link to="/who">About HIBS</Link> &raquo;{" "}

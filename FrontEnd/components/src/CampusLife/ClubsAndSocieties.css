@@ -1,0 +1,17 @@
+.clubs-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.clubs-title {
+  color: #16324f;
+  font-size: 2.4rem;
+  margin: 0 0 1.25rem;
+}
+
+.clubs-container p {
+  line-height: 1.8;
+  color: #1f2937;
+  text-align: center;
+}

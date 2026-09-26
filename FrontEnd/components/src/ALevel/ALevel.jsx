@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles.css";
 import "./ALevel.css";
+import hibsFooterLogo from "../../image/hibs_logofooter.jpg";
 
 const subjects = [
   "English Language",
@@ -44,7 +45,7 @@ const ALevel = () => {
             }}
           >
             <img
-              src="/src/image/hibs_logofooter.jpg"
+              src={hibsFooterLogo}
               alt="HIBS"
               style={{ height: 140, opacity: 0.95 }}
             />

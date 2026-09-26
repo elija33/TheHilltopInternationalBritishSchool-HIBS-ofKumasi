@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles.css";
 import "./IGCSE.css";
+import hibsFooterLogo from "../../image/hibs_logofooter.jpg";
 
 const subjectsColumnOne = [
   "First Language English",
@@ -30,7 +31,7 @@ const IGCSE = () => {
             }}
           >
             <img
-              src="/src/image/hibs_logofooter.jpg"
+              src={hibsFooterLogo}
               alt="HIBS"
               style={{ height: 140, opacity: 0.95 }}
             />

@@ -1,0 +1,135 @@
+.tech-sidebar-panel {
+  border: 1px solid #eef1ee;
+  border-top: none;
+  margin-top: -1px;
+}
+
+.tech-sidebar-panel-title {
+  background: #f2f4f1;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #1f2937;
+}
+
+.tech-sidebar-sub-link {
+  padding: 0.7rem 1.25rem;
+  font-size: 0.88rem;
+  color: #1f2937;
+  border-top: 1px solid #eef1ee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tech-sidebar-plus {
+  color: #179636;
+  font-weight: 700;
+}
+
+.tech-cta-banner {
+  display: block;
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  background: #16324f;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.tech-cta-banner--alt {
+  background: #11672c;
+}
+
+.tech-news {
+  border: 1px solid #eef1ee;
+  margin-top: 1rem;
+}
+
+.tech-news-title {
+  background: #f2f4f1;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #1f2937;
+}
+
+.tech-news-item {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid #eef1ee;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.tech-news-item a {
+  color: #1170ff;
+  font-size: 0.88rem;
+  text-decoration: underline;
+}
+
+.tech-news-item span {
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+.tech-hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.tech-hero-caption {
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 0.75rem 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tech-hero-caption a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.tech-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: #eef1ee;
+  border: 1px solid #eef1ee;
+  margin-top: 1.5rem;
+}
+
+.tech-quick-tile {
+  background: #fff;
+  padding: 1.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  text-decoration: none;
+  color: #1f2937;
+  font-size: 0.88rem;
+}
+
+.tech-quick-tile:hover {
+  background: #f7f9f7;
+}
+
+@media (max-width: 700px) {
+  .tech-quick-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 420px) {
+  .tech-quick-grid {
+    grid-template-columns: 1fr;
+  }
+}

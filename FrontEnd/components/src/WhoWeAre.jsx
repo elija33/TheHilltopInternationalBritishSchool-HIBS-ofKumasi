@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles.css";
+import hibsTop1 from "../image/hibs_top1.jpg";
 
 const WhoWeAre = () => {
   return (
@@ -11,15 +12,18 @@ const WhoWeAre = () => {
               width: "100%",
               height: 260,
               background: "linear-gradient(90deg,#0b9a56,#2bb673)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              overflow: "hidden",
             }}
           >
             <img
-              src="/src/image/hibs_logofooter.jpg"
+              src={hibsTop1}
               alt="HIBS"
-              style={{ height: 140, opacity: 0.95 }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center top",
+              }}
             />
           </div>
         </div>
@@ -42,19 +46,18 @@ const WhoWeAre = () => {
             September 2010, The Hilltop International British School (HIBS),
             formerly The Hilltop International Science College offers to
             students the opportunity to sit for the prestigious International
-            Graduate Certificate of Secondary Education (IGCSE) and the
-            Advanced (A) level. HIBS is part of The Hilltop School and a
-            member of the PSGN of the British Council.
+            Graduate Certificate of Secondary Education (IGCSE) and the Advanced
+            (A) level. HIBS is part of The Hilltop School and a member of the
+            PSGN of the British Council.
           </p>
 
           <p>
-            HIBS admits students from year four through to Upper Six Level.
-            We provide a secure and progressive education environment with
+            HIBS admits students from year four through to Upper Six Level. We
+            provide a secure and progressive education environment with
             counseling and guidance services through to the university
-            application level. Our students graduate and undertake
-            undergraduate programmes in medicine, engineering, applied
-            science programmes and business Administration in local and
-            international universities.
+            application level. Our students graduate and undertake undergraduate
+            programmes in medicine, engineering, applied science programmes and
+            business Administration in local and international universities.
           </p>
 
           <h3>Multicultural Community</h3>
@@ -82,11 +85,11 @@ const WhoWeAre = () => {
 
           <h3>The School&rsquo;s Logo</h3>
           <p>
-            Our logo which is glowing torch with black and white star in a
-            blue sky over a green hill represents the school logo. The black
-            and white stars symbolize the multiracial and international
-            nature of the school and the green hill represents our
-            ecological friendly environment.
+            Our logo which is glowing torch with black and white star in a blue
+            sky over a green hill represents the school logo. The black and
+            white stars symbolize the multiracial and international nature of
+            the school and the green hill represents our ecological friendly
+            environment.
           </p>
 
           <h3>Our Mission</h3>

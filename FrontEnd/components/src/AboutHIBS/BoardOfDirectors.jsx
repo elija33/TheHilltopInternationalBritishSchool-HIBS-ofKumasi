@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles.css";
 import "./BoardOfDirectors.css";
+import hibsFooterLogo from "../../image/hibs_logofooter.jpg";
 
 const leadership = [
   {
@@ -116,7 +117,7 @@ const BoardOfDirectors = () => {
             }}
           >
             <img
-              src="/src/image/hibs_logofooter.jpg"
+              src={hibsFooterLogo}
               alt="HIBS"
               style={{ height: 140, opacity: 0.95 }}
             />
