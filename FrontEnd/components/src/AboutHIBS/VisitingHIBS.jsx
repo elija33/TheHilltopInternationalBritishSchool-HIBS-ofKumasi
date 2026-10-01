@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./VisitingHIBS.css";
 import hilltopSquare2 from "../../image/hilltop-square2.jpg";
+import hilltop1 from "../../image/hilltop-1.jpg";
+import room1 from "../../image/room1.jpg";
 
 const visitCards = [
   {
@@ -12,11 +14,13 @@ const visitCards = [
   {
     title: "Tours & Open Days",
     to: "/tours-and-open-days",
+    image: hilltop1,
     body: "Attend one of our guided campus tours or open days — the best way to see our classrooms, meet teaching staff and observe campus life first-hand.",
   },
   {
     title: "Boarding & Accommodation",
     to: "/#boarding",
+    image: room1,
     body: "HIBS offers on-campus boarding for students. Prospective families are welcome to tour the boarding facilities as part of a scheduled visit.",
   },
 ];
@@ -85,7 +89,11 @@ const VisitingHIBS = () => {
         <div className="visiting-cards">
           {visitCards.map((card) => (
             <div className="visiting-info-card" key={card.title}>
-              <div className="visiting-info-image" />
+              {card.image ? (
+                <img src={card.image} alt={card.title} className="visiting-info-image" />
+              ) : (
+                <div className="visiting-info-image" />
+              )}
               <Link to={card.to} className="visiting-info-title">
                 {card.title}
               </Link>

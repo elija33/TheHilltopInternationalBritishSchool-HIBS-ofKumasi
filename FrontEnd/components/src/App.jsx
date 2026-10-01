@@ -40,6 +40,26 @@ import ParentPortalLayout from "./ParentPortal/ParentPortalLayout";
 import ParentHome from "./ParentPortal/Home";
 import ParentGrades from "./ParentPortal/Grades";
 import ParentAttendance from "./ParentPortal/Attendance";
+import TeacherPortalLayout from "./TeacherPortal/TeacherPortalLayout";
+import TeacherHome from "./TeacherPortal/Home";
+import TeacherMyClasses from "./TeacherPortal/MyClasses";
+import TeacherAttendance from "./TeacherPortal/Attendance";
+import TeacherGrades from "./TeacherPortal/Grades";
+import TeacherSyllabus from "./TeacherPortal/Syllabus";
+import TeacherSetPassword from "./TeacherPortal/SetPassword";
+import AdminLogin from "./Login/AdminLogin";
+import AdminPortalLayout from "./AdminPortal/AdminPortalLayout";
+import AdminHome from "./AdminPortal/Home";
+import AdminStudents from "./AdminPortal/Students";
+import AdminTeachers from "./AdminPortal/Teachers";
+import AdminTeacherRecord from "./AdminPortal/TeacherRecord";
+import AdminAddTeacherWizard from "./AdminPortal/AddTeacherWizard";
+import AdminParents from "./AdminPortal/Parents";
+import AdminGradeCorrections from "./AdminPortal/GradeCorrections";
+import AdminPublishing from "./AdminPortal/Publishing";
+import AdminAnnouncements from "./AdminPortal/Announcements";
+import AdminSettings from "./AdminPortal/Settings";
+import { getPageTitle } from "./pageTitle";
 
 const App = () => {
   const [showModal, setShowModal] = useState(false);
@@ -54,6 +74,10 @@ const App = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [location]);
+
+  useEffect(() => {
+    document.title = getPageTitle(location.pathname);
+  }, [location.pathname]);
 
   return (
     <div className="app-shell">
@@ -203,6 +227,7 @@ const App = () => {
         <Route path="/login/student" element={<StudentLogin />} />
         <Route path="/login/teacher" element={<TeacherLogin />} />
         <Route path="/login/parent" element={<ParentLogin />} />
+        <Route path="/login/admin" element={<AdminLogin />} />
 
         <Route path="/portal/student" element={<StudentPortalLayout />}>
           <Route index element={<StudentHome />} />
@@ -218,6 +243,31 @@ const App = () => {
           <Route path="home" element={<ParentHome />} />
           <Route path="grades" element={<ParentGrades />} />
           <Route path="attendance" element={<ParentAttendance />} />
+        </Route>
+
+        <Route path="/portal/teacher" element={<TeacherPortalLayout />}>
+          <Route index element={<TeacherHome />} />
+          <Route path="home" element={<TeacherHome />} />
+          <Route path="classes" element={<TeacherMyClasses />} />
+          <Route path="attendance" element={<TeacherAttendance />} />
+          <Route path="grades" element={<TeacherGrades />} />
+          <Route path="syllabus" element={<TeacherSyllabus />} />
+        </Route>
+
+        <Route path="/portal/teacher/set-password" element={<TeacherSetPassword />} />
+
+        <Route path="/portal/admin" element={<AdminPortalLayout />}>
+          <Route index element={<AdminHome />} />
+          <Route path="home" element={<AdminHome />} />
+          <Route path="students" element={<AdminStudents />} />
+          <Route path="teachers" element={<AdminTeachers />} />
+          <Route path="teachers/new" element={<AdminAddTeacherWizard />} />
+          <Route path="teachers/:id" element={<AdminTeacherRecord />} />
+          <Route path="parents" element={<AdminParents />} />
+          <Route path="corrections" element={<AdminGradeCorrections />} />
+          <Route path="publishing" element={<AdminPublishing />} />
+          <Route path="announcements" element={<AdminAnnouncements />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
       </Routes>
 

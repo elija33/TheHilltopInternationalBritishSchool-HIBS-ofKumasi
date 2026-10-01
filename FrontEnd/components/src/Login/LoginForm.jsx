@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LoginForm = ({ role = "User", redirectTo = "/" }) => {
+const LoginForm = ({ role = "User", redirectTo = "/", onBeforeNavigate }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -10,6 +10,7 @@ const LoginForm = ({ role = "User", redirectTo = "/" }) => {
     e.preventDefault();
     // Placeholder behaviour: in real app, call API and handle auth
     console.log("Login attempt", { role, username });
+    if (onBeforeNavigate) onBeforeNavigate();
     navigate(redirectTo);
   };
 
