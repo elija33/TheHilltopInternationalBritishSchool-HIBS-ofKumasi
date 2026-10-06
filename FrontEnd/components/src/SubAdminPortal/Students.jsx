@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { students } from "./mockData";
-import { CLASS_LIST } from "./teacherData";
+import { students } from "../AdminPortal/mockData";
+import { CLASS_LIST } from "../AdminPortal/teacherData";
 
 const Students = () => {
-  const [query, setQuery] = useState("");
   const [, forceRender] = useState(0);
+  const [query, setQuery] = useState("");
   const [name, setName] = useState("");
   const [className, setClassName] = useState(CLASS_LIST[0]);
   const [added, setAdded] = useState(false);

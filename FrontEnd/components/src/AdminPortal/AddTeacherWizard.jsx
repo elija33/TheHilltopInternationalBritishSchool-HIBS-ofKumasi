@@ -12,7 +12,7 @@ import {
 
 const EMPTY_SUBJECT_ROW = () => ({ subject: SUBJECT_LIST[0], classes: [] });
 
-const AddTeacherWizard = () => {
+const AddTeacherWizard = ({ basePath = "/portal/admin" }) => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
 
@@ -127,7 +127,7 @@ const AddTeacherWizard = () => {
 
   return (
     <div>
-      <Link to="/portal/admin/teachers" style={{ fontSize: "0.85rem" }}>
+      <Link to={`${basePath}/teachers`} style={{ fontSize: "0.85rem" }}>
         &larr; Back to teachers
       </Link>
 
@@ -360,7 +360,7 @@ const AddTeacherWizard = () => {
                 {emailed ? "Emailed" : "Email to teacher"}
               </button>
             </div>
-            <button className="portal-link-btn" onClick={() => navigate("/portal/admin/teachers")}>
+            <button className="portal-link-btn" onClick={() => navigate(`${basePath}/teachers`)}>
               Done
             </button>
           </div>

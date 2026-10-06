@@ -18,7 +18,7 @@ const STATUS_LABEL = {
   INACTIVE: "Inactive",
 };
 
-const TeacherRecord = () => {
+const TeacherRecord = ({ basePath = "/portal/admin" }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const original = teacherRecords.find((t) => t.id === id);
@@ -36,7 +36,7 @@ const TeacherRecord = () => {
     return (
       <div className="admin-section-card">
         <p className="portal-empty">No teacher found with this ID.</p>
-        <Link to="/portal/admin/teachers">&larr; Back to teachers</Link>
+        <Link to={`${basePath}/teachers`}>&larr; Back to teachers</Link>
       </div>
     );
   }
@@ -126,7 +126,7 @@ const TeacherRecord = () => {
 
   return (
     <div>
-      <Link to="/portal/admin/teachers" style={{ fontSize: "0.85rem" }}>
+      <Link to={`${basePath}/teachers`} style={{ fontSize: "0.85rem" }}>
         &larr; Back to teachers
       </Link>
 

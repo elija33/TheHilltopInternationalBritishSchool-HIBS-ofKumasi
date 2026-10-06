@@ -47,6 +47,19 @@ export const parents = [
   },
 ];
 
+// Sub-admins can only create/view Students and Parents — see
+// SubAdminPortal/. Access is controlled here: only ACTIVE sub-admins can log
+// in, and the School Office can revoke access at any time by flipping this.
+export const subAdmins = [
+  {
+    id: "sa1",
+    name: "Linda Owusu",
+    email: "l.owusu@hibs.edu.gh",
+    status: "ACTIVE",
+    createdAt: "2026-02-10",
+  },
+];
+
 // A school-wide default. A real deployment should ship this OFF; it's
 // turned on here only for the demo, same as in the parent portal's mock data.
 export const arrearsPolicyEnabled = true;

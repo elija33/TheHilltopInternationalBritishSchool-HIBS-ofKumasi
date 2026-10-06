@@ -59,6 +59,12 @@ import AdminGradeCorrections from "./AdminPortal/GradeCorrections";
 import AdminPublishing from "./AdminPortal/Publishing";
 import AdminAnnouncements from "./AdminPortal/Announcements";
 import AdminSettings from "./AdminPortal/Settings";
+import AdminSubAdmins from "./AdminPortal/SubAdmins";
+import SubAdminLogin from "./Login/SubAdminLogin";
+import SubAdminPortalLayout from "./SubAdminPortal/SubAdminPortalLayout";
+import SubAdminHome from "./SubAdminPortal/Home";
+import SubAdminStudents from "./SubAdminPortal/Students";
+import SubAdminClasses from "./SubAdminPortal/Classes";
 import { getPageTitle } from "./pageTitle";
 
 const App = () => {
@@ -228,6 +234,7 @@ const App = () => {
         <Route path="/login/teacher" element={<TeacherLogin />} />
         <Route path="/login/parent" element={<ParentLogin />} />
         <Route path="/login/admin" element={<AdminLogin />} />
+        <Route path="/login/subadmin" element={<SubAdminLogin />} />
 
         <Route path="/portal/student" element={<StudentPortalLayout />}>
           <Route index element={<StudentHome />} />
@@ -268,6 +275,26 @@ const App = () => {
           <Route path="publishing" element={<AdminPublishing />} />
           <Route path="announcements" element={<AdminAnnouncements />} />
           <Route path="settings" element={<AdminSettings />} />
+          <Route path="sub-admins" element={<AdminSubAdmins />} />
+        </Route>
+
+        <Route path="/portal/subadmin" element={<SubAdminPortalLayout />}>
+          <Route index element={<SubAdminHome />} />
+          <Route path="home" element={<SubAdminHome />} />
+          <Route path="students" element={<SubAdminStudents />} />
+          <Route path="classes" element={<SubAdminClasses />} />
+          <Route
+            path="teachers"
+            element={<AdminTeachers basePath="/portal/subadmin" />}
+          />
+          <Route
+            path="teachers/new"
+            element={<AdminAddTeacherWizard basePath="/portal/subadmin" />}
+          />
+          <Route
+            path="teachers/:id"
+            element={<AdminTeacherRecord basePath="/portal/subadmin" />}
+          />
         </Route>
       </Routes>
 

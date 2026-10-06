@@ -25,6 +25,7 @@ const STATIC_TITLES = {
   "/login/teacher": "Teacher Login",
   "/login/parent": "Parent / Guardian Login",
   "/login/admin": "Admin Login",
+  "/login/subadmin": "Sub Admin Login",
 };
 
 const STUDENT_TAB_LABELS = {
@@ -55,10 +56,18 @@ const ADMIN_TAB_LABELS = {
   students: "Students",
   teachers: "Teachers",
   parents: "Parents",
+  "sub-admins": "Sub Admin",
   corrections: "Grade Corrections",
   publishing: "Publishing",
   announcements: "Announcements",
   settings: "Settings",
+};
+
+const SUBADMIN_TAB_LABELS = {
+  home: "Dashboard",
+  students: "Students",
+  teachers: "Teachers",
+  classes: "Classes",
 };
 
 export const getPageTitle = (pathname) => {
@@ -97,6 +106,17 @@ export const getPageTitle = (pathname) => {
       }
       const tab = rest[0] || "home";
       return `Admin Portal · ${ADMIN_TAB_LABELS[tab] || "Dashboard"}`;
+    }
+
+    if (portal === "subadmin") {
+      if (rest[0] === "teachers" && rest[1] === "new") {
+        return "Sub Admin Portal · Add Teacher";
+      }
+      if (rest[0] === "teachers" && rest[1]) {
+        return "Sub Admin Portal · Teacher Record";
+      }
+      const tab = rest[0] || "home";
+      return `Sub Admin Portal · ${SUBADMIN_TAB_LABELS[tab] || "Dashboard"}`;
     }
   }
 

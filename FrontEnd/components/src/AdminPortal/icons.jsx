@@ -73,6 +73,21 @@ export const IconHome = () => (
   </svg>
 );
 
+export const IconLayers = () => (
+  <svg {...base}>
+    <path d="M12 3l9 5-9 5-9-5 9-5z" />
+    <path d="M3 13l9 5 9-5" />
+    <path d="M3 18l9 5 9-5" />
+  </svg>
+);
+
+export const IconShield = () => (
+  <svg {...base}>
+    <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" />
+    <path d="M9 12l2 2 4-4" />
+  </svg>
+);
+
 export const IconBell = () => (
   <svg {...base}>
     <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />

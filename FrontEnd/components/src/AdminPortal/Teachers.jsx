@@ -23,7 +23,7 @@ const STATUS_BADGE = {
 
 const initials = (t) => `${t.firstName[0]}${t.lastName[0]}`.toUpperCase();
 
-const Teachers = () => {
+const Teachers = ({ basePath = "/portal/admin" }) => {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("VISIBLE");
@@ -140,7 +140,7 @@ const Teachers = () => {
           <button
             className="portal-link-btn"
             style={{ marginLeft: "auto" }}
-            onClick={() => navigate("/portal/admin/teachers/new")}
+            onClick={() => navigate(`${basePath}/teachers/new`)}
           >
             + Add teacher
           </button>
@@ -166,7 +166,7 @@ const Teachers = () => {
                 {filtered.map((t) => (
                   <tr
                     key={t.id}
-                    onClick={() => navigate(`/portal/admin/teachers/${t.id}`)}
+                    onClick={() => navigate(`${basePath}/teachers/${t.id}`)}
                     style={{ cursor: "pointer" }}
                   >
                     <td>

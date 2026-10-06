@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { parents as initialParents } from "./mockData";
+import { parents } from "./mockData";
 
 const Parents = () => {
-  const [parents, setParents] = useState(initialParents);
+  const [, forceRender] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -12,15 +12,13 @@ const Parents = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !email) return;
-    setParents((prev) => [
-      ...prev,
-      { name, email, phone, children: childName ? [childName] : [] },
-    ]);
+    parents.push({ name, email, phone, children: childName ? [childName] : [] });
     setName("");
     setEmail("");
     setPhone("");
     setChildName("");
     setAdded(true);
+    forceRender((n) => n + 1);
   };
 
   return (

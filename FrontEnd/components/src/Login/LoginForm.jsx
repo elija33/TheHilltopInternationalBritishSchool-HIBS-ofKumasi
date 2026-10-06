@@ -10,7 +10,7 @@ const LoginForm = ({ role = "User", redirectTo = "/", onBeforeNavigate }) => {
     e.preventDefault();
     // Placeholder behaviour: in real app, call API and handle auth
     console.log("Login attempt", { role, username });
-    if (onBeforeNavigate) onBeforeNavigate();
+    if (onBeforeNavigate) onBeforeNavigate(username);
     navigate(redirectTo);
   };
 
