@@ -4,7 +4,9 @@ import "../StudentPortal/StudentPortal.css";
 import "../AdminPortal/AdminPortal.css";
 import {
   IconDashboard,
+  IconStar,
   IconPeople,
+  IconHome,
   IconGraduationCap,
   IconLayers,
   IconBell,
@@ -14,7 +16,9 @@ import { getCurrentSubAdmin } from "./useCurrentSubAdmin";
 
 const TABS = [
   { to: "home", label: "Dashboard", Icon: IconDashboard },
+  { to: "headmaster", label: "Headmaster", Icon: IconStar },
   { to: "students", label: "Students", Icon: IconPeople },
+  { to: "parents", label: "Parents", Icon: IconHome },
   { to: "teachers", label: "Teachers", Icon: IconGraduationCap },
   { to: "classes", label: "Classes", Icon: IconLayers },
 ];

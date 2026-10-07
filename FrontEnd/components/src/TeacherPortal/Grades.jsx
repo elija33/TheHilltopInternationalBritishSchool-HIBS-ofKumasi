@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { CLASS_ROSTERS } from "../AdminPortal/teacherData";
+import { CLASS_ROSTERS, fullName } from "../AdminPortal/teacherData";
+import { currentTerm } from "../AdminPortal/mockData";
+import { gradeSubmissions, nextSubmissionId } from "../AdminPortal/gradeSubmissions";
 
 // Generic assessment template — this demo has no per-subject assessment
 // calendar, so every subject+class pair gets the same placeholder to grade.
@@ -11,6 +13,12 @@ const pairKey = (subject, cls) => `${subject}::${cls}`;
 const defaultEntries = (roster) =>
   Object.fromEntries(roster.map((name) => [name, { status: "SCORED", value: "" }]));
 
+const STATUS_LABEL = {
+  PENDING: "Awaiting headmaster approval.",
+  APPROVED: "Approved — now visible to these students and their parents.",
+  REJECTED: "Sent back by your headmaster — resubmit once corrected.",
+};
+
 const Grades = () => {
   const { teacher } = useOutletContext();
   const pairs = teacher.subjectAssignments.flatMap((a) =>
@@ -20,6 +28,8 @@ const Grades = () => {
   const [selected, setSelected] = useState(pairs[0] ? pairKey(pairs[0].subject, pairs[0].class) : "");
   const [entriesByPair, setEntriesByPair] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [, forceRender] = useState(0);
 
   if (pairs.length === 0) {
     return (
@@ -36,17 +46,72 @@ const Grades = () => {
   const roster = CLASS_ROSTERS[current.class] || [];
   const entries = entriesByPair[selected] || defaultEntries(roster);
 
+  // Most recent submission for this exact subject+class+term — a rejected
+  // one can always be superseded by submitting again, but a submission
+  // still awaiting a decision blocks a second one from piling up behind it.
+  const submissionsForPair = gradeSubmissions.filter(
+    (s) => s.class === current.class && s.subject === current.subject && s.term === currentTerm.label,
+  );
+  const latest = submissionsForPair[submissionsForPair.length - 1];
+  const blockedByPending = Boolean(latest && latest.status === "PENDING");
+
   const updateEntry = (name, field, value) => {
     setEntriesByPair((prev) => ({
       ...prev,
       [selected]: { ...(prev[selected] || defaultEntries(roster)), [name]: { ...entries[name], [field]: value } },
     }));
     setSubmitted(false);
+    setError("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError("");
+
+    for (const name of roster) {
+      const entry = entries[name] || { status: "SCORED", value: "" };
+      if (entry.status === "SCORED") {
+        const n = Number(entry.value);
+        if (entry.value === "" || Number.isNaN(n) || n < 0 || n > ASSESSMENT.max) {
+          setError(
+            `Enter a valid mark (0–${ASSESSMENT.max}) for ${name}, or mark them Absent / Not assessed.`,
+          );
+          return;
+        }
+      }
+    }
+
+    gradeSubmissions.push({
+      id: nextSubmissionId(),
+      class: current.class,
+      subject: current.subject,
+      term: currentTerm.label,
+      teacherId: teacher.id,
+      teacherName: fullName(teacher),
+      submittedAt: new Date().toISOString().split("T")[0],
+      status: "PENDING",
+      decidedBy: null,
+      decidedAt: null,
+      rejectionNote: null,
+      entries: roster.map((name) => {
+        const entry = entries[name] || { status: "SCORED", value: "" };
+        return {
+          studentName: name,
+          assessments: [
+            {
+              name: ASSESSMENT.name,
+              weight: ASSESSMENT.weight,
+              max: ASSESSMENT.max,
+              value: entry.status === "SCORED" ? Number(entry.value) : null,
+              status: entry.status,
+            },
+          ],
+        };
+      }),
+    });
+
     setSubmitted(true);
+    forceRender((n) => n + 1);
   };
 
   return (
@@ -61,6 +126,7 @@ const Grades = () => {
             onChange={(e) => {
               setSelected(e.target.value);
               setSubmitted(false);
+              setError("");
             }}
           >
             {pairs.map((p) => (
@@ -71,6 +137,14 @@ const Grades = () => {
           </select>
         </div>
       </div>
+
+      {latest && (
+        <p className={latest.status === "REJECTED" ? "portal-notice" : "portal-success"}>
+          {STATUS_LABEL[latest.status]}
+          {latest.status !== "PENDING" && latest.decidedAt && ` (${latest.decidedAt})`}
+          {latest.status === "REJECTED" && latest.rejectionNote && ` — "${latest.rejectionNote}"`}
+        </p>
+      )}
 
       <form className="portal-card" onSubmit={handleSubmit}>
         <div className="portal-subject-header">
@@ -101,6 +175,7 @@ const Grades = () => {
                       <select
                         className="portal-select"
                         value={entry.status}
+                        disabled={blockedByPending}
                         onChange={(e) => updateEntry(name, "status", e.target.value)}
                       >
                         <option value="SCORED">Scored</option>
@@ -113,7 +188,7 @@ const Grades = () => {
                         type="number"
                         min="0"
                         max={ASSESSMENT.max}
-                        disabled={entry.status !== "SCORED"}
+                        disabled={blockedByPending || entry.status !== "SCORED"}
                         value={entry.value}
                         onChange={(e) => updateEntry(name, "value", e.target.value)}
                         style={{ width: "80px" }}
@@ -126,15 +201,18 @@ const Grades = () => {
           </table>
         </div>
 
+        {error && <p className="portal-notice">{error}</p>}
+
         <p style={{ fontSize: "0.8rem", color: "var(--muted)", marginTop: "0.75rem" }}>
-          Submitting appends these marks as new grade records — it never overwrites a
-          previously published mark.
+          Submitting sends these marks to your headmaster for approval. Once submitted they
+          can&rsquo;t be changed — if something needs fixing, your headmaster can send it
+          back to you to resubmit.
         </p>
 
-        <button type="submit" className="portal-link-btn">
-          Submit grades
+        <button type="submit" className="portal-link-btn" disabled={blockedByPending}>
+          {blockedByPending ? "Awaiting approval" : "Submit grades"}
         </button>
-        {submitted && <p className="portal-success">Grades submitted.</p>}
+        {submitted && <p className="portal-success">Grades submitted for approval.</p>}
       </form>
     </div>
   );

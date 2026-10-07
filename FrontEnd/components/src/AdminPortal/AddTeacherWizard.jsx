@@ -9,10 +9,11 @@ import {
   nextStaffId,
   generateTempPassword,
 } from "./teacherData";
+import { pendingAccountRequests } from "./approvals";
 
 const EMPTY_SUBJECT_ROW = () => ({ subject: SUBJECT_LIST[0], classes: [] });
 
-const AddTeacherWizard = ({ basePath = "/portal/admin" }) => {
+const AddTeacherWizard = ({ basePath = "/portal/admin", requiresApproval = false, requestedBy = "Sub Admin" }) => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
 
@@ -79,6 +80,33 @@ const AddTeacherWizard = ({ basePath = "/portal/admin" }) => {
   };
 
   const createAccount = () => {
+    const classTeacherOfValue = isClassTeacher ? classTeacherOf : null;
+    const subjectAssignmentsValue = isSubjectTeacher
+      ? subjectRows.filter((r) => r.classes.length > 0)
+      : [];
+
+    if (requiresApproval) {
+      pendingAccountRequests.push({
+        id: `paq-${Date.now()}`,
+        type: "TEACHER",
+        proposedData: {
+          title,
+          firstName,
+          lastName,
+          email,
+          phone,
+          employmentType,
+          startDate,
+          classTeacherOf: classTeacherOfValue,
+          subjectAssignments: subjectAssignmentsValue,
+        },
+        requestedBy,
+        requestedAt: new Date().toISOString().split("T")[0],
+      });
+      setStep(4);
+      return;
+    }
+
     const newTeacher = {
       id: `t-${Date.now()}`,
       staffId,
@@ -95,10 +123,8 @@ const AddTeacherWizard = ({ basePath = "/portal/admin" }) => {
       startDate,
       endDate: null,
       gesRegistrationNo: null,
-      classTeacherOf: isClassTeacher ? classTeacherOf : null,
-      subjectAssignments: isSubjectTeacher
-        ? subjectRows.filter((r) => r.classes.length > 0)
-        : [],
+      classTeacherOf: classTeacherOfValue,
+      subjectAssignments: subjectAssignmentsValue,
       qualifications: [],
       documents: [],
     };
@@ -174,10 +200,16 @@ const AddTeacherWizard = ({ basePath = "/portal/admin" }) => {
 
         {step === 2 && (
           <form onSubmit={goToStep3}>
-            <div className="portal-field">
-              <label>Staff ID</label>
-              <input value={staffId} onChange={(e) => setStaffId(e.target.value)} />
-            </div>
+            {requiresApproval ? (
+              <p style={{ fontSize: "0.85rem", color: "var(--muted)" }}>
+                A staff ID will be assigned automatically once this teacher is approved.
+              </p>
+            ) : (
+              <div className="portal-field">
+                <label>Staff ID</label>
+                <input value={staffId} onChange={(e) => setStaffId(e.target.value)} />
+              </div>
+            )}
             <div className="portal-field">
               <label>Employment type</label>
               <select
@@ -310,7 +342,8 @@ const AddTeacherWizard = ({ basePath = "/portal/admin" }) => {
 
             <h3>Employment</h3>
             <p>
-              {staffId} &middot; {employmentType.replace("_", "-")} &middot; Starts {startDate}
+              {!requiresApproval && <>{staffId} &middot; </>}
+              {employmentType.replace("_", "-")} &middot; Starts {startDate}
             </p>
 
             <h3>Roles</h3>
@@ -335,7 +368,7 @@ const AddTeacherWizard = ({ basePath = "/portal/admin" }) => {
                 Back
               </button>
               <button className="portal-link-btn" onClick={createAccount}>
-                Create account
+                {requiresApproval ? "Submit for approval" : "Create account"}
               </button>
             </div>
           </div>
@@ -343,23 +376,32 @@ const AddTeacherWizard = ({ basePath = "/portal/admin" }) => {
 
         {step === 4 && (
           <div>
-            <p className="portal-success">
-              Account created for {title} {firstName} {lastName} ({staffId}).
-            </p>
-            <p className="portal-notice">
-              Temporary password (shown once — not retrievable later):{" "}
-              <strong>{tempPassword}</strong>
-              <br />
-              Expires in 72 hours. The teacher must set a new password on first login.
-            </p>
-            <div style={{ display: "flex", gap: "0.6rem", marginBottom: "1rem" }}>
-              <button className="portal-link-btn" onClick={handleCopy}>
-                {copied ? "Copied!" : "Copy"}
-              </button>
-              <button className="portal-link-btn" onClick={() => setEmailed(true)}>
-                {emailed ? "Emailed" : "Email to teacher"}
-              </button>
-            </div>
+            {requiresApproval ? (
+              <p className="portal-success">
+                Submitted — {title} {firstName} {lastName} is now waiting on headmaster
+                approval. They&rsquo;ll be able to log in once approved.
+              </p>
+            ) : (
+              <>
+                <p className="portal-success">
+                  Account created for {title} {firstName} {lastName} ({staffId}).
+                </p>
+                <p className="portal-notice">
+                  Temporary password (shown once — not retrievable later):{" "}
+                  <strong>{tempPassword}</strong>
+                  <br />
+                  Expires in 72 hours. The teacher must set a new password on first login.
+                </p>
+                <div style={{ display: "flex", gap: "0.6rem", marginBottom: "1rem" }}>
+                  <button className="portal-link-btn" onClick={handleCopy}>
+                    {copied ? "Copied!" : "Copy"}
+                  </button>
+                  <button className="portal-link-btn" onClick={() => setEmailed(true)}>
+                    {emailed ? "Emailed" : "Email to teacher"}
+                  </button>
+                </div>
+              </>
+            )}
             <button className="portal-link-btn" onClick={() => navigate(`${basePath}/teachers`)}>
               Done
             </button>

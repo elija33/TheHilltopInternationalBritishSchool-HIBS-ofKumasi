@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { students } from "../AdminPortal/mockData";
+import { students, headmasters } from "../AdminPortal/mockData";
 import { CLASS_LIST, teacherRecords, fullName } from "../AdminPortal/teacherData";
 
 const Classes = () => {
@@ -34,6 +34,10 @@ const Classes = () => {
     ? teacherRecords.find(
         (t) => t.classTeacherOf === selectedClass && t.status !== "INACTIVE",
       )
+    : null;
+
+  const classHeadmaster = selectedClass
+    ? headmasters.find((hm) => hm.classes.includes(selectedClass))
     : null;
 
   return (
@@ -109,9 +113,13 @@ const Classes = () => {
       {selectedClass && (
         <div className="admin-section-card">
           <h2>Students in {selectedClass}</h2>
-          <p style={{ margin: "0 0 1rem", fontSize: "0.9rem", color: "var(--muted)" }}>
+          <p style={{ margin: "0 0 0.3rem", fontSize: "0.9rem", color: "var(--muted)" }}>
             <strong>Class Teacher:</strong>{" "}
             {classTeacher ? fullName(classTeacher) : "Not yet assigned"}
+          </p>
+          <p style={{ margin: "0 0 1rem", fontSize: "0.9rem", color: "var(--muted)" }}>
+            <strong>Headmaster:</strong>{" "}
+            {classHeadmaster ? classHeadmaster.name : "Not yet assigned"}
           </p>
           {classStudents.length === 0 ? (
             <p className="portal-empty">No students in this class yet.</p>

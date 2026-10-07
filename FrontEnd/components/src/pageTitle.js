@@ -26,6 +26,7 @@ const STATIC_TITLES = {
   "/login/parent": "Parent / Guardian Login",
   "/login/admin": "Admin Login",
   "/login/subadmin": "Sub Admin Login",
+  "/login/headmaster": "Headmaster Login",
 };
 
 const STUDENT_TAB_LABELS = {
@@ -57,6 +58,7 @@ const ADMIN_TAB_LABELS = {
   teachers: "Teachers",
   parents: "Parents",
   "sub-admins": "Sub Admin",
+  "headmaster-approvals": "Headmaster Approvals",
   corrections: "Grade Corrections",
   publishing: "Publishing",
   announcements: "Announcements",
@@ -65,9 +67,18 @@ const ADMIN_TAB_LABELS = {
 
 const SUBADMIN_TAB_LABELS = {
   home: "Dashboard",
+  headmaster: "Headmaster",
   students: "Students",
+  parents: "Parents",
   teachers: "Teachers",
   classes: "Classes",
+};
+
+const HEADMASTER_TAB_LABELS = {
+  home: "Dashboard",
+  approvals: "Approvals",
+  "my-classes": "My Classes",
+  grades: "Grades",
 };
 
 export const getPageTitle = (pathname) => {
@@ -117,6 +128,11 @@ export const getPageTitle = (pathname) => {
       }
       const tab = rest[0] || "home";
       return `Sub Admin Portal · ${SUBADMIN_TAB_LABELS[tab] || "Dashboard"}`;
+    }
+
+    if (portal === "headmaster") {
+      const tab = rest[0] || "home";
+      return `Headmaster Portal · ${HEADMASTER_TAB_LABELS[tab] || "Dashboard"}`;
     }
   }
 

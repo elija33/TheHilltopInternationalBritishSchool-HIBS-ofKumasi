@@ -60,11 +60,21 @@ import AdminPublishing from "./AdminPortal/Publishing";
 import AdminAnnouncements from "./AdminPortal/Announcements";
 import AdminSettings from "./AdminPortal/Settings";
 import AdminSubAdmins from "./AdminPortal/SubAdmins";
+import AdminHeadmasterApprovals from "./AdminPortal/HeadmasterApprovals";
 import SubAdminLogin from "./Login/SubAdminLogin";
 import SubAdminPortalLayout from "./SubAdminPortal/SubAdminPortalLayout";
 import SubAdminHome from "./SubAdminPortal/Home";
+import SubAdminHeadmaster from "./SubAdminPortal/Headmaster";
 import SubAdminStudents from "./SubAdminPortal/Students";
+import SubAdminParents from "./SubAdminPortal/Parents";
 import SubAdminClasses from "./SubAdminPortal/Classes";
+import { getCurrentSubAdmin } from "./SubAdminPortal/useCurrentSubAdmin";
+import HeadmasterLogin from "./Login/HeadmasterLogin";
+import HeadmasterPortalLayout from "./HeadmasterPortal/HeadmasterPortalLayout";
+import HeadmasterHome from "./HeadmasterPortal/Home";
+import HeadmasterApprovals from "./HeadmasterPortal/Approvals";
+import HeadmasterMyClasses from "./HeadmasterPortal/MyClasses";
+import HeadmasterGrades from "./HeadmasterPortal/Grades";
 import { getPageTitle } from "./pageTitle";
 
 const App = () => {
@@ -235,6 +245,7 @@ const App = () => {
         <Route path="/login/parent" element={<ParentLogin />} />
         <Route path="/login/admin" element={<AdminLogin />} />
         <Route path="/login/subadmin" element={<SubAdminLogin />} />
+        <Route path="/login/headmaster" element={<HeadmasterLogin />} />
 
         <Route path="/portal/student" element={<StudentPortalLayout />}>
           <Route index element={<StudentHome />} />
@@ -276,25 +287,42 @@ const App = () => {
           <Route path="announcements" element={<AdminAnnouncements />} />
           <Route path="settings" element={<AdminSettings />} />
           <Route path="sub-admins" element={<AdminSubAdmins />} />
+          <Route path="headmaster-approvals" element={<AdminHeadmasterApprovals />} />
         </Route>
 
         <Route path="/portal/subadmin" element={<SubAdminPortalLayout />}>
           <Route index element={<SubAdminHome />} />
           <Route path="home" element={<SubAdminHome />} />
+          <Route path="headmaster" element={<SubAdminHeadmaster />} />
           <Route path="students" element={<SubAdminStudents />} />
+          <Route path="parents" element={<SubAdminParents />} />
           <Route path="classes" element={<SubAdminClasses />} />
           <Route
             path="teachers"
-            element={<AdminTeachers basePath="/portal/subadmin" />}
+            element={<AdminTeachers basePath="/portal/subadmin" showPendingRequests />}
           />
           <Route
             path="teachers/new"
-            element={<AdminAddTeacherWizard basePath="/portal/subadmin" />}
+            element={
+              <AdminAddTeacherWizard
+                basePath="/portal/subadmin"
+                requiresApproval
+                requestedBy={getCurrentSubAdmin()?.name || "Sub Admin"}
+              />
+            }
           />
           <Route
             path="teachers/:id"
             element={<AdminTeacherRecord basePath="/portal/subadmin" />}
           />
+        </Route>
+
+        <Route path="/portal/headmaster" element={<HeadmasterPortalLayout />}>
+          <Route index element={<HeadmasterHome />} />
+          <Route path="home" element={<HeadmasterHome />} />
+          <Route path="approvals" element={<HeadmasterApprovals />} />
+          <Route path="my-classes" element={<HeadmasterMyClasses />} />
+          <Route path="grades" element={<HeadmasterGrades />} />
         </Route>
       </Routes>
 

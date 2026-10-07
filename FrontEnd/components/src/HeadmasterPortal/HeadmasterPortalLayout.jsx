@@ -1,48 +1,61 @@
 import React from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "../StudentPortal/StudentPortal.css";
-import "./AdminPortal.css";
-import { admin } from "./mockData";
+import "../AdminPortal/AdminPortal.css";
 import {
   IconDashboard,
-  IconPeople,
-  IconGraduationCap,
-  IconHome,
-  IconStar,
   IconEdit,
-  IconUpload,
-  IconMegaphone,
-  IconGear,
-  IconShield,
+  IconLayers,
+  IconGraduationCap,
   IconBell,
   IconLogout,
-} from "./icons";
+} from "../AdminPortal/icons";
+import { getCurrentHeadmaster } from "./useCurrentHeadmaster";
+import { pendingAccountRequests } from "../AdminPortal/approvals";
 
 const TABS = [
   { to: "home", label: "Dashboard", Icon: IconDashboard },
-  { to: "students", label: "Students", Icon: IconPeople },
-  { to: "teachers", label: "Teachers", Icon: IconGraduationCap },
-  { to: "parents", label: "Parents", Icon: IconHome },
-  { to: "sub-admins", label: "Sub Admin", Icon: IconShield },
-  { to: "headmaster-approvals", label: "Headmaster Approvals", Icon: IconStar },
-  { to: "corrections", label: "Grade Corrections", Icon: IconEdit },
-  { to: "publishing", label: "Publishing", Icon: IconUpload },
-  { to: "announcements", label: "Announcements", Icon: IconMegaphone },
-  { to: "settings", label: "Settings", Icon: IconGear },
+  { to: "approvals", label: "Approvals", Icon: IconEdit },
+  { to: "my-classes", label: "My Classes", Icon: IconLayers },
+  { to: "grades", label: "Grades", Icon: IconGraduationCap },
 ];
 
 const initials = (name) =>
   name
     .split(" ")
+    .filter((w) => w[0] === w[0].toUpperCase())
     .map((w) => w[0])
     .slice(0, 2)
     .join("")
     .toUpperCase();
 
-const AdminPortalLayout = () => {
+const HeadmasterPortalLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const headmaster = getCurrentHeadmaster();
   const currentTab = TABS.find((t) => location.pathname.endsWith(t.to));
+
+  if (!headmaster) {
+    return (
+      <div className="admin-shell">
+        <div
+          className="admin-main"
+          style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+        >
+          <div className="admin-section-card" style={{ maxWidth: 420, margin: "2rem" }}>
+            <h2>Access not available</h2>
+            <p>
+              Either you aren&rsquo;t logged in, or this headmaster account hasn&rsquo;t
+              been approved by the School Office yet.
+            </p>
+            <button className="portal-link-btn" onClick={() => navigate("/login/headmaster")}>
+              Go to Headmaster login
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="admin-shell">
@@ -76,11 +89,11 @@ const AdminPortalLayout = () => {
           <div className="admin-topbar-actions">
             <span className="admin-bell">
               <IconBell />
-              <span className="admin-bell-dot" />
+              {pendingAccountRequests.length > 0 && <span className="admin-bell-dot" />}
             </span>
             <div className="admin-user">
-              <span className="admin-user-avatar">{initials(admin.name)}</span>
-              <span className="admin-user-name">{admin.name}</span>
+              <span className="admin-user-avatar">{initials(headmaster.name)}</span>
+              <span className="admin-user-name">{headmaster.name}</span>
             </div>
             <button className="admin-logout-btn" onClick={() => navigate("/")}>
               Log out
@@ -89,11 +102,11 @@ const AdminPortalLayout = () => {
         </div>
 
         <div className="admin-content">
-          <Outlet />
+          <Outlet context={{ headmaster }} />
         </div>
       </div>
     </div>
   );
 };
 
-export default AdminPortalLayout;
+export default HeadmasterPortalLayout;

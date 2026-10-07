@@ -8,6 +8,7 @@ import {
   roleBadges,
   roleKind,
 } from "./teacherData";
+import { pendingAccountRequests } from "./approvals";
 
 const STATUS_LABEL = {
   ACTIVE: "Active",
@@ -23,8 +24,9 @@ const STATUS_BADGE = {
 
 const initials = (t) => `${t.firstName[0]}${t.lastName[0]}`.toUpperCase();
 
-const Teachers = ({ basePath = "/portal/admin" }) => {
+const Teachers = ({ basePath = "/portal/admin", showPendingRequests = false }) => {
   const navigate = useNavigate();
+  const [, forceRender] = useState(0);
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("VISIBLE");
   const [roleFilter, setRoleFilter] = useState("all");
@@ -60,8 +62,48 @@ const Teachers = ({ basePath = "/portal/admin" }) => {
     });
   }, [query, statusFilter, roleFilter, subjectFilter, classFilter]);
 
+  const myPendingTeachers = pendingAccountRequests.filter((r) => r.type === "TEACHER");
+
+  const cancelRequest = (id) => {
+    const idx = pendingAccountRequests.findIndex((r) => r.id === id);
+    if (idx !== -1) pendingAccountRequests.splice(idx, 1);
+    forceRender((n) => n + 1);
+  };
+
   return (
     <div>
+      {showPendingRequests && myPendingTeachers.length > 0 && (
+        <div className="admin-section-card">
+          <h2>Your pending requests</h2>
+          {myPendingTeachers.map((r) => (
+            <div
+              key={r.id}
+              style={{
+                borderTop: "1px solid #eef1ee",
+                padding: "0.85rem 0",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: "0.5rem",
+              }}
+            >
+              <div>
+                <strong>
+                  {r.proposedData.title} {r.proposedData.firstName} {r.proposedData.lastName}
+                </strong>
+                <span className="portal-badge status-late" style={{ marginLeft: "0.5rem" }}>
+                  Pending headmaster approval
+                </span>
+              </div>
+              <button className="portal-link-btn" onClick={() => cancelRequest(r.id)}>
+                Cancel request
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="admin-section-card">
         <div className="portal-toolbar" style={{ marginBottom: 0 }}>
           <div>

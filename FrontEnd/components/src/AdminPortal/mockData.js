@@ -6,6 +6,43 @@
 
 export const admin = { name: "School Office" };
 
+// Headmasters oversee a set of classes (e.g. one over JHS 1-3, another over
+// Primary 1-6) — reusing the two real Head of School / Headmistress figures
+// already listed on the public Board of Directors page, split by level to
+// demonstrate segmented oversight.
+export const headmasters = [
+  {
+    id: "hm1",
+    name: "Mr Patrick Kwesi Essiam",
+    title: "Head of School & Head of Boarding",
+    email: "p.essiam@hibs.edu.gh",
+    phone: "+233 24 000 1111",
+    bio: "Head of School, HIBS & Head of Boarding. Member, Board of Directors, The Hilltop School.",
+    classes: ["JHS 1A", "JHS 2A", "JHS 2B"],
+  },
+  {
+    id: "hm2",
+    name: "Madam Paulina Agyekum",
+    title: "Headmistress",
+    email: "p.agyekum@hibs.edu.gh",
+    phone: "+233 24 000 2222",
+    bio: "Headmistress, The Hilltop Sch. Member, Board of Directors, The Hilltop School.",
+    classes: ["Primary 5"],
+  },
+];
+
+// Which classes already have a headmaster — same "one owner per class"
+// pattern as assignmentAvailability() for teachers, so the UI can disable
+// classes another headmaster already oversees instead of silently allowing
+// two headmasters to claim the same class.
+export const headmasterClassAvailability = (excludeId = null) => {
+  const taken = new Set();
+  headmasters
+    .filter((hm) => hm.id !== excludeId)
+    .forEach((hm) => hm.classes.forEach((c) => taken.add(c)));
+  return { isClassTaken: (c) => taken.has(c) };
+};
+
 export const currentTerm = {
   id: "term-1-2026",
   label: "Term 1, 2026/2027",
