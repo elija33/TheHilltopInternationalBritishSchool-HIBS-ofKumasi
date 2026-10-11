@@ -76,6 +76,20 @@ export const children = [
         ],
       },
     ],
+    syllabus: [
+      { subject: "Mathematics", teacher: "Mr. Kwabena Owusu", updatedAt: "2026-08-03", type: "document", expired: false },
+      {
+        subject: "English Language",
+        teacher: "Mrs. Adjoa Mensah",
+        updatedAt: "2026-07-28",
+        type: "text",
+        content:
+          "Term 1 covers narrative writing, comprehension strategies, and an introduction to persuasive essays. Weekly vocabulary lists are shared in class.",
+      },
+      { subject: "Integrated Science", teacher: "Mr. Yaw Boateng", updatedAt: null, type: "none" },
+      { subject: "Social Studies", teacher: "Ms. Efua Asante", updatedAt: "2026-08-15", type: "document", expired: true },
+      { subject: "French", teacher: "Mme. Akosua Darko", updatedAt: "2026-08-01", type: "document", expired: false },
+    ],
     previousTermSubjects: [
       { id: "math", name: "Mathematics", termMark: 79 },
       { id: "fr", name: "French", termMark: 88 },
@@ -139,6 +153,10 @@ export const children = [
         ],
       },
     ],
+    syllabus: [
+      { subject: "English Language", teacher: "Mrs. Adjoa Mensah", updatedAt: null, type: "none" },
+      { subject: "Integrated Science", teacher: "Mr. Yaw Boateng", updatedAt: null, type: "none" },
+    ],
     previousTermSubjects: [
       { id: "eng", name: "English Language", termMark: 66 },
       { id: "sci", name: "Integrated Science", termMark: 72 },
@@ -183,6 +201,7 @@ export const children = [
         ],
       },
     ],
+    syllabus: [{ subject: "Mathematics", teacher: "Mr. Kwabena Owusu", updatedAt: null, type: "none" }],
     previousTermSubjects: [],
     attendanceDays: [
       { date: "2026-03-02", status: "PRESENT" },

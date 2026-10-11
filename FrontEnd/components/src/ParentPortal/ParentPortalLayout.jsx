@@ -9,6 +9,7 @@ const TABS = [
   { to: "home", label: "Home" },
   { to: "grades", label: "Grades" },
   { to: "attendance", label: "Attendance" },
+  { to: "syllabus", label: "Syllabus" },
 ];
 
 const ParentPortalLayout = () => {

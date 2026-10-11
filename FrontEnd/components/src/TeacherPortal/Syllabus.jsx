@@ -1,15 +1,49 @@
 import React, { useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { fullName } from "../AdminPortal/teacherData";
+import { syllabusSubmissions, nextSyllabusSubmissionId } from "../AdminPortal/syllabusSubmissions";
 
-const SyllabusCard = ({ subject, className }) => {
+const STATUS_LABEL = {
+  PENDING: "Awaiting headmaster approval.",
+  APPROVED: "Approved — now visible to these students and their parents.",
+  REJECTED: "Sent back by your headmaster — resubmit once corrected.",
+};
+
+const SyllabusCard = ({ subject, className, teacher }) => {
   const [content, setContent] = useState("");
-  const [updatedAt, setUpdatedAt] = useState(null);
-  const [saved, setSaved] = useState(false);
+  const [error, setError] = useState("");
+  const [, forceRender] = useState(0);
+
+  // Most recent submission for this exact subject+class — a rejected one
+  // can always be superseded by submitting again, but one still awaiting a
+  // decision blocks a second from piling up behind it.
+  const submissionsForPair = syllabusSubmissions.filter(
+    (s) => s.class === className && s.subject === subject,
+  );
+  const latest = submissionsForPair[submissionsForPair.length - 1];
+  const blockedByPending = Boolean(latest && latest.status === "PENDING");
 
   const handleSave = (e) => {
     e.preventDefault();
-    setUpdatedAt(new Date().toISOString().split("T")[0]);
-    setSaved(true);
+    if (!content.trim()) {
+      setError("Enter what this class will cover before submitting.");
+      return;
+    }
+    setError("");
+    syllabusSubmissions.push({
+      id: nextSyllabusSubmissionId(),
+      class: className,
+      subject,
+      teacherId: teacher.id,
+      teacherName: fullName(teacher),
+      content: content.trim(),
+      submittedAt: new Date().toISOString().split("T")[0],
+      status: "PENDING",
+      decidedBy: null,
+      decidedAt: null,
+      rejectionNote: null,
+    });
+    forceRender((n) => n + 1);
   };
 
   return (
@@ -19,16 +53,25 @@ const SyllabusCard = ({ subject, className }) => {
           {subject} &middot; {className}
         </h3>
         <span style={{ fontSize: "0.8rem", color: "var(--muted)" }}>
-          {updatedAt ? `Last updated ${updatedAt}` : "Not yet uploaded"}
+          {latest && latest.status === "APPROVED" ? `Approved ${latest.decidedAt}` : "Not yet published"}
         </span>
       </div>
+
+      {latest && (
+        <p className={latest.status === "REJECTED" ? "portal-notice" : "portal-success"}>
+          {STATUS_LABEL[latest.status]}
+          {latest.status === "REJECTED" && latest.rejectionNote && ` — "${latest.rejectionNote}"`}
+        </p>
+      )}
+
       <textarea
         rows={5}
         value={content}
         placeholder="What will this class cover this term?"
+        disabled={blockedByPending}
         onChange={(e) => {
           setContent(e.target.value);
-          setSaved(false);
+          setError("");
         }}
         style={{
           width: "100%",
@@ -40,10 +83,17 @@ const SyllabusCard = ({ subject, className }) => {
           boxSizing: "border-box",
         }}
       />
-      <button type="submit" className="portal-link-btn" style={{ marginTop: "0.75rem" }}>
-        Save syllabus
+      {error && <p className="portal-notice">{error}</p>}
+
+      <p style={{ fontSize: "0.8rem", color: "var(--muted)", margin: "0.5rem 0 0" }}>
+        Submitting sends this to your headmaster for approval. Once submitted it can&rsquo;t
+        be changed — if something needs fixing, your headmaster can send it back to you to
+        resubmit.
+      </p>
+
+      <button type="submit" className="portal-link-btn" style={{ marginTop: "0.75rem" }} disabled={blockedByPending}>
+        {blockedByPending ? "Awaiting approval" : "Save syllabus"}
       </button>
-      {saved && <p className="portal-success">Saved.</p>}
     </form>
   );
 };
@@ -68,7 +118,7 @@ const Syllabus = () => {
   return (
     <div>
       {pairs.map((p) => (
-        <SyllabusCard key={`${p.subject}-${p.class}`} subject={p.subject} className={p.class} />
+        <SyllabusCard key={`${p.subject}-${p.class}`} subject={p.subject} className={p.class} teacher={teacher} />
       ))}
     </div>
   );

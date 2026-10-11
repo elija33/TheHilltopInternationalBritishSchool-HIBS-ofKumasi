@@ -4,6 +4,7 @@ import { CLASS_LIST } from "./teacherData";
 
 const Students = () => {
   const [query, setQuery] = useState("");
+  const [classFilter, setClassFilter] = useState("ALL");
   const [, forceRender] = useState(0);
   const [name, setName] = useState("");
   const [className, setClassName] = useState(CLASS_LIST[0]);
@@ -18,8 +19,10 @@ const Students = () => {
     forceRender((n) => n + 1);
   };
 
-  const filtered = students.filter((s) =>
-    `${s.name} ${s.class}`.toLowerCase().includes(query.toLowerCase()),
+  const filtered = students.filter(
+    (s) =>
+      (classFilter === "ALL" || s.class === classFilter) &&
+      `${s.name} ${s.class}`.toLowerCase().includes(query.toLowerCase()),
   );
 
   return (
@@ -63,17 +66,35 @@ const Students = () => {
       </form>
 
       <div className="portal-toolbar">
-        <div>
-          <label htmlFor="student-search">Search</label>
-          <input
-            id="student-search"
-            className="portal-select"
-            type="text"
-            placeholder="Search by name or class"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            style={{ minWidth: "220px" }}
-          />
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
+          <div>
+            <label htmlFor="student-search">Search</label>
+            <input
+              id="student-search"
+              className="portal-select"
+              type="text"
+              placeholder="Search by name or class"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              style={{ minWidth: "220px" }}
+            />
+          </div>
+          <div>
+            <label htmlFor="student-class-filter">Class</label>
+            <select
+              id="student-class-filter"
+              className="portal-select"
+              value={classFilter}
+              onChange={(e) => setClassFilter(e.target.value)}
+            >
+              <option value="ALL">All classes</option>
+              {CLASS_LIST.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 

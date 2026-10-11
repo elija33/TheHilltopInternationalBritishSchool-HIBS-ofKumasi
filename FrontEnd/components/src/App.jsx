@@ -40,6 +40,7 @@ import ParentPortalLayout from "./ParentPortal/ParentPortalLayout";
 import ParentHome from "./ParentPortal/Home";
 import ParentGrades from "./ParentPortal/Grades";
 import ParentAttendance from "./ParentPortal/Attendance";
+import ParentSyllabus from "./ParentPortal/Syllabus";
 import TeacherPortalLayout from "./TeacherPortal/TeacherPortalLayout";
 import TeacherHome from "./TeacherPortal/Home";
 import TeacherMyClasses from "./TeacherPortal/MyClasses";
@@ -75,6 +76,7 @@ import HeadmasterHome from "./HeadmasterPortal/Home";
 import HeadmasterApprovals from "./HeadmasterPortal/Approvals";
 import HeadmasterMyClasses from "./HeadmasterPortal/MyClasses";
 import HeadmasterGrades from "./HeadmasterPortal/Grades";
+import HeadmasterSyllabus from "./HeadmasterPortal/Syllabus";
 import { getPageTitle } from "./pageTitle";
 
 const App = () => {
@@ -261,6 +263,7 @@ const App = () => {
           <Route path="home" element={<ParentHome />} />
           <Route path="grades" element={<ParentGrades />} />
           <Route path="attendance" element={<ParentAttendance />} />
+          <Route path="syllabus" element={<ParentSyllabus />} />
         </Route>
 
         <Route path="/portal/teacher" element={<TeacherPortalLayout />}>
@@ -323,6 +326,7 @@ const App = () => {
           <Route path="approvals" element={<HeadmasterApprovals />} />
           <Route path="my-classes" element={<HeadmasterMyClasses />} />
           <Route path="grades" element={<HeadmasterGrades />} />
+          <Route path="syllabus" element={<HeadmasterSyllabus />} />
         </Route>
       </Routes>
 

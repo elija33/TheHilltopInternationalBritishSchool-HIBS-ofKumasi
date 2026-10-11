@@ -41,6 +41,7 @@ const PARENT_TAB_LABELS = {
   home: "Home",
   grades: "Grades",
   attendance: "Attendance",
+  syllabus: "Syllabus",
 };
 
 const TEACHER_TAB_LABELS = {
@@ -79,6 +80,7 @@ const HEADMASTER_TAB_LABELS = {
   approvals: "Approvals",
   "my-classes": "My Classes",
   grades: "Grades",
+  syllabus: "Syllabus",
 };
 
 export const getPageTitle = (pathname) => {

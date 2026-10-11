@@ -7,6 +7,7 @@ import {
   IconEdit,
   IconLayers,
   IconGraduationCap,
+  IconUpload,
   IconBell,
   IconLogout,
 } from "../AdminPortal/icons";
@@ -18,6 +19,7 @@ const TABS = [
   { to: "approvals", label: "Approvals", Icon: IconEdit },
   { to: "my-classes", label: "My Classes", Icon: IconLayers },
   { to: "grades", label: "Grades", Icon: IconGraduationCap },
+  { to: "syllabus", label: "Syllabus", Icon: IconUpload },
 ];
 
 const initials = (name) =>
