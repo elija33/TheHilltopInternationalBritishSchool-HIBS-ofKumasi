@@ -7,6 +7,7 @@ const SITE_NAME = "HIBS";
 
 const STATIC_TITLES = {
   "/": "Home",
+  "/news": "Announcements",
   "/apply": "Apply",
   "/who": "Who We Are",
   "/board-of-directors": "Board of Directors",
@@ -63,6 +64,7 @@ const ADMIN_TAB_LABELS = {
   corrections: "Grade Corrections",
   publishing: "Publishing",
   announcements: "Announcements",
+  messages: "Messages",
   settings: "Settings",
 };
 
@@ -73,6 +75,7 @@ const SUBADMIN_TAB_LABELS = {
   parents: "Parents",
   teachers: "Teachers",
   classes: "Classes",
+  announcements: "Announcements",
 };
 
 const HEADMASTER_TAB_LABELS = {

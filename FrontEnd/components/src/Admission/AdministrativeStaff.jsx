@@ -1,7 +1,6 @@
 import React from "react";
 import "../AboutHIBS/BoardOfDirectors.css";
 import "./AdministrativeStaff.css";
-import hibsFooterLogo from "../../image/hibs_logofooter.jpg";
 
 const staff = [
   {
@@ -54,27 +53,6 @@ const StaffCard = ({ member }) => (
 const AdministrativeStaff = () => {
   return (
     <div>
-      <section className="hero" style={{ padding: 0 }}>
-        <div className="carousel-wrapper">
-          <div
-            style={{
-              width: "100%",
-              height: 260,
-              background: "linear-gradient(90deg,#0b9a56,#2bb673)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <img
-              src={hibsFooterLogo}
-              alt="HIBS"
-              style={{ height: 140, opacity: 0.95 }}
-            />
-          </div>
-        </div>
-      </section>
-
       <main className="container main-content">
         <h1 className="board-page-title">Administrative Staff</h1>
 

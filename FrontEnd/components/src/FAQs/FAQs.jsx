@@ -1,7 +1,6 @@
 import React from "react";
 import "../styles.css";
 import "./FAQs.css";
-import hibsFooterLogo from "../../image/hibs_logofooter.jpg";
 
 const faqs = [
   {
@@ -67,27 +66,6 @@ const faqs = [
 const FAQs = () => {
   return (
     <div>
-      <section className="hero" style={{ padding: 0 }}>
-        <div className="carousel-wrapper">
-          <div
-            style={{
-              width: "100%",
-              height: 260,
-              background: "linear-gradient(90deg,#0b9a56,#2bb673)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <img
-              src={hibsFooterLogo}
-              alt="HIBS"
-              style={{ height: 140, opacity: 0.95 }}
-            />
-          </div>
-        </div>
-      </section>
-
       <main className="container main-content">
         <div className="faqs-container">
           <h1 className="faqs-title">FAQs</h1>

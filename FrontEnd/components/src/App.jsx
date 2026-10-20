@@ -1,82 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Footer from "./Footer/Footer";
-import Body from "./Home/Body/Body";
-import Carousel from "./Home/carousel/Carousel";
+import AppRoutes from "./AppRoutes";
+import { getMainPageAnnouncements } from "./Home/announcementsUtils";
 import hibsLogo from "../image/hibs_logo.jpg";
-import hibsFooterLogo from "../image/hibs_logofooter.jpg";
 import "./styles.css";
 import ApplicationModal from "./ApplicationModal";
-import ApplyPage from "./ApplyPage";
-import {
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
-import WhoWeAre from "./WhoWeAre";
-import BoardOfDirectors from "./AboutHIBS/BoardOfDirectors";
-import VisitingHIBS from "./AboutHIBS/VisitingHIBS";
-import ToursAndOpenDays from "./AboutHIBS/ToursAndOpenDays";
-import AdministrativeStaff from "./Admission/AdministrativeStaff";
-import IGCSE from "./IGCSE/IGCSE";
-import ALevel from "./ALevel/ALevel";
-import ContactUs from "./ContactUs/ContactUs";
-import FAQs from "./FAQs/FAQs";
-import ClubsAndSocieties from "./CampusLife/ClubsAndSocieties";
-import HousingAndDining from "./CampusLife/HousingAndDining";
-import TechnologyOnCampus from "./CampusLife/TechnologyOnCampus";
-import Sports from "./CampusLife/Sports";
-import StudentLogin from "./Login/StudentLogin";
-import TeacherLogin from "./Login/TeacherLogin";
-import ParentLogin from "./Login/ParentLogin";
-import StudentPortalLayout from "./StudentPortal/StudentPortalLayout";
-import StudentHome from "./StudentPortal/Home";
-import StudentGrades from "./StudentPortal/Grades";
-import StudentAttendance from "./StudentPortal/Attendance";
-import StudentSyllabus from "./StudentPortal/Syllabus";
-import StudentProfile from "./StudentPortal/Profile";
-import ParentPortalLayout from "./ParentPortal/ParentPortalLayout";
-import ParentHome from "./ParentPortal/Home";
-import ParentGrades from "./ParentPortal/Grades";
-import ParentAttendance from "./ParentPortal/Attendance";
-import ParentSyllabus from "./ParentPortal/Syllabus";
-import TeacherPortalLayout from "./TeacherPortal/TeacherPortalLayout";
-import TeacherHome from "./TeacherPortal/Home";
-import TeacherMyClasses from "./TeacherPortal/MyClasses";
-import TeacherAttendance from "./TeacherPortal/Attendance";
-import TeacherGrades from "./TeacherPortal/Grades";
-import TeacherSyllabus from "./TeacherPortal/Syllabus";
-import TeacherSetPassword from "./TeacherPortal/SetPassword";
-import AdminLogin from "./Login/AdminLogin";
-import AdminPortalLayout from "./AdminPortal/AdminPortalLayout";
-import AdminHome from "./AdminPortal/Home";
-import AdminStudents from "./AdminPortal/Students";
-import AdminTeachers from "./AdminPortal/Teachers";
-import AdminTeacherRecord from "./AdminPortal/TeacherRecord";
-import AdminAddTeacherWizard from "./AdminPortal/AddTeacherWizard";
-import AdminParents from "./AdminPortal/Parents";
-import AdminGradeCorrections from "./AdminPortal/GradeCorrections";
-import AdminPublishing from "./AdminPortal/Publishing";
-import AdminAnnouncements from "./AdminPortal/Announcements";
-import AdminSettings from "./AdminPortal/Settings";
-import AdminSubAdmins from "./AdminPortal/SubAdmins";
-import AdminHeadmasterApprovals from "./AdminPortal/HeadmasterApprovals";
-import SubAdminLogin from "./Login/SubAdminLogin";
-import SubAdminPortalLayout from "./SubAdminPortal/SubAdminPortalLayout";
-import SubAdminHome from "./SubAdminPortal/Home";
-import SubAdminHeadmaster from "./SubAdminPortal/Headmaster";
-import SubAdminStudents from "./SubAdminPortal/Students";
-import SubAdminParents from "./SubAdminPortal/Parents";
-import SubAdminClasses from "./SubAdminPortal/Classes";
-import { getCurrentSubAdmin } from "./SubAdminPortal/useCurrentSubAdmin";
-import HeadmasterLogin from "./Login/HeadmasterLogin";
-import HeadmasterPortalLayout from "./HeadmasterPortal/HeadmasterPortalLayout";
-import HeadmasterHome from "./HeadmasterPortal/Home";
-import HeadmasterApprovals from "./HeadmasterPortal/Approvals";
-import HeadmasterMyClasses from "./HeadmasterPortal/MyClasses";
-import HeadmasterGrades from "./HeadmasterPortal/Grades";
-import HeadmasterSyllabus from "./HeadmasterPortal/Syllabus";
 import { getPageTitle } from "./pageTitle";
 
 const App = () => {
@@ -97,53 +26,75 @@ const App = () => {
     document.title = getPageTitle(location.pathname);
   }, [location.pathname]);
 
+  const urgentAnnouncement = getMainPageAnnouncements().find((a) => a.urgent);
+
   return (
     <div className="app-shell">
       <header className="site-header">
-        <div className="top-bar">
-          <div className="container header-inner">
-            <Link to="/" className="brand">
-              <img
-                src={hibsLogo}
-                alt="HIBS logo"
-                className="brand-logo"
-                height={80}
-              />
-            </Link>
-
-            <div className="top-actions">
-              <Link to="/#news" className="top-link">
-                NEWS
-              </Link>
-              <Link to="/login/student" className="top-link">
-                STUDENTS
-              </Link>
-              <Link to="/#alumni" className="top-link">
-                ALUMNI
-              </Link>
-              <Link to="/login/parent" className="top-link">
-                PARENTS
-              </Link>
-              <Link to="/#jobs" className="top-link">
-                JOBS
-              </Link>
-              <Link to="/igcse" className="top-link">
-                IGCSE
-              </Link>
-              <Link to="/apply" className="apply-btn">
-                APPLY
-              </Link>
+        <div className="hp-utility-bar">
+          <div className="hp-container">
+            <div className="hp-utility-contact">
+              <a href="tel:+233322299229">+233 (0) 32 229 9229</a>
+              <span>1 Cecilia Agyei-Amoako Road, Kumasi</span>
+            </div>
+            <div className="hp-utility-links">
+              <Link to="/news">News</Link>
+              <Link to="/login/student">Students</Link>
+              <Link to="/#alumni">Alumni</Link>
+              <Link to="/login/parent">Parents</Link>
+              <Link to="/#jobs">Jobs</Link>
+              <Link to="/igcse">IGCSE</Link>
+              <div className="hp-portal-login">
+                <button type="button">Portal Login &rarr;</button>
+                <ul className="hp-portal-login-menu">
+                  <li>
+                    <Link to="/login/student">Student Login</Link>
+                  </li>
+                  <li>
+                    <Link to="/login/teacher">Teacher Login</Link>
+                  </li>
+                  <li>
+                    <Link to="/login/parent">Parent / Guardian Login</Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="primary-nav">
-          <div className="container">
-            <nav className="main-nav">
-              <Link to="/">Home</Link>
-              <div className="nav-item has-dropdown">
-                <Link to="/#about">About HIBS</Link>
-                <ul className="dropdown-menu">
+        {urgentAnnouncement && (
+          <div className="hp-urgent-banner">
+            <div className="hp-container">
+              <span className="hp-urgent-badge">Urgent</span>
+              <span className="hp-urgent-message">
+                {urgentAnnouncement.body}
+              </span>
+              <Link to="/news" className="hp-urgent-link">
+                Read more
+              </Link>
+            </div>
+          </div>
+        )}
+
+        <div className="hp-main-header">
+          <div className="hp-container">
+            <Link to="/" className="hp-brand">
+              <img src={hibsLogo} alt="HIBS logo" className="hp-brand-logo" />
+            </Link>
+
+            <nav className="hp-nav">
+              <Link to="/" className="hp-nav-link">
+                Home
+              </Link>
+              <div className="hp-nav-item">
+                <a
+                  href="#"
+                  className="hp-nav-link"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  About
+                </a>
+                <ul className="hp-dropdown">
                   <li>
                     <Link to="/who">Who We Are</Link>
                   </li>
@@ -161,9 +112,15 @@ const App = () => {
                   </li>
                 </ul>
               </div>
-              <div className="nav-item has-dropdown">
-                <Link to="/#admission">Admission</Link>
-                <ul className="dropdown-menu">
+              <div className="hp-nav-item">
+                <a
+                  href="#"
+                  className="hp-nav-link"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  Admissions
+                </a>
+                <ul className="hp-dropdown">
                   <li>
                     <Link to="/a-level">A Level</Link>
                   </li>
@@ -172,9 +129,15 @@ const App = () => {
                   </li>
                 </ul>
               </div>
-              <div className="nav-item has-dropdown">
-                <Link to="/#campuslife">Campus Life</Link>
-                <ul className="dropdown-menu">
+              <div className="hp-nav-item">
+                <a
+                  href="#"
+                  className="hp-nav-link"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  Campus Life
+                </a>
+                <ul className="hp-dropdown">
                   <li>
                     <Link to="/housing-and-dining">Housing & Dining</Link>
                   </li>
@@ -189,146 +152,28 @@ const App = () => {
                   </li>
                 </ul>
               </div>
-              <Link to="/igcse">IGCSE</Link>
-              <Link to="/faqs">FAQs</Link>
-              <Link to="/#media">Media Center</Link>
-              <Link to="/#resources">Resources</Link>
-              <Link to="/contact-us">Contact Us</Link>
+              <Link to="/igcse" className="hp-nav-link">
+                IGCSE
+              </Link>
+              <Link to="/faqs" className="hp-nav-link">
+                FAQs
+              </Link>
+              <Link to="/#media" className="hp-nav-link">
+                Media
+              </Link>
+              <Link to="/contact-us" className="hp-nav-link">
+                Contact
+              </Link>
             </nav>
+
+            <Link to="/apply" className="hp-apply-btn">
+              Apply Now
+            </Link>
           </div>
         </div>
       </header>
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <section className="hero" id="home">
-                <div className="hero-overlay" />
-                <div className="carousel-wrapper">
-                  <Carousel />
-                </div>
-              </section>
-              <main className="container main-content">
-                <Body />
-
-                <section className="partners-section">
-                  <div>
-                    <div className="partner-logo partner-logo--img">
-                      <img src={hibsFooterLogo} alt="HIBS footer logo" />
-                    </div>
-                  </div>
-                </section>
-              </main>
-            </>
-          }
-        />
-
-        <Route
-          path="/apply"
-          element={<ApplyPage onClose={() => navigate("/")} />}
-        />
-        <Route path="/who" element={<WhoWeAre />} />
-        <Route path="/board-of-directors" element={<BoardOfDirectors />} />
-        <Route path="/visiting-hibs" element={<VisitingHIBS />} />
-        <Route path="/tours-and-open-days" element={<ToursAndOpenDays />} />
-        <Route path="/administrative-staff" element={<AdministrativeStaff />} />
-        <Route path="/igcse" element={<IGCSE />} />
-        <Route path="/a-level" element={<ALevel />} />
-        <Route path="/contact-us" element={<ContactUs />} />
-        <Route path="/faqs" element={<FAQs />} />
-        <Route path="/clubs-and-societies" element={<ClubsAndSocieties />} />
-        <Route path="/housing-and-dining" element={<HousingAndDining />} />
-        <Route path="/technology-on-campus" element={<TechnologyOnCampus />} />
-        <Route path="/sports" element={<Sports />} />
-        <Route path="/login/student" element={<StudentLogin />} />
-        <Route path="/login/teacher" element={<TeacherLogin />} />
-        <Route path="/login/parent" element={<ParentLogin />} />
-        <Route path="/login/admin" element={<AdminLogin />} />
-        <Route path="/login/subadmin" element={<SubAdminLogin />} />
-        <Route path="/login/headmaster" element={<HeadmasterLogin />} />
-
-        <Route path="/portal/student" element={<StudentPortalLayout />}>
-          <Route index element={<StudentHome />} />
-          <Route path="home" element={<StudentHome />} />
-          <Route path="grades" element={<StudentGrades />} />
-          <Route path="attendance" element={<StudentAttendance />} />
-          <Route path="syllabus" element={<StudentSyllabus />} />
-          <Route path="profile" element={<StudentProfile />} />
-        </Route>
-
-        <Route path="/portal/parent/:childId" element={<ParentPortalLayout />}>
-          <Route index element={<ParentHome />} />
-          <Route path="home" element={<ParentHome />} />
-          <Route path="grades" element={<ParentGrades />} />
-          <Route path="attendance" element={<ParentAttendance />} />
-          <Route path="syllabus" element={<ParentSyllabus />} />
-        </Route>
-
-        <Route path="/portal/teacher" element={<TeacherPortalLayout />}>
-          <Route index element={<TeacherHome />} />
-          <Route path="home" element={<TeacherHome />} />
-          <Route path="classes" element={<TeacherMyClasses />} />
-          <Route path="attendance" element={<TeacherAttendance />} />
-          <Route path="grades" element={<TeacherGrades />} />
-          <Route path="syllabus" element={<TeacherSyllabus />} />
-        </Route>
-
-        <Route path="/portal/teacher/set-password" element={<TeacherSetPassword />} />
-
-        <Route path="/portal/admin" element={<AdminPortalLayout />}>
-          <Route index element={<AdminHome />} />
-          <Route path="home" element={<AdminHome />} />
-          <Route path="students" element={<AdminStudents />} />
-          <Route path="teachers" element={<AdminTeachers />} />
-          <Route path="teachers/new" element={<AdminAddTeacherWizard />} />
-          <Route path="teachers/:id" element={<AdminTeacherRecord />} />
-          <Route path="parents" element={<AdminParents />} />
-          <Route path="corrections" element={<AdminGradeCorrections />} />
-          <Route path="publishing" element={<AdminPublishing />} />
-          <Route path="announcements" element={<AdminAnnouncements />} />
-          <Route path="settings" element={<AdminSettings />} />
-          <Route path="sub-admins" element={<AdminSubAdmins />} />
-          <Route path="headmaster-approvals" element={<AdminHeadmasterApprovals />} />
-        </Route>
-
-        <Route path="/portal/subadmin" element={<SubAdminPortalLayout />}>
-          <Route index element={<SubAdminHome />} />
-          <Route path="home" element={<SubAdminHome />} />
-          <Route path="headmaster" element={<SubAdminHeadmaster />} />
-          <Route path="students" element={<SubAdminStudents />} />
-          <Route path="parents" element={<SubAdminParents />} />
-          <Route path="classes" element={<SubAdminClasses />} />
-          <Route
-            path="teachers"
-            element={<AdminTeachers basePath="/portal/subadmin" showPendingRequests />}
-          />
-          <Route
-            path="teachers/new"
-            element={
-              <AdminAddTeacherWizard
-                basePath="/portal/subadmin"
-                requiresApproval
-                requestedBy={getCurrentSubAdmin()?.name || "Sub Admin"}
-              />
-            }
-          />
-          <Route
-            path="teachers/:id"
-            element={<AdminTeacherRecord basePath="/portal/subadmin" />}
-          />
-        </Route>
-
-        <Route path="/portal/headmaster" element={<HeadmasterPortalLayout />}>
-          <Route index element={<HeadmasterHome />} />
-          <Route path="home" element={<HeadmasterHome />} />
-          <Route path="approvals" element={<HeadmasterApprovals />} />
-          <Route path="my-classes" element={<HeadmasterMyClasses />} />
-          <Route path="grades" element={<HeadmasterGrades />} />
-          <Route path="syllabus" element={<HeadmasterSyllabus />} />
-        </Route>
-      </Routes>
+      <AppRoutes />
 
       <Footer />
 

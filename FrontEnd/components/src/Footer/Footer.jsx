@@ -1,50 +1,52 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
+
+const WHATSAPP_URL = "https://wa.me/233322299229";
+const DIRECTIONS_URL =
+  "https://www.google.com/maps/search/?api=1&query=1+Cecilia+Agyei-Amoako+Road%2C+Kumasi%2C+Ghana";
 
 const Footer = () => {
   return (
     <footer className="footer-wrapper">
-      <div className="footer-content">
-        <div className="footer-About-HIBS">
-          <h3>About HIBS</h3>
+      <div className="footer-grid">
+        <div className="footer-column footer-about">
+          <h3>The Hilltop International British School</h3>
           <p>
-            Accredited by Cambridge Assessment International Education in
-            September 2010, The Hilltop International British School (HIBS),
-            formerly The Hilltop International Science College offers students
-            the opportunity to sit for the prestigious International Graduate
-            Certificate of Secondary Education (IGCSE) and the Advanced (A)
-            level. HIBS is part of The Hilltop School and a member of the PSGN
-            of the British Council.
+            Accredited by Cambridge Assessment International Education in September 2010,
+            offering students the opportunity to sit for the IGCSE.
           </p>
         </div>
-        <div className="footer-Phones">
-          <div className="footer-contact">
-            <strong>Find Us</strong>
-            <div>
-              The Hilltop International British School
-              <p>
-                1 Cecilia Agyei-Amoako Road,
-                <p>Kumasi, Ghana</p>
-              </p>
-              <p>+233 (0) 32 229 9229</p>
-              <p>+233 (0) 26 512 7717</p>
-              <p>+233 (0) 32 219 8394</p>
-              <p>+233 (0) 26 560 9987</p>
-              <p>
-                <strong>Email:</strong> support@hibs.edu.gh
-              </p>
-            </div>
-          </div>
+
+        <div className="footer-column">
+          <h3>Explore</h3>
+          <Link to="/who">About HIBS</Link>
+          <Link to="/a-level">Admissions</Link>
+          <Link to="/clubs-and-societies">Campus Life</Link>
+          <Link to="/news">Announcements</Link>
         </div>
-      </div>
-      <div className="footer-contact">
-        {/* <p>
-          <strong>Location:</strong> Cecilia Agyei Amoako Road, Daban, near Dr.
-          Asafo Adjei Hospital Daban off Ricky Boakye Guinness Depot
-        </p> */}
-        {/* <p>
-          <strong>Email:</strong> support@hibs.edu.gh
-        </p> */}
+
+        <div className="footer-column">
+          <h3>For Families</h3>
+          <Link to="/login/parent">Parent Portal</Link>
+          <Link to="/login/student">Student Portal</Link>
+          <Link to="/faqs">FAQs</Link>
+          <Link to="/#jobs">Jobs</Link>
+        </div>
+
+        <div className="footer-column">
+          <h3>Find Us</h3>
+          <p>1 Cecilia Agyei-Amoako Road, Kumasi, Ghana</p>
+          <p>
+            <a href="tel:+233322299229">+233 (0) 32 229 9229</a>
+          </p>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="footer-action-link">
+            WhatsApp us &rarr;
+          </a>
+          <a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="footer-action-link">
+            Get directions &rarr;
+          </a>
+        </div>
       </div>
 
       <div className="footer-bottom">

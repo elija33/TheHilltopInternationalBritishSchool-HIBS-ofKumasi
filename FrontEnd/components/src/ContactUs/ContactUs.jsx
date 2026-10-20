@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ContactUs.css";
+import { addContactMessage, nextContactMessageId } from "../AdminPortal/contactMessages";
 
 const MESSAGE_LIMIT = 2000;
 
@@ -27,6 +28,23 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    addContactMessage({
+      id: nextContactMessageId(),
+      fullName,
+      email,
+      phone,
+      childName,
+      classApplyingFor,
+      message,
+      submittedAt: new Date().toISOString().split("T")[0],
+      read: false,
+    });
+    setFullName("");
+    setEmail("");
+    setPhone("");
+    setChildName("");
+    setClassApplyingFor("");
+    setMessage("");
     setSent(true);
   };
 

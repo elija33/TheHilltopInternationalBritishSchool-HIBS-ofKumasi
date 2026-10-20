@@ -1,36 +1,56 @@
 import React, { useState } from "react";
-import { announcements as initialAnnouncements } from "./mockData";
+import { announcements } from "./mockData";
 
 const AUDIENCE_LABEL = {
   school: "Whole school",
   class: "One class",
+  teachers: "Teachers only",
   parents_fees: "Parents (fees) — never shown to students",
+  main_page: "Main page (public website)",
 };
 
+const MAIN_PAGE_CATEGORIES = ["Notice", "Admissions", "Academics", "Events", "General"];
+
+// Shared by both Admin and Sub Admin — mutating the one module-level array
+// (instead of local component state) means a post from either portal shows
+// up for the other, and is what the public homepage and Teacher Portal read
+// from when filtering by audience.
 const Announcements = () => {
-  const [items, setItems] = useState(initialAnnouncements);
+  const [, forceRender] = useState(0);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [audience, setAudience] = useState("school");
   const [className, setClassName] = useState("");
+  const [category, setCategory] = useState(MAIN_PAGE_CATEGORIES[0]);
+  const [pinned, setPinned] = useState(false);
+  const [urgent, setUrgent] = useState(false);
+  const [image, setImage] = useState("");
+
+  const isMainPage = audience === "main_page";
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title || !body) return;
-    setItems((prev) => [
-      {
-        id: `new-${Date.now()}`,
-        audience,
-        class: audience === "class" ? className : undefined,
-        title,
-        body,
-        date: new Date().toISOString().split("T")[0],
-      },
-      ...prev,
-    ]);
+    announcements.unshift({
+      id: `ann-${Date.now()}`,
+      audience,
+      class: audience === "class" ? className : undefined,
+      category: isMainPage ? category : undefined,
+      pinned: isMainPage ? pinned : undefined,
+      urgent: isMainPage ? urgent : undefined,
+      image: isMainPage && image.trim() ? image.trim() : null,
+      title,
+      body,
+      date: new Date().toISOString().split("T")[0],
+    });
     setTitle("");
     setBody("");
     setClassName("");
+    setCategory(MAIN_PAGE_CATEGORIES[0]);
+    setPinned(false);
+    setUrgent(false);
+    setImage("");
+    forceRender((n) => n + 1);
   };
 
   return (
@@ -51,7 +71,9 @@ const Announcements = () => {
           >
             <option value="school">Whole school</option>
             <option value="class">One class</option>
+            <option value="teachers">Teachers only</option>
             <option value="parents_fees">Parents (fees) — never shown to students</option>
+            <option value="main_page">Main page (public website)</option>
           </select>
         </div>
         {audience === "class" && (
@@ -64,6 +86,46 @@ const Announcements = () => {
               placeholder="e.g. JHS 2B"
             />
           </div>
+        )}
+        {isMainPage && (
+          <>
+            <div className="portal-field">
+              <label htmlFor="ann-category">Category</label>
+              <select
+                id="ann-category"
+                className="portal-select"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                {MAIN_PAGE_CATEGORIES.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="portal-field">
+              <label htmlFor="ann-image">
+                Image URL <span style={{ fontWeight: 400, color: "var(--muted)" }}>(optional)</span>
+              </label>
+              <input
+                id="ann-image"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                placeholder="https://… — leave blank to show a placeholder"
+              />
+            </div>
+            <div className="portal-field" style={{ display: "flex", gap: "1.5rem" }}>
+              <label style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontWeight: 400 }}>
+                <input type="checkbox" checked={pinned} onChange={(e) => setPinned(e.target.checked)} />
+                Pin to top
+              </label>
+              <label style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontWeight: 400 }}>
+                <input type="checkbox" checked={urgent} onChange={(e) => setUrgent(e.target.checked)} />
+                Show as urgent banner
+              </label>
+            </div>
+          </>
         )}
         <div className="portal-field">
           <label htmlFor="ann-body">Message</label>
@@ -90,19 +152,26 @@ const Announcements = () => {
 
       <div className="admin-section-card">
         <h2>All announcements</h2>
-        {items.map((a) => (
-          <div key={a.id} style={{ borderTop: "1px solid #eef1ee", padding: "0.85rem 0" }}>
-            <div className="portal-subject-header">
-              <h3>{a.title}</h3>
-              <span style={{ fontSize: "0.78rem", color: "var(--muted)" }}>{a.date}</span>
+        {announcements.length === 0 ? (
+          <p className="portal-empty">No announcements have been posted yet.</p>
+        ) : (
+          announcements.map((a) => (
+            <div key={a.id} style={{ borderTop: "1px solid #eef1ee", padding: "0.85rem 0" }}>
+              <div className="portal-subject-header">
+                <h3>{a.title}</h3>
+                <span style={{ fontSize: "0.78rem", color: "var(--muted)" }}>{a.date}</span>
+              </div>
+              <p style={{ margin: "0 0 0.3rem" }}>{a.body}</p>
+              <span style={{ fontSize: "0.78rem", color: "var(--muted)" }}>
+                {AUDIENCE_LABEL[a.audience]}
+                {a.class ? ` — ${a.class}` : ""}
+                {a.category ? ` — ${a.category}` : ""}
+                {a.pinned ? " — Pinned" : ""}
+                {a.urgent ? " — Urgent banner" : ""}
+              </span>
             </div>
-            <p style={{ margin: "0 0 0.3rem" }}>{a.body}</p>
-            <span style={{ fontSize: "0.78rem", color: "var(--muted)" }}>
-              {AUDIENCE_LABEL[a.audience]}
-              {a.class ? ` — ${a.class}` : ""}
-            </span>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

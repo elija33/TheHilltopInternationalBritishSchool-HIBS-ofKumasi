@@ -1,7 +1,6 @@
 import React from "react";
 import "../styles.css";
 import "./IGCSE.css";
-import hibsFooterLogo from "../../image/hibs_logofooter.jpg";
 
 const subjectsColumnOne = [
   "First Language English",
@@ -18,27 +17,6 @@ const subjectsColumnTwo = ["Physics", "Accounting", "Economics", "Geography"];
 const IGCSE = () => {
   return (
     <div>
-      <section className="hero" style={{ padding: 0 }}>
-        <div className="carousel-wrapper">
-          <div
-            style={{
-              width: "100%",
-              height: 260,
-              background: "linear-gradient(90deg,#0b9a56,#2bb673)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <img
-              src={hibsFooterLogo}
-              alt="HIBS"
-              style={{ height: 140, opacity: 0.95 }}
-            />
-          </div>
-        </div>
-      </section>
-
       <main className="container main-content">
         <div className="igcse-container">
           <h1 className="igcse-title">IGCSE</h1>

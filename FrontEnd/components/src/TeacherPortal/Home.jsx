@@ -1,9 +1,15 @@
 import React from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import { CLASS_ROSTERS } from "../AdminPortal/teacherData";
+import { announcements } from "../AdminPortal/mockData";
 
 const Home = () => {
   const { teacher } = useOutletContext();
+  // Teachers see whole-school notices plus anything posted just for staff —
+  // never the class-scoped or parents-fees ones meant for other audiences.
+  const visibleAnnouncements = announcements.filter(
+    (a) => a.audience === "school" || a.audience === "teachers",
+  );
   const isClassTeacher = Boolean(teacher.classTeacherOf);
   const subjectClassCount = teacher.subjectAssignments.reduce(
     (sum, a) => sum + a.classes.length,
@@ -39,6 +45,23 @@ const Home = () => {
           <p className="label">Students across your classes</p>
           <p className="value">{totalStudents}</p>
         </div>
+      </div>
+
+      <div className="portal-card">
+        <h2>Announcements</h2>
+        {visibleAnnouncements.length === 0 ? (
+          <p className="portal-empty">There are no announcements right now.</p>
+        ) : (
+          visibleAnnouncements.map((a) => (
+            <div key={a.id} style={{ borderTop: "1px solid #eef1ee", padding: "0.75rem 0" }}>
+              <div className="portal-subject-header">
+                <h3>{a.title}</h3>
+                <span style={{ fontSize: "0.78rem", color: "var(--muted)" }}>{a.date}</span>
+              </div>
+              <p style={{ margin: 0 }}>{a.body}</p>
+            </div>
+          ))
+        )}
       </div>
 
       {isClassTeacher && (

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "../StudentPortal/StudentPortal.css";
 import "./AdminPortal.css";
 import { admin } from "./mockData";
+import { contactMessages, subscribeToContactMessages } from "./contactMessages";
 import {
   IconDashboard,
   IconPeople,
@@ -28,6 +29,7 @@ const TABS = [
   { to: "corrections", label: "Grade Corrections", Icon: IconEdit },
   { to: "publishing", label: "Publishing", Icon: IconUpload },
   { to: "announcements", label: "Announcements", Icon: IconMegaphone },
+  { to: "messages", label: "Messages", Icon: IconBell },
   { to: "settings", label: "Settings", Icon: IconGear },
 ];
 
@@ -43,6 +45,9 @@ const AdminPortalLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentTab = TABS.find((t) => location.pathname.endsWith(t.to));
+  const [, forceRender] = useState(0);
+
+  useEffect(() => subscribeToContactMessages(() => forceRender((n) => n + 1)), []);
 
   return (
     <div className="admin-shell">
@@ -74,9 +79,13 @@ const AdminPortalLayout = () => {
         <div className="admin-topbar">
           <h1>{currentTab ? currentTab.label : "Dashboard"}</h1>
           <div className="admin-topbar-actions">
-            <span className="admin-bell">
+            <span
+              className="admin-bell"
+              onClick={() => navigate("messages")}
+              style={{ cursor: "pointer" }}
+            >
               <IconBell />
-              <span className="admin-bell-dot" />
+              {contactMessages.some((m) => !m.read) && <span className="admin-bell-dot" />}
             </span>
             <div className="admin-user">
               <span className="admin-user-avatar">{initials(admin.name)}</span>

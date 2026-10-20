@@ -174,8 +174,8 @@ const Approvals = () => {
                       <strong>Contact:</strong> {p.email} {p.phone ? `· ${p.phone}` : ""}
                     </p>
                     <p style={{ margin: "0 0 0.5rem" }}>
-                      <strong>Children:</strong>{" "}
-                      {p.children && p.children.length > 0 ? p.children.join(", ") : "None listed"}
+                      <strong>Child:</strong>{" "}
+                      {p.childName ? `${p.childName} · ${p.childClass}` : "None listed"}
                     </p>
                   </>
                 )}

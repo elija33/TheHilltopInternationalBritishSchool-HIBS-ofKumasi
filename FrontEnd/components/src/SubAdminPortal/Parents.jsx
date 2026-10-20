@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { parents } from "../AdminPortal/mockData";
 import { pendingAccountRequests } from "../AdminPortal/approvals";
+import { CLASS_LIST } from "../AdminPortal/teacherData";
 import { getCurrentSubAdmin } from "./useCurrentSubAdmin";
 
 const Parents = () => {
@@ -10,11 +11,18 @@ const Parents = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [childName, setChildName] = useState("");
+  const [childClass, setChildClass] = useState(CLASS_LIST[0]);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !email) return;
+    if (!childName.trim()) {
+      setError("Enter the child's name — it's required to link the parent account.");
+      return;
+    }
+    setError("");
     pendingAccountRequests.push({
       id: `paq-${Date.now()}`,
       type: "PARENT",
@@ -22,7 +30,9 @@ const Parents = () => {
         name,
         email,
         phone,
-        children: childName ? [childName] : [],
+        childName,
+        childClass,
+        children: [childName],
       },
       requestedBy: subAdmin ? subAdmin.name : "Sub Admin",
       requestedAt: new Date().toISOString().split("T")[0],
@@ -31,6 +41,7 @@ const Parents = () => {
     setEmail("");
     setPhone("");
     setChildName("");
+    setChildClass(CLASS_LIST[0]);
     setSubmitted(true);
     forceRender((n) => n + 1);
   };
@@ -91,20 +102,37 @@ const Parents = () => {
           />
         </div>
         <div className="portal-field">
-          <label htmlFor="parent-child">
-            Child&rsquo;s name{" "}
-            <span style={{ fontWeight: 400, color: "var(--muted)" }}>(optional)</span>
-          </label>
+          <label htmlFor="parent-child">Child&rsquo;s name</label>
           <input
             id="parent-child"
             value={childName}
             onChange={(e) => {
               setChildName(e.target.value);
               setSubmitted(false);
+              setError("");
             }}
             placeholder="e.g. Kofi Darko"
           />
         </div>
+        <div className="portal-field">
+          <label htmlFor="parent-child-class">Child&rsquo;s class</label>
+          <select
+            id="parent-child-class"
+            className="portal-select"
+            value={childClass}
+            onChange={(e) => {
+              setChildClass(e.target.value);
+              setSubmitted(false);
+            }}
+          >
+            {CLASS_LIST.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+        </div>
+        {error && <p className="portal-notice">{error}</p>}
         <button type="submit" className="portal-link-btn">
           Submit for approval
         </button>
@@ -129,6 +157,9 @@ const Parents = () => {
             >
               <div>
                 <strong>{r.proposedData.name}</strong>
+                <span style={{ marginLeft: "0.5rem", fontSize: "0.85rem", color: "var(--muted)" }}>
+                  {r.proposedData.childName} &middot; {r.proposedData.childClass}
+                </span>
                 <span className="portal-badge status-late" style={{ marginLeft: "0.5rem" }}>
                   Pending headmaster approval
                 </span>
@@ -151,6 +182,7 @@ const Parents = () => {
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Children</th>
+                <th>Class</th>
               </tr>
             </thead>
             <tbody>
@@ -160,6 +192,7 @@ const Parents = () => {
                   <td>{p.email}</td>
                   <td>{p.phone || "—"}</td>
                   <td>{p.children.length > 0 ? p.children.join(", ") : "—"}</td>
+                  <td>{p.childClass || "—"}</td>
                 </tr>
               ))}
             </tbody>
