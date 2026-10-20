@@ -1,0 +1,533 @@
+/* "Who We Are" page — reuses .hp-container/.hp-section-eyebrow/.hp-photo-placeholder
+   from Home/HomePage.css, plus its own wwa-prefixed classes below. */
+
+.wwa-hero {
+  position: relative;
+  background: var(--green-dark);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 2px,
+    transparent 2px,
+    transparent 26px
+  );
+  color: #fff;
+  padding: 2rem 0 3.5rem;
+  overflow: hidden;
+}
+
+.wwa-hero-photo {
+  float: right;
+  width: 340px;
+  max-width: 40%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 0 1rem 1.5rem;
+}
+
+.wwa-hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+.wwa-breadcrumb {
+  clear: both;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 2rem;
+}
+
+.wwa-breadcrumb a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
+
+.wwa-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.wwa-hero h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(2.3rem, 4.5vw, 3.4rem);
+}
+
+.wwa-hero p {
+  max-width: 640px;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+}
+
+/* ---------- Our Story ---------- */
+.wwa-story-section {
+  padding: 4.5rem 0;
+  background: var(--white);
+}
+
+.wwa-story-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.wwa-story-grid h2 {
+  margin: 0 0 1.1rem;
+  color: var(--green-dark);
+  font-size: 1.85rem;
+  line-height: 1.3;
+}
+
+.wwa-story-grid p {
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.8;
+  margin: 0 0 1.1rem;
+}
+
+.wwa-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.wwa-stat-card {
+  background: #f7f5ef;
+  border-top: 3px solid #d49b00;
+  border-radius: 8px;
+  padding: 1.25rem 1.4rem;
+}
+
+.wwa-stat-card .number {
+  margin: 0;
+  color: var(--green-dark);
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.wwa-stat-card .label {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+@media (max-width: 860px) {
+  .wwa-story-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Motto ---------- */
+.wwa-motto-section {
+  position: relative;
+  background: var(--green-dark);
+  padding: 4rem 0;
+  overflow: hidden;
+}
+
+.wwa-motto-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.wwa-motto-header .hp-section-eyebrow {
+  color: #ffd83b;
+}
+
+.wwa-motto-header h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 2rem;
+}
+
+.wwa-motto-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 760px) {
+  .wwa-motto-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wwa-motto-card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+}
+
+.wwa-motto-card .num {
+  color: #ffd83b;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.wwa-motto-card h3 {
+  margin: 0.5rem 0 0.6rem;
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.wwa-motto-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* ---------- Mission / Vision ---------- */
+.wwa-mv-section {
+  padding: 4.5rem 0;
+  background: var(--white);
+}
+
+.wwa-mv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+}
+
+@media (max-width: 760px) {
+  .wwa-mv-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wwa-mv-card {
+  border-radius: 14px;
+  padding: 2rem;
+}
+
+.wwa-mv-card.mission {
+  background: #f7f5ef;
+}
+
+.wwa-mv-card.vision {
+  background: #fff3cf;
+}
+
+.wwa-mv-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: var(--green-dark);
+  color: #ffd83b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.wwa-mv-card .hp-section-eyebrow {
+  margin-bottom: 0.4rem;
+}
+
+.wwa-mv-card h3 {
+  margin: 0 0 0.75rem;
+  color: var(--green-dark);
+  font-size: 1.5rem;
+}
+
+.wwa-mv-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+/* ---------- Core values ---------- */
+.wwa-values-section {
+  padding: 4.5rem 0 5rem;
+  background: #f7f5ef;
+}
+
+.wwa-values-section .hp-section-eyebrow {
+  color: var(--green-dark);
+}
+
+.wwa-values-section h2 {
+  margin: 0 0 0.75rem;
+  color: var(--green-dark);
+  font-size: 2rem;
+}
+
+.wwa-values-intro {
+  max-width: 640px;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.75;
+  margin: 0 0 2.25rem;
+}
+
+.wwa-values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1000px) {
+  .wwa-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .wwa-values-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wwa-value-card {
+  background: var(--white);
+  border: 1px solid #e7ede7;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.wwa-value-card .emoji {
+  font-size: 1.6rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.wwa-value-card h3 {
+  margin: 0 0 0.4rem;
+  color: var(--green-dark);
+  font-size: 1.05rem;
+}
+
+.wwa-value-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* ---------- Multicultural community ---------- */
+.wwa-culture-section {
+  padding: 4.5rem 0;
+  background: #f7f5ef;
+}
+
+.wwa-culture-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.wwa-culture-grid .hp-photo-placeholder {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  border-radius: 14px;
+}
+
+.wwa-culture-grid h2 {
+  margin: 0 0 1rem;
+  color: var(--green-dark);
+  font-size: 2rem;
+  line-height: 1.25;
+}
+
+.wwa-culture-grid > div:last-child > p {
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.75;
+  margin: 0 0 1.5rem;
+}
+
+@media (max-width: 860px) {
+  .wwa-culture-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wwa-flag-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.wwa-flag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid #d7dcd7;
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--white);
+}
+
+.wwa-flag-pill.host {
+  background: var(--green-dark);
+  border-color: var(--green-dark);
+  color: #fff;
+}
+
+/* ---------- School crest ---------- */
+.wwa-crest-section {
+  padding: 4.5rem 0 5rem;
+  background: #fbfaf5;
+}
+
+.wwa-crest-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+@media (max-width: 860px) {
+  .wwa-crest-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wwa-crest-badge-wrap {
+  text-align: center;
+}
+
+.wwa-crest-badge {
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 3px solid #d49b00;
+  background: #cfe3f5;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wwa-crest-hill {
+  position: absolute;
+  left: -10%;
+  bottom: -5%;
+  width: 120%;
+  height: 55%;
+  background: var(--green-dark);
+  border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+}
+
+.wwa-crest-flame {
+  position: relative;
+  z-index: 2;
+  font-size: 2.2rem;
+}
+
+.wwa-crest-caption {
+  margin: 0.9rem 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.wwa-crest-grid h2 {
+  margin: 0 0 1.5rem;
+  color: var(--green-dark);
+  font-size: 2rem;
+}
+
+.wwa-crest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.wwa-crest-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--white);
+  border: 1px solid #eef1ee;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.wwa-crest-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: #f3f0e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.wwa-crest-item h3 {
+  margin: 0 0 0.25rem;
+  color: var(--green-dark);
+  font-size: 1.02rem;
+}
+
+.wwa-crest-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* ---------- Where our students go ---------- */
+.wwa-careers-section {
+  padding: 4.5rem 0 1.5rem;
+  background: var(--white);
+}
+
+.wwa-careers-section h2 {
+  margin: 0 0 2rem;
+  color: var(--green-dark);
+  font-size: 2rem;
+}
+
+.wwa-careers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.75rem;
+}
+
+@media (max-width: 760px) {
+  .wwa-careers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.wwa-career-card {
+  background: var(--green-dark);
+  border-radius: 12px;
+  padding: 1.75rem 1.4rem;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wwa-career-card .icon {
+  font-size: 1.4rem;
+}
+
+.wwa-career-card h3 {
+  margin: 0.75rem 0 0;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+/* ---------- Final CTA ---------- */
+.wwa-final-cta-wrap {
+  padding: 0 0 4.5rem;
+  background: var(--white);
+}
