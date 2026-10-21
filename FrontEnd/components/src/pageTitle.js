@@ -65,6 +65,7 @@ const ADMIN_TAB_LABELS = {
   corrections: "Grade Corrections",
   publishing: "Publishing",
   announcements: "Announcements",
+  carousel: "Carousel",
   messages: "Messages",
   settings: "Settings",
 };

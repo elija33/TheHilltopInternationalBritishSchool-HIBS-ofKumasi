@@ -49,6 +49,7 @@ import AdminParents from "./AdminPortal/Parents";
 import AdminGradeCorrections from "./AdminPortal/GradeCorrections";
 import AdminPublishing from "./AdminPortal/Publishing";
 import AdminAnnouncements from "./AdminPortal/Announcements";
+import AdminCarousel from "./AdminPortal/Carousel";
 import AdminMessages from "./AdminPortal/Messages";
 import AdminSettings from "./AdminPortal/Settings";
 import AdminSubAdmins from "./AdminPortal/SubAdmins";
@@ -141,6 +142,7 @@ const AppRoutes = () => {
         <Route path="corrections" element={<AdminGradeCorrections />} />
         <Route path="publishing" element={<AdminPublishing />} />
         <Route path="announcements" element={<AdminAnnouncements />} />
+        <Route path="carousel" element={<AdminCarousel />} />
         <Route path="messages" element={<AdminMessages />} />
         <Route path="settings" element={<AdminSettings />} />
         <Route path="sub-admins" element={<AdminSubAdmins />} />

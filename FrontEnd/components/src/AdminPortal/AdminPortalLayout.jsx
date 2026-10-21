@@ -16,6 +16,7 @@ import {
   IconGear,
   IconShield,
   IconBell,
+  IconLayers,
   IconLogout,
 } from "./icons";
 
@@ -29,6 +30,7 @@ const TABS = [
   { to: "corrections", label: "Grade Corrections", Icon: IconEdit },
   { to: "publishing", label: "Publishing", Icon: IconUpload },
   { to: "announcements", label: "Announcements", Icon: IconMegaphone },
+  { to: "carousel", label: "Carousel", Icon: IconLayers },
   { to: "messages", label: "Messages", Icon: IconBell },
   { to: "settings", label: "Settings", Icon: IconGear },
 ];
