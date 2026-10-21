@@ -102,7 +102,7 @@ const App = () => {
                     <Link to="/board-of-directors">Board of Directors</Link>
                   </li>
                   <li>
-                    <Link to="/#staff">Teaching Staff</Link>
+                    <Link to="/teaching-staff">Teaching Staff</Link>
                   </li>
                   <li>
                     <Link to="/#pta">PTA</Link>

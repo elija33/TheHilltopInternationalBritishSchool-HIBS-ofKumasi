@@ -4,6 +4,7 @@ import Body from "./Home/Body/Body";
 import ApplyPage from "./ApplyPage";
 import WhoWeAre from "./WhoWeAre";
 import BoardOfDirectors from "./AboutHIBS/BoardOfDirectors";
+import TeachingStaff from "./AboutHIBS/TeachingStaff";
 import VisitingHIBS from "./AboutHIBS/VisitingHIBS";
 import ToursAndOpenDays from "./AboutHIBS/ToursAndOpenDays";
 import AdministrativeStaff from "./Admission/AdministrativeStaff";
@@ -82,6 +83,7 @@ const AppRoutes = () => {
       <Route path="/apply" element={<ApplyPage onClose={() => navigate("/")} />} />
       <Route path="/who" element={<WhoWeAre />} />
       <Route path="/board-of-directors" element={<BoardOfDirectors />} />
+      <Route path="/teaching-staff" element={<TeachingStaff />} />
       <Route path="/visiting-hibs" element={<VisitingHIBS />} />
       <Route path="/tours-and-open-days" element={<ToursAndOpenDays />} />
       <Route path="/administrative-staff" element={<AdministrativeStaff />} />

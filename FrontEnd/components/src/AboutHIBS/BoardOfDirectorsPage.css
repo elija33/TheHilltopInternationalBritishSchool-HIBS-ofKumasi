@@ -1,0 +1,314 @@
+/* Redesigned Board of Directors page. Deliberately its own file with its
+   own bod- prefixed classes — BoardOfDirectors.css (the old card grid) is
+   left untouched because AdministrativeStaff.jsx still depends on it. */
+
+.bod-hero {
+  position: relative;
+  background: var(--green-dark);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 2px,
+    transparent 2px,
+    transparent 26px
+  );
+  color: #fff;
+  padding: 2rem 0 9rem;
+  overflow: hidden;
+}
+
+.bod-hero::after {
+  content: "★";
+  position: absolute;
+  right: -60px;
+  top: -80px;
+  font-size: 420px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.bod-breadcrumb {
+  position: relative;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 2rem;
+}
+
+.bod-breadcrumb a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
+
+.bod-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.bod-hero h1 {
+  position: relative;
+  margin: 0 0 1rem;
+  font-size: clamp(2.3rem, 4.5vw, 3.4rem);
+}
+
+.bod-hero > .hp-container > p {
+  position: relative;
+  max-width: 640px;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+}
+
+/* ---------- Avatars (shared by all three tiers) ---------- */
+.bod-avatar {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  border: 3px solid #d49b00;
+  background: #fdf3cf;
+  color: var(--green-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.bod-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Top leadership (overlapping the hero) ---------- */
+.bod-leader-grid {
+  position: relative;
+  z-index: 5;
+  margin-top: -7rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 760px) {
+  .bod-leader-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bod-leader-card {
+  display: flex;
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+}
+
+.bod-leader-photo {
+  flex: 0 0 170px;
+  background: linear-gradient(160deg, var(--green), var(--green-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bod-leader-photo .bod-avatar {
+  width: 108px;
+  height: 108px;
+  font-size: 1.8rem;
+}
+
+.bod-leader-body {
+  padding: 1.5rem 1.6rem;
+}
+
+.bod-badge {
+  display: inline-block;
+  background: var(--green-dark);
+  color: #ffd83b;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: 0.65rem;
+}
+
+.bod-leader-body h3 {
+  margin: 0 0 0.25rem;
+  color: var(--green-dark);
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.bod-credentials {
+  margin: 0 0 0.65rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.bod-bio {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* ---------- Directors ---------- */
+.bod-section {
+  padding: 4rem 0;
+  background: var(--white);
+}
+
+.bod-section.alt {
+  background: #f7f5ef;
+}
+
+.bod-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.bod-section-header h2 {
+  margin: 0;
+  color: var(--green-dark);
+  font-size: 1.9rem;
+}
+
+.bod-member-count {
+  color: var(--muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.bod-director-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 760px) {
+  .bod-director-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bod-director-card {
+  display: flex;
+  gap: 1.25rem;
+  background: var(--white);
+  border: 1px solid #eef1ee;
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.bod-director-card .bod-badge {
+  background: #e6f2e9;
+  color: var(--green-dark);
+}
+
+/* ---------- Board members ---------- */
+.bod-member-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1000px) {
+  .bod-member-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .bod-member-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bod-member-card {
+  background: var(--white);
+  border: 1px solid #eef1ee;
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.bod-member-card .bod-avatar {
+  margin: 0 auto 0.9rem;
+}
+
+.bod-member-card h3 {
+  margin: 0 0 0.5rem;
+  color: var(--green-dark);
+  font-size: 1.02rem;
+  line-height: 1.3;
+}
+
+.bod-member-card .bod-badge {
+  background: #e6f2e9;
+  color: var(--green-dark);
+}
+
+.bod-member-card .bod-badge.secretary {
+  background: #fff3cf;
+  color: #7a5700;
+}
+
+.bod-member-card .bod-bio {
+  margin-top: 0.6rem;
+}
+
+.bod-read-more {
+  display: inline-block;
+  margin-top: 0.4rem;
+  color: var(--green-dark);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-bottom: 2px solid #d49b00;
+}
+
+/* ---------- Governance banner ---------- */
+.bod-governance-wrap {
+  padding: 0 0 4.5rem;
+  background: var(--white);
+}
+
+.bod-governance-banner {
+  background: var(--green-dark);
+  border-radius: 20px;
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.bod-governance-banner .hp-section-eyebrow {
+  color: #ffd83b;
+}
+
+.bod-governance-banner h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.9rem;
+  max-width: 420px;
+}
+
+.bod-governance-right {
+  max-width: 380px;
+}
+
+.bod-governance-right p {
+  margin: 0 0 1.25rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}

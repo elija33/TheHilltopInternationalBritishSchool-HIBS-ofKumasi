@@ -1,50 +1,459 @@
-.alevel-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
+/* "A Level at HIBS" page. Reuses .hp-container/.hp-section-eyebrow/
+   .hp-hero-cta-primary/.hp-hero-cta-secondary from Home/HomePage.css. */
+
+.al-hero {
+  position: relative;
+  background: var(--green-dark);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 2px,
+    transparent 2px,
+    transparent 26px
+  );
+  color: #fff;
+  padding: 2rem 0 4rem;
+  overflow: hidden;
 }
 
-.alevel-title {
-  color: #16324f;
-  font-size: 2.4rem;
+.al-hero::after {
+  content: "A";
+  position: absolute;
+  right: -20px;
+  top: -60px;
+  font-size: 420px;
+  line-height: 1;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.al-breadcrumb {
+  position: relative;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
   margin: 0 0 1.25rem;
 }
 
-.alevel-container p {
+.al-breadcrumb a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
+
+.al-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.al-hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .al-hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.al-hero h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(2.3rem, 4.5vw, 3.3rem);
+}
+
+.al-hero-grid p.al-subtitle {
+  max-width: 560px;
+  font-size: 1.02rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 1.75rem;
+}
+
+.al-hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.al-hero-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.al-feature-card {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+}
+
+.al-feature-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #d49b00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.al-feature-card h3 {
+  margin: 0 0 0.2rem;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.al-feature-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.82rem;
+}
+
+/* ---------- Subjects offered ---------- */
+.al-subjects-section {
+  padding: 4.5rem 0;
+  background: var(--white);
+}
+
+.al-subjects-section h2 {
+  margin: 0 0 0.6rem;
+  color: var(--green-dark);
+  font-size: 2rem;
+}
+
+.al-subjects-intro {
+  max-width: 600px;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.75;
+  margin: 0 0 2.25rem;
+}
+
+.al-subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .al-subjects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .al-subjects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.al-subject-card {
+  background: var(--white);
+  border: 1px solid #eef1ee;
+  border-left: 4px solid #d49b00;
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.al-subject-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #eef3ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 0.9rem;
+}
+
+.al-subject-card h3 {
+  margin: 0 0 0.4rem;
+  color: var(--green-dark);
+  font-size: 1.1rem;
+}
+
+.al-subject-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.al-subject-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+
+.al-subject-tag {
+  background: #fff3cf;
+  color: #7a5700;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+}
+
+.al-subject-callout {
+  background: var(--green-dark);
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.al-subject-callout h3 {
+  margin: 0 0 0.4rem;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.al-subject-callout p {
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.al-subject-callout a {
+  align-self: flex-start;
+}
+
+/* ---------- Pathways ---------- */
+.al-pathways-section {
+  padding: 4.5rem 0;
+  background: #f7f5ef;
+}
+
+.al-pathways-section h2 {
+  margin: 0 0 0.5rem;
+  color: var(--green-dark);
+  font-size: 2rem;
+}
+
+.al-pathways-intro {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0 0 2.25rem;
+}
+
+.al-pathways-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .al-pathways-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.al-pathway-card {
+  background: var(--white);
+  border: 1px solid #eef1ee;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.al-pathway-tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.al-pathway-tag {
+  background: var(--green-dark);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+}
+
+.al-pathway-plus {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.al-pathway-card h3 {
+  margin: 0 0 0.4rem;
+  color: var(--green-dark);
+  font-size: 1.05rem;
+}
+
+.al-pathway-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* ---------- Guidance ---------- */
+.al-guidance-section {
+  padding: 4.5rem 0 5rem;
+  background: var(--white);
+}
+
+.al-guidance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (max-width: 860px) {
+  .al-guidance-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.al-guidance-grid h2 {
+  margin: 0 0 1rem;
+  color: var(--green-dark);
+  font-size: 1.9rem;
+  line-height: 1.3;
+}
+
+.al-guidance-grid > div:first-child > p {
+  color: var(--muted);
+  font-size: 0.98rem;
   line-height: 1.8;
-  color: #374151;
+  margin: 0;
 }
 
-.alevel-subjects {
-  margin: 0.25rem 0 1.25rem;
-  padding: 0;
-  list-style-position: inside;
+.al-guidance-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.alevel-subjects li {
-  margin: 0.35rem 0;
-  color: #374151;
+.al-guidance-step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--white);
+  border: 1px solid #eef1ee;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
 }
 
-.alevel-table-wrap {
-  overflow-x: auto;
-  margin-top: 0.5rem;
+.al-guidance-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #d49b00;
+  color: #2b1600;
+  font-weight: 800;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
 }
 
-.alevel-table {
+.al-guidance-step h3 {
+  margin: 0 0 0.2rem;
+  color: var(--green-dark);
+  font-size: 1rem;
+}
+
+.al-guidance-step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* ---------- Curriculum by year ---------- */
+.al-curriculum-section {
+  padding: 1rem 0 4.5rem;
+  background: #f7f5ef;
+}
+
+.al-curriculum-section h2 {
+  margin: 0 0 1.75rem;
+  color: var(--green-dark);
+  font-size: 1.9rem;
+}
+
+.al-curriculum-table-wrap {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(31, 41, 55, 0.06);
+}
+
+.al-curriculum-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0 auto;
 }
 
-.alevel-table th,
-.alevel-table td {
-  border: 1px solid #d7dcd7;
-  padding: 0.65rem 0.9rem;
+.al-curriculum-table th {
+  background: var(--green-dark);
+  color: #fff;
+  text-align: left;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.85rem;
+}
+
+.al-curriculum-table th:not(:first-child),
+.al-curriculum-table td:not(:first-child) {
   text-align: center;
 }
 
-.alevel-table th {
+.al-curriculum-group-row td {
+  background: #eef3ee;
+  color: var(--green-dark);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.25rem;
+}
+
+.al-curriculum-table td {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid #eef1ee;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.al-curriculum-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: #16324f;
+}
+
+.al-curriculum-dot.yes {
+  background: #e6f2e9;
+  color: var(--green-dark);
+}
+
+.al-curriculum-dot.no {
+  background: #f1f1ef;
+  color: #9aa39a;
+}
+
+/* ---------- Final CTA ---------- */
+.al-cta-wrap {
+  padding: 0 0 4.5rem;
+  background: var(--white);
 }

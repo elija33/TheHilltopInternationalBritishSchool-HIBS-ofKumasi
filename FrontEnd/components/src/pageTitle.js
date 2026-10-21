@@ -11,6 +11,7 @@ const STATIC_TITLES = {
   "/apply": "Apply",
   "/who": "Who We Are",
   "/board-of-directors": "Board of Directors",
+  "/teaching-staff": "Teaching Staff",
   "/visiting-hibs": "Visiting HIBS",
   "/tours-and-open-days": "Tours & Open Days",
   "/administrative-staff": "Administrative Staff",
