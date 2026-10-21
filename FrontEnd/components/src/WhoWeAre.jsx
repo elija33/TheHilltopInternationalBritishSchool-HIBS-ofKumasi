@@ -97,19 +97,17 @@ const WhoWeAre = () => {
   return (
     <div>
       <section className="wwa-hero">
-        <div className="hp-container">
-          <div className="wwa-hero-photo">
-            <img src={hibsTop1} alt="HIBS staff and students" />
-          </div>
-
+        <img className="wwa-hero-bg" src={hibsTop1} alt="" />
+        <div className="wwa-hero-overlay" />
+        <div className="hp-container wwa-hero-content">
           <p className="wwa-breadcrumb">
             <Link to="/">Home</Link> / About / Who We Are
           </p>
 
           <h1>Who We Are</h1>
           <p>
-            A Cambridge-accredited British school in Kumasi, raising confident, morally
-            upright young people since 2010.
+            A Cambridge-accredited British school in Kumasi, raising confident,
+            morally upright young people since 2010.
           </p>
         </div>
       </section>
@@ -119,19 +117,20 @@ const WhoWeAre = () => {
           <div>
             <p className="hp-section-eyebrow">Our Story</p>
             <h2>
-              Formerly The Hilltop International Science College, HIBS has prepared
-              students for the IGCSE and A Levels since earning Cambridge accreditation
-              in September 2010.
+              Formerly The Hilltop International Science College, HIBS has
+              prepared students for the IGCSE and A Levels since earning
+              Cambridge accreditation in September 2010.
             </h2>
             <p>
-              HIBS is part of The Hilltop School and a member of the British Council&rsquo;s
-              Partner Schools Global Network (PSGN). We admit students from Year 4 through
-              Upper Six, with counselling and guidance all the way to university
-              applications.
+              HIBS is part of The Hilltop School and a member of the British
+              Council&rsquo;s Partner Schools Global Network (PSGN). We admit
+              students from Year 4 through Upper Six, with counselling and
+              guidance all the way to university applications.
             </p>
             <p>
-              Our graduates go on to study medicine, engineering, applied sciences and
-              business administration at universities in Ghana and abroad.
+              Our graduates go on to study medicine, engineering, applied
+              sciences and business administration at universities in Ghana and
+              abroad.
             </p>
           </div>
 
@@ -171,8 +170,8 @@ const WhoWeAre = () => {
             <p className="hp-section-eyebrow">Our Mission</p>
             <h3>Why we exist</h3>
             <p>
-              To provide sound, holistic education for academic excellence in a guided
-              and secure moral environment.
+              To provide sound, holistic education for academic excellence in a
+              guided and secure moral environment.
             </p>
           </div>
           <div className="wwa-mv-card vision">
@@ -181,8 +180,8 @@ const WhoWeAre = () => {
             <h3>Where we&rsquo;re going</h3>
             <p>
               To be a leading school in Ghana and the West African sub-region,
-              providing competitive, holistic education with distinction and instilling
-              ethical values in our pupils.
+              providing competitive, holistic education with distinction and
+              instilling ethical values in our pupils.
             </p>
           </div>
         </div>
@@ -193,8 +192,8 @@ const WhoWeAre = () => {
           <p className="hp-section-eyebrow">Core Values</p>
           <h2>Every child has a talent</h2>
           <p className="wwa-values-intro">
-            We help each child discover and develop that talent, believe in themselves,
-            and grow into a valuable member of society.
+            We help each child discover and develop that talent, believe in
+            themselves, and grow into a valuable member of society.
           </p>
           <div className="wwa-values-grid">
             {VALUES.map((v) => (
@@ -211,18 +210,22 @@ const WhoWeAre = () => {
       <section className="wwa-culture-section">
         <div className="hp-container wwa-culture-grid">
           <div className="hp-photo-placeholder">
-            PHOTO: students from different backgrounds together (cultural day works well)
+            PHOTO: students from different backgrounds together (cultural day
+            works well)
           </div>
           <div>
             <p className="hp-section-eyebrow">Multicultural Community</p>
             <h2>Children from all over the world call HIBS home</h2>
             <p>
-              Our global community of 10 to 19 year olds includes students from many
-              countries, learning side by side.
+              Our global community of 10 to 19 year olds includes students from
+              many countries, learning side by side.
             </p>
             <div className="wwa-flag-pills">
               {NATIONALITIES.map((n) => (
-                <span className={`wwa-flag-pill ${n.host ? "host" : ""}`} key={n.name}>
+                <span
+                  className={`wwa-flag-pill ${n.host ? "host" : ""}`}
+                  key={n.name}
+                >
                   <span>{n.flag}</span> {n.name}
                 </span>
               ))}
@@ -238,7 +241,9 @@ const WhoWeAre = () => {
               <div className="wwa-crest-hill" />
               <span className="wwa-crest-flame">🔥</span>
             </div>
-            <p className="wwa-crest-caption">Replace with the real HIBS crest (SVG)</p>
+            <p className="wwa-crest-caption">
+              Replace with the real HIBS crest (SVG)
+            </p>
           </div>
           <div>
             <p className="hp-section-eyebrow">The School Crest</p>
