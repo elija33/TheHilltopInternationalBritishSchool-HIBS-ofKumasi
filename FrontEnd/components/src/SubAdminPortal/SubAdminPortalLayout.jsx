@@ -10,6 +10,7 @@ import {
   IconGraduationCap,
   IconLayers,
   IconMegaphone,
+  IconUpload,
   IconBell,
   IconLogout,
 } from "../AdminPortal/icons";
@@ -23,6 +24,8 @@ const TABS = [
   { to: "teachers", label: "Teachers", Icon: IconGraduationCap },
   { to: "classes", label: "Classes", Icon: IconLayers },
   { to: "announcements", label: "Announcements", Icon: IconMegaphone },
+  { to: "photos", label: "Photos", Icon: IconUpload },
+  { to: "teaching-staff", label: "Teaching Staff", Icon: IconPeople },
 ];
 
 const initials = (name) =>

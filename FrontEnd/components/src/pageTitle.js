@@ -66,6 +66,8 @@ const ADMIN_TAB_LABELS = {
   publishing: "Publishing",
   announcements: "Announcements",
   carousel: "Carousel",
+  photos: "Photos",
+  "teaching-staff": "Teaching Staff",
   messages: "Messages",
   settings: "Settings",
 };
@@ -77,6 +79,8 @@ const SUBADMIN_TAB_LABELS = {
   parents: "Parents",
   teachers: "Teachers",
   classes: "Classes",
+  photos: "Photos",
+  "teaching-staff": "Teaching Staff",
   announcements: "Announcements",
 };
 

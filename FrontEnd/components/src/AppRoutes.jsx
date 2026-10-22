@@ -50,6 +50,8 @@ import AdminGradeCorrections from "./AdminPortal/GradeCorrections";
 import AdminPublishing from "./AdminPortal/Publishing";
 import AdminAnnouncements from "./AdminPortal/Announcements";
 import AdminCarousel from "./AdminPortal/Carousel";
+import AdminPhotos from "./AdminPortal/Photos";
+import AdminTeachingStaff from "./AdminPortal/TeachingStaffAdmin";
 import AdminMessages from "./AdminPortal/Messages";
 import AdminSettings from "./AdminPortal/Settings";
 import AdminSubAdmins from "./AdminPortal/SubAdmins";
@@ -61,6 +63,8 @@ import SubAdminHeadmaster from "./SubAdminPortal/Headmaster";
 import SubAdminStudents from "./SubAdminPortal/Students";
 import SubAdminParents from "./SubAdminPortal/Parents";
 import SubAdminClasses from "./SubAdminPortal/Classes";
+import SubAdminPhotos from "./SubAdminPortal/Photos";
+import SubAdminTeachingStaff from "./SubAdminPortal/TeachingStaff";
 import { getCurrentSubAdmin } from "./SubAdminPortal/useCurrentSubAdmin";
 import HeadmasterLogin from "./Login/HeadmasterLogin";
 import HeadmasterPortalLayout from "./HeadmasterPortal/HeadmasterPortalLayout";
@@ -143,6 +147,8 @@ const AppRoutes = () => {
         <Route path="publishing" element={<AdminPublishing />} />
         <Route path="announcements" element={<AdminAnnouncements />} />
         <Route path="carousel" element={<AdminCarousel />} />
+        <Route path="photos" element={<AdminPhotos />} />
+        <Route path="teaching-staff" element={<AdminTeachingStaff />} />
         <Route path="messages" element={<AdminMessages />} />
         <Route path="settings" element={<AdminSettings />} />
         <Route path="sub-admins" element={<AdminSubAdmins />} />
@@ -175,6 +181,8 @@ const AppRoutes = () => {
           element={<AdminTeacherRecord basePath="/portal/subadmin" />}
         />
         <Route path="announcements" element={<AdminAnnouncements />} />
+        <Route path="photos" element={<SubAdminPhotos />} />
+        <Route path="teaching-staff" element={<SubAdminTeachingStaff />} />
       </Route>
 
       <Route path="/portal/headmaster" element={<HeadmasterPortalLayout />}>

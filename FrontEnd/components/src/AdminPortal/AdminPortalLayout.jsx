@@ -31,6 +31,8 @@ const TABS = [
   { to: "publishing", label: "Publishing", Icon: IconUpload },
   { to: "announcements", label: "Announcements", Icon: IconMegaphone },
   { to: "carousel", label: "Carousel", Icon: IconLayers },
+  { to: "photos", label: "Photos", Icon: IconUpload },
+  { to: "teaching-staff", label: "Teaching Staff", Icon: IconPeople },
   { to: "messages", label: "Messages", Icon: IconBell },
   { to: "settings", label: "Settings", Icon: IconGear },
 ];
