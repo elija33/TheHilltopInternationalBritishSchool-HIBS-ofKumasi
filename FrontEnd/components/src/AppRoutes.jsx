@@ -2,6 +2,8 @@ import React from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Body from "./Home/Body/Body";
 import ApplyPage from "./ApplyPage";
+import ApplicationForm from "./ApplicationForm";
+import ApplyAccount from "./ApplyAccount";
 import WhoWeAre from "./WhoWeAre";
 import BoardOfDirectors from "./AboutHIBS/BoardOfDirectors";
 import TeachingStaff from "./AboutHIBS/TeachingStaff";
@@ -53,6 +55,7 @@ import AdminCarousel from "./AdminPortal/Carousel";
 import AdminPhotos from "./AdminPortal/Photos";
 import AdminTeachingStaff from "./AdminPortal/TeachingStaffAdmin";
 import AdminMessages from "./AdminPortal/Messages";
+import AdminApplications from "./AdminPortal/Applications";
 import AdminSettings from "./AdminPortal/Settings";
 import AdminSubAdmins from "./AdminPortal/SubAdmins";
 import AdminHeadmasterApprovals from "./AdminPortal/HeadmasterApprovals";
@@ -86,6 +89,8 @@ const AppRoutes = () => {
       <Route path="/news" element={<AllAnnouncements />} />
 
       <Route path="/apply" element={<ApplyPage onClose={() => navigate("/")} />} />
+      <Route path="/apply/account/:type" element={<ApplyAccount />} />
+      <Route path="/apply/form/:type" element={<ApplicationForm />} />
       <Route path="/who" element={<WhoWeAre />} />
       <Route path="/board-of-directors" element={<BoardOfDirectors />} />
       <Route path="/teaching-staff" element={<TeachingStaff />} />
@@ -138,6 +143,7 @@ const AppRoutes = () => {
       <Route path="/portal/admin" element={<AdminPortalLayout />}>
         <Route index element={<AdminHome />} />
         <Route path="home" element={<AdminHome />} />
+        <Route path="applications" element={<AdminApplications />} />
         <Route path="students" element={<AdminStudents />} />
         <Route path="teachers" element={<AdminTeachers />} />
         <Route path="teachers/new" element={<AdminAddTeacherWizard />} />

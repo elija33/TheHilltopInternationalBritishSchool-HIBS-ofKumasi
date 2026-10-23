@@ -9,6 +9,8 @@ const STATIC_TITLES = {
   "/": "Home",
   "/news": "Announcements",
   "/apply": "Apply",
+  "/apply/form/new": "New Student Application",
+  "/apply/form/transfer": "Transfer Application",
   "/who": "Who We Are",
   "/board-of-directors": "Board of Directors",
   "/teaching-staff": "Teaching Staff",
@@ -57,6 +59,7 @@ const TEACHER_TAB_LABELS = {
 
 const ADMIN_TAB_LABELS = {
   home: "Dashboard",
+  applications: "Applications",
   students: "Students",
   teachers: "Teachers",
   parents: "Parents",

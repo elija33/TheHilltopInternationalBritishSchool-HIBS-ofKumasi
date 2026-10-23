@@ -1,0 +1,389 @@
+/* Apply page — reuses .hp-container/.hp-section-eyebrow from
+   Home/HomePage.css, plus its own ap-prefixed classes below. Deliberately
+   decoupled from ApplicationModal.css (.app-modal-*) which is a separate,
+   still-in-use popup component. */
+
+.ap-hero {
+  position: relative;
+  background: #ffd83b;
+  padding: 1.5rem 0 9rem;
+  overflow: hidden;
+}
+
+.ap-hero::before {
+  content: "";
+  position: absolute;
+  right: -120px;
+  top: -80px;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.ap-hero::after {
+  content: "★";
+  position: absolute;
+  left: -40px;
+  bottom: -60px;
+  font-size: 300px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.06);
+  pointer-events: none;
+}
+
+.ap-back {
+  position: relative;
+  background: none;
+  border: none;
+  color: var(--green-dark);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 2.5rem;
+}
+
+.ap-hero-copy {
+  position: relative;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.ap-hero-copy .hp-section-eyebrow {
+  color: var(--green-dark);
+  text-align: center;
+}
+
+.ap-hero-copy h1 {
+  margin: 0 0 1.1rem;
+  color: var(--green-dark);
+  font-size: clamp(2.1rem, 4vw, 3rem);
+  line-height: 1.2;
+}
+
+.ap-hero-copy p {
+  margin: 0;
+  color: #4a3b00;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+/* ---------- Path cards (overlap the hero bottom edge) ---------- */
+.ap-paths-wrap {
+  position: relative;
+  z-index: 5;
+  margin-top: -6rem;
+}
+
+.ap-paths-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+}
+
+@media (max-width: 760px) {
+  .ap-paths-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ap-path-card {
+  position: relative;
+  background: var(--white);
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+}
+
+.ap-path-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--green-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.ap-path-badge {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: #fff3cf;
+  color: #7a5700;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+}
+
+.ap-path-card h3 {
+  margin: 0 0 0.5rem;
+  color: var(--green-dark);
+  font-size: 1.4rem;
+}
+
+.ap-path-card > p {
+  margin: 0 0 1.1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.ap-path-checklist {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.ap-path-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.ap-path-checklist li::before {
+  content: "✓";
+  color: var(--green-dark);
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.ap-path-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--green-dark);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.85rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* ---------- How it works ---------- */
+.ap-steps-section {
+  padding: 5.5rem 0 4rem;
+  background: var(--white);
+  text-align: center;
+}
+
+.ap-steps-section .hp-section-eyebrow {
+  text-align: center;
+}
+
+.ap-steps-section h2 {
+  margin: 0 0 3rem;
+  color: var(--green-dark);
+  font-size: 2rem;
+}
+
+.ap-steps-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+}
+
+.ap-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 220px;
+}
+
+.ap-step-num {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--green-dark);
+  color: #ffd83b;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.ap-step h3 {
+  margin: 0 0 0.4rem;
+  color: var(--green-dark);
+  font-size: 1rem;
+}
+
+.ap-step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.ap-step-connector {
+  flex: 1;
+  max-width: 100px;
+  border-top: 2px dashed #d49b00;
+  margin-top: 22px;
+}
+
+@media (max-width: 760px) {
+  .ap-steps-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .ap-step-connector {
+    display: none;
+  }
+}
+
+/* ---------- Documents + Talk to Admissions ---------- */
+.ap-help-section {
+  padding: 4.5rem 0 5rem;
+  background: #f7f5ef;
+}
+
+.ap-help-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .ap-help-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ap-docs-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.ap-docs-card h2 {
+  margin: 0 0 1.25rem;
+  color: var(--green-dark);
+  font-size: 1.5rem;
+}
+
+.ap-docs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .ap-docs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ap-doc-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #f7f5ef;
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+}
+
+.ap-doc-item .icon {
+  font-size: 1.2rem;
+}
+
+.ap-doc-item .label {
+  font-size: 0.88rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.ap-doc-item .sub-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.ap-admissions-card {
+  background: var(--green-dark);
+  border-radius: 16px;
+  padding: 2rem;
+  color: #fff;
+}
+
+.ap-admissions-card .hp-section-eyebrow {
+  color: #ffd83b;
+}
+
+.ap-admissions-card h2 {
+  margin: 0 0 0.75rem;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.ap-admissions-card > p {
+  margin: 0 0 1.25rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.ap-contact-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ap-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  text-decoration: none;
+  color: #fff;
+}
+
+.ap-contact-row .icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: #d49b00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
+.ap-contact-row .label {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ap-contact-row .value {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+}

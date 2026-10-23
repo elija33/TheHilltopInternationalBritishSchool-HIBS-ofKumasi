@@ -22,6 +22,7 @@ import {
 
 const TABS = [
   { to: "home", label: "Dashboard", Icon: IconDashboard },
+  { to: "applications", label: "Applications", Icon: IconEdit },
   { to: "students", label: "Students", Icon: IconPeople },
   { to: "teachers", label: "Teachers", Icon: IconGraduationCap },
   { to: "parents", label: "Parents", Icon: IconHome },
