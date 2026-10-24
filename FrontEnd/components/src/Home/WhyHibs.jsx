@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getApprovedPhotoForCard, subscribeToWhyHibsPhotos } from "../AdminPortal/whyHibsPhotos";
+import { getApprovedPhotosForCard, subscribeToWhyHibsPhotos } from "../AdminPortal/whyHibsPhotos";
 import gradPhoto1 from "../../image/img-0866.jpg";
 import gradPhoto2 from "../../image/img-0111.jpg";
 import gradPhoto3 from "../../image/img-0084.jpg";
@@ -67,11 +67,11 @@ const WhyHibs = () => {
         <h2>Built for how children learn best</h2>
         <div className="hp-why-grid">
           {CARDS.map((c) => {
-            const approved = getApprovedPhotoForCard(c.key);
+            const approved = getApprovedPhotosForCard(c.key).map((p) => p.imageDataUrl);
             return (
               <div className="hp-why-card" key={c.title}>
-                {approved ? (
-                  <RotatingCardPhoto photos={[approved]} />
+                {approved.length > 0 ? (
+                  <RotatingCardPhoto photos={approved} />
                 ) : c.fallbackPhotos ? (
                   <RotatingCardPhoto photos={c.fallbackPhotos} />
                 ) : (

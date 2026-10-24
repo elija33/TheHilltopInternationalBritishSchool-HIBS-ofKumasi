@@ -1,10 +1,11 @@
-// Photos for the homepage "Why HIBS" cards. Sub Admin uploads sit here as
-// PENDING until Admin approves or rejects them (same queue-until-approved
-// shape as the grade/syllabus submissions); Admin's own uploads publish
-// immediately. Backed by localStorage rather than a plain array — same
-// reason as contactMessages.js: a submission is made in one browser tab
-// (Sub Admin) and must reach a different tab (Admin) to be approved, which
-// plain module state can't do across tabs.
+// Photos for homepage cards with a "PHOTO: ..." placeholder — the "Why
+// HIBS" cards and the "A day on campus" carousel cards. Sub Admin uploads
+// sit here as PENDING until Admin approves or rejects them (same
+// queue-until-approved shape as the grade/syllabus submissions); Admin's
+// own uploads publish immediately. Backed by localStorage rather than a
+// plain array — same reason as contactMessages.js: a submission is made in
+// one browser tab (Sub Admin) and must reach a different tab (Admin) to be
+// approved, which plain module state can't do across tabs.
 const STORAGE_KEY = "hibs_why_hibs_photo_submissions";
 
 export const CARDS_META = [
@@ -12,6 +13,12 @@ export const CARDS_META = [
   { key: "labs", label: "Science & Computer Labs" },
   { key: "sports", label: "Sports & Clubs" },
   { key: "igcse", label: "Cambridge IGCSE" },
+  { key: "campus-sports-day", label: "A day on campus — Sports Day" },
+  { key: "campus-lab", label: "A day on campus — In the Lab" },
+  { key: "campus-classes", label: "A day on campus — Small Classes" },
+  { key: "campus-digital", label: "A day on campus — Digital Skills" },
+  { key: "campus-boarding", label: "A day on campus — Boarding Life" },
+  { key: "campus-clubs", label: "A day on campus — Clubs & Societies" },
 ];
 
 const load = () => {
@@ -38,13 +45,13 @@ const today = () => new Date().toISOString().split("T")[0];
 
 export const nextPhotoSubmissionId = () => `wp-${Date.now()}`;
 
-export const getApprovedPhotoForCard = (cardKey) => {
-  const approved = photoSubmissions.filter(
-    (s) => s.cardKey === cardKey && s.status === "APPROVED",
-  );
-  if (approved.length === 0) return null;
-  return approved[approved.length - 1].imageDataUrl;
-};
+// A card can carry more than one approved photo — WhyHibs.jsx rotates
+// through whatever comes back here, same as the Cambridge IGCSE card's
+// original 3-photo set.
+export const getApprovedPhotosForCard = (cardKey) =>
+  photoSubmissions
+    .filter((s) => s.cardKey === cardKey && s.status === "APPROVED")
+    .map((s) => ({ id: s.id, imageDataUrl: s.imageDataUrl }));
 
 export const submitPhotoForApproval = ({ cardKey, cardLabel, imageDataUrl, submittedBy }) => {
   photoSubmissions.push({
@@ -103,18 +110,18 @@ export const rejectPhotoSubmission = (id, approverName, note) => {
   persist();
 };
 
-// Puts a card's "PHOTO: ..." placeholder back by retiring its current
-// approved submission — the old photo stays in the history below as a
-// rejected entry rather than disappearing silently.
-export const revertToPlaceholder = (cardKey, actorName) => {
-  photoSubmissions
-    .filter((s) => s.cardKey === cardKey && s.status === "APPROVED")
-    .forEach((s) => {
-      s.status = "REJECTED";
-      s.decidedBy = actorName;
-      s.decidedAt = today();
-      s.rejectionNote = "Reverted to placeholder by admin.";
-    });
+// Removes one approved photo (a card can have several) — it stays in the
+// history below as a rejected entry rather than disappearing silently. If
+// this was the card's last approved photo, it falls back to the
+// placeholder/fallback rotation automatically, since nothing APPROVED is
+// left for getApprovedPhotosForCard to return.
+export const removeApprovedPhoto = (submissionId, actorName) => {
+  const s = photoSubmissions.find((x) => x.id === submissionId);
+  if (!s) return;
+  s.status = "REJECTED";
+  s.decidedBy = actorName;
+  s.decidedAt = today();
+  s.rejectionNote = "Removed by admin.";
   persist();
 };
 

@@ -5,8 +5,8 @@ import {
   publishPhotoDirectly,
   approvePhotoSubmission,
   rejectPhotoSubmission,
-  getApprovedPhotoForCard,
-  revertToPlaceholder,
+  getApprovedPhotosForCard,
+  removeApprovedPhoto,
 } from "./whyHibsPhotos";
 import { compressImageFile } from "./imageUpload";
 import { admin } from "./mockData";
@@ -14,8 +14,7 @@ import { admin } from "./mockData";
 const Photos = () => {
   const [, forceRender] = useState(0);
   const [cardKey, setCardKey] = useState(CARDS_META[0].key);
-  const [preview, setPreview] = useState(null);
-  const [compressed, setCompressed] = useState(null);
+  const [previews, setPreviews] = useState([]);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [published, setPublished] = useState(false);
@@ -23,20 +22,18 @@ const Photos = () => {
   const [rejectNote, setRejectNote] = useState("");
   const [rejectError, setRejectError] = useState("");
 
-  const handleFile = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const handleFiles = async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
     setError("");
     setPublished(false);
     setBusy(true);
     try {
-      const dataUrl = await compressImageFile(file);
-      setPreview(dataUrl);
-      setCompressed(dataUrl);
+      const dataUrls = await Promise.all(files.map((f) => compressImageFile(f)));
+      setPreviews(dataUrls);
     } catch (err) {
       setError(err.message);
-      setPreview(null);
-      setCompressed(null);
+      setPreviews([]);
     } finally {
       setBusy(false);
     }
@@ -44,24 +41,25 @@ const Photos = () => {
 
   const handlePublish = (e) => {
     e.preventDefault();
-    if (!compressed) {
-      setError("Choose an image before publishing.");
+    if (previews.length === 0) {
+      setError("Choose at least one image before publishing.");
       return;
     }
     const meta = CARDS_META.find((c) => c.key === cardKey);
     try {
-      publishPhotoDirectly({
-        cardKey,
-        cardLabel: meta.label,
-        imageDataUrl: compressed,
-        publishedBy: admin.name,
+      previews.forEach((dataUrl) => {
+        publishPhotoDirectly({
+          cardKey,
+          cardLabel: meta.label,
+          imageDataUrl: dataUrl,
+          publishedBy: admin.name,
+        });
       });
     } catch {
-      setError("That image is too large to save, even after compression. Try a smaller photo.");
+      setError("That batch is too large to save, even after compression. Try fewer or smaller photos.");
       return;
     }
-    setPreview(null);
-    setCompressed(null);
+    setPreviews([]);
     setPublished(true);
     forceRender((n) => n + 1);
   };
@@ -91,17 +89,19 @@ const Photos = () => {
     forceRender((n) => n + 1);
   };
 
-  const revert = (cardKeyToRevert) => {
-    revertToPlaceholder(cardKeyToRevert, admin.name);
+  const removePhoto = (photoId) => {
+    removeApprovedPhoto(photoId, admin.name);
     forceRender((n) => n + 1);
   };
 
   return (
     <div>
       <form className="admin-section-card" onSubmit={handlePublish}>
-        <h2>Upload a homepage photo</h2>
+        <h2>Upload homepage photos</h2>
         <p style={{ fontSize: "0.85rem", color: "var(--muted)", marginBottom: "1rem" }}>
-          Published immediately — no approval step for admin uploads.
+          Published immediately — no approval step for admin uploads. Select more than one
+          file to add several photos to the same card at once; they&rsquo;ll rotate on the
+          homepage.
         </p>
         <div className="portal-field">
           <label htmlFor="admin-photo-card">Which card</label>
@@ -119,26 +119,25 @@ const Photos = () => {
           </select>
         </div>
         <div className="portal-field">
-          <label htmlFor="admin-photo-file">Image file</label>
-          <input id="admin-photo-file" type="file" accept="image/*" onChange={handleFile} />
+          <label htmlFor="admin-photo-file">Image files</label>
+          <input id="admin-photo-file" type="file" accept="image/*" multiple onChange={handleFiles} />
         </div>
-        {busy && <p className="portal-notice">Processing image…</p>}
-        {preview && (
-          <img
-            src={preview}
-            alt="Preview"
-            style={{
-              width: "220px",
-              height: "165px",
-              objectFit: "cover",
-              borderRadius: "8px",
-              marginBottom: "0.75rem",
-            }}
-          />
+        {busy && <p className="portal-notice">Processing images…</p>}
+        {previews.length > 0 && (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem", marginBottom: "0.75rem" }}>
+            {previews.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt="Preview"
+                style={{ width: "120px", height: "90px", objectFit: "cover", borderRadius: "8px" }}
+              />
+            ))}
+          </div>
         )}
         {error && <p className="portal-notice">{error}</p>}
-        <button type="submit" className="portal-link-btn" disabled={busy || !compressed}>
-          Publish to homepage
+        <button type="submit" className="portal-link-btn" disabled={busy || previews.length === 0}>
+          Publish {previews.length > 1 ? `${previews.length} photos` : "to homepage"}
         </button>
         {published && <p className="portal-success">Published to the homepage.</p>}
       </form>
@@ -222,45 +221,37 @@ const Photos = () => {
       <div className="admin-section-card">
         <h2>Current live photos</h2>
         {CARDS_META.map((c) => {
-          const photo = getApprovedPhotoForCard(c.key);
+          const photos = getApprovedPhotosForCard(c.key);
           return (
-            <div
-              key={c.key}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-                borderTop: "1px solid #eef1ee",
-                padding: "0.85rem 0",
-              }}
-            >
-              {photo ? (
-                <img
-                  src={photo}
-                  alt=""
-                  style={{ width: "96px", height: "72px", objectFit: "cover", borderRadius: "6px" }}
-                />
-              ) : (
-                <div
-                  style={{
-                    width: "96px",
-                    height: "72px",
-                    borderRadius: "6px",
-                    background: "#eef3ee",
-                    flexShrink: 0,
-                  }}
-                />
-              )}
-              <div style={{ flex: 1 }}>
+            <div key={c.key} style={{ borderTop: "1px solid #eef1ee", padding: "0.85rem 0" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <strong>{c.label}</strong>
-                <p style={{ margin: "0.2rem 0 0", fontSize: "0.8rem", color: "var(--muted)" }}>
-                  {photo ? "Live photo set" : "Using the placeholder"}
-                </p>
+                <span style={{ fontSize: "0.8rem", color: "var(--muted)" }}>
+                  {photos.length > 0
+                    ? `${photos.length} live photo${photos.length > 1 ? "s" : ""}`
+                    : "Using the placeholder"}
+                </span>
               </div>
-              {photo && (
-                <button className="portal-link-btn" style={{ background: "#9a1c1c" }} onClick={() => revert(c.key)}>
-                  Revert to placeholder
-                </button>
+
+              {photos.length > 0 && (
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", marginTop: "0.75rem" }}>
+                  {photos.map((p) => (
+                    <div key={p.id} style={{ textAlign: "center" }}>
+                      <img
+                        src={p.imageDataUrl}
+                        alt=""
+                        style={{ width: "96px", height: "72px", objectFit: "cover", borderRadius: "6px", display: "block" }}
+                      />
+                      <button
+                        className="portal-link-btn"
+                        style={{ background: "#9a1c1c", marginTop: "0.4rem", fontSize: "0.78rem", padding: "0.3rem 0.6rem" }}
+                        onClick={() => removePhoto(p.id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
           );

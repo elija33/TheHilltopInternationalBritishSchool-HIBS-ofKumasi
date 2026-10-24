@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { carouselSlides } from "../AdminPortal/carouselSlides";
+import { carouselSlides, subscribeToCarouselSlides } from "../AdminPortal/carouselSlides";
 
 const SLIDE_INTERVAL_MS = 6000;
 
 const Hero = () => {
   const [active, setActive] = useState(0);
+  const [, forceRender] = useState(0);
+
+  useEffect(
+    () => subscribeToCarouselSlides(() => forceRender((n) => n + 1)),
+    [],
+  );
 
   useEffect(() => {
     if (carouselSlides.length < 2) return undefined;
