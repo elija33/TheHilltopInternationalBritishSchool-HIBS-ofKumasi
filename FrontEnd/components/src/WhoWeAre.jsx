@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./styles.css";
 import "./Home/HomePage.css";
 import "./WhoWeAre.css";
 import hibsTop1 from "../image/hibs_top1.jpg";
+import crestLogo from "../image/HIB_n.jpeg";
+import { getApprovedPhotosForCard, subscribeToWhyHibsPhotos } from "./AdminPortal/whyHibsPhotos";
+
+const PHOTO_INTERVAL_MS = 4000;
+
+const RotatingPhoto = ({ photos }) => {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (photos.length < 2) return undefined;
+    const timer = setInterval(() => {
+      setActive((i) => (i + 1) % photos.length);
+    }, PHOTO_INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, [photos]);
+
+  return (
+    <div className="hp-why-card-photo">
+      {photos.map((src, i) => (
+        <img key={src} src={src} alt="" className={i === active ? "active" : ""} />
+      ))}
+    </div>
+  );
+};
 
 const STATS = [
   { number: "2010", label: "Cambridge accredited" },
@@ -94,6 +118,14 @@ const CAREERS = [
 ];
 
 const WhoWeAre = () => {
+  const [, forceRender] = useState(0);
+
+  useEffect(() => subscribeToWhyHibsPhotos(() => forceRender((n) => n + 1)), []);
+
+  const culturePhotos = getApprovedPhotosForCard("multicultural-community").map(
+    (p) => p.imageDataUrl,
+  );
+
   return (
     <div>
       <section className="wwa-hero">
@@ -209,10 +241,14 @@ const WhoWeAre = () => {
 
       <section className="wwa-culture-section">
         <div className="hp-container wwa-culture-grid">
-          <div className="hp-photo-placeholder">
-            PHOTO: students from different backgrounds together (cultural day
-            works well)
-          </div>
+          {culturePhotos.length > 0 ? (
+            <RotatingPhoto photos={culturePhotos} />
+          ) : (
+            <div className="hp-photo-placeholder">
+              PHOTO: students from different backgrounds together (cultural day
+              works well)
+            </div>
+          )}
           <div>
             <p className="hp-section-eyebrow">Multicultural Community</p>
             <h2>Children from all over the world call HIBS home</h2>
@@ -238,12 +274,8 @@ const WhoWeAre = () => {
         <div className="hp-container wwa-crest-grid">
           <div className="wwa-crest-badge-wrap">
             <div className="wwa-crest-badge">
-              <div className="wwa-crest-hill" />
-              <span className="wwa-crest-flame">🔥</span>
+              <img src={crestLogo} alt="HIBS crest" className="wwa-crest-image" />
             </div>
-            <p className="wwa-crest-caption">
-              Replace with the real HIBS crest (SVG)
-            </p>
           </div>
           <div>
             <p className="hp-section-eyebrow">The School Crest</p>

@@ -13,6 +13,7 @@ import {
 } from "../AdminPortal/icons";
 import { getCurrentHeadmaster } from "./useCurrentHeadmaster";
 import { pendingAccountRequests } from "../AdminPortal/approvals";
+import hibsLogo from "../../image/HIB_n.jpeg";
 
 const TABS = [
   { to: "home", label: "Dashboard", Icon: IconDashboard },
@@ -62,7 +63,10 @@ const HeadmasterPortalLayout = () => {
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">
-        <div className="admin-sidebar-brand">The Hilltop International British School</div>
+        <div className="admin-sidebar-brand">
+          <img src={hibsLogo} alt="HIBS logo" className="admin-sidebar-logo" />
+          <span>The Hilltop International British School</span>
+        </div>
 
         <nav className="admin-sidebar-nav">
           {TABS.map(({ to, label, Icon }) => (

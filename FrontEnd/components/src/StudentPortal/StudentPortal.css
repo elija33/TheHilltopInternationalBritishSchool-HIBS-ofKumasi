@@ -22,6 +22,19 @@
   font-size: 1.4rem;
 }
 
+.portal-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.portal-header-logo {
+  height: 44px;
+  width: auto;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
 .portal-header p {
   margin: 0;
   color: rgba(255, 255, 255, 0.85);

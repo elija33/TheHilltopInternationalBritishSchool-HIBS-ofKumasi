@@ -19,6 +19,7 @@ export const CARDS_META = [
   { key: "campus-digital", label: "A day on campus — Digital Skills" },
   { key: "campus-boarding", label: "A day on campus — Boarding Life" },
   { key: "campus-clubs", label: "A day on campus — Clubs & Societies" },
+  { key: "multicultural-community", label: "Who We Are — Multicultural Community" },
 ];
 
 const load = () => {

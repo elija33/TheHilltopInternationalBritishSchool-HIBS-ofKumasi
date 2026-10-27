@@ -29,7 +29,7 @@ const sidebarLinks = [
   { label: "Who We Are", to: "/who" },
   { label: "Board of Directors", to: "/board-of-directors" },
   { label: "Teaching Staff", to: "/#staff" },
-  { label: "PTA", to: "/#pta" },
+  { label: "PTA", to: "/pta" },
   { label: "Visiting HIBS", to: "/visiting-hibs", active: true },
 ];
 

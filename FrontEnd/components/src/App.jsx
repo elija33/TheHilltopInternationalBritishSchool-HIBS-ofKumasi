@@ -105,7 +105,7 @@ const App = () => {
                     <Link to="/teaching-staff">Teaching Staff</Link>
                   </li>
                   <li>
-                    <Link to="/#pta">PTA</Link>
+                    <Link to="/pta">PTA</Link>
                   </li>
                   <li>
                     <Link to="/visiting-hibs">Visiting HIBS</Link>

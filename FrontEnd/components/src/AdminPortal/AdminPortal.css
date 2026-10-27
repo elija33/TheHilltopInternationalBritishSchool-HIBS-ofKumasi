@@ -21,6 +21,16 @@
   font-size: 1.1rem;
   font-weight: 700;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.admin-sidebar-logo {
+  height: 32px;
+  width: auto;
+  flex-shrink: 0;
+  border-radius: 4px;
 }
 
 .admin-sidebar-nav {

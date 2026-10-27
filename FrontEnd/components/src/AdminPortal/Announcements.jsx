@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { announcements } from "./mockData";
+import { compressImageFile } from "./imageUpload";
 
 const AUDIENCE_LABEL = {
   school: "Whole school",
@@ -25,12 +26,33 @@ const Announcements = () => {
   const [pinned, setPinned] = useState(false);
   const [urgent, setUrgent] = useState(false);
   const [image, setImage] = useState("");
+  const [uploadedPreview, setUploadedPreview] = useState(null);
+  const [imageError, setImageError] = useState("");
+  const [imageBusy, setImageBusy] = useState(false);
 
   const isMainPage = audience === "main_page";
+
+  const handleImageFile = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImageError("");
+    setImageBusy(true);
+    try {
+      const dataUrl = await compressImageFile(file);
+      setUploadedPreview(dataUrl);
+      setImage("");
+    } catch (err) {
+      setImageError(err.message);
+      setUploadedPreview(null);
+    } finally {
+      setImageBusy(false);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title || !body) return;
+    const finalImage = uploadedPreview || image.trim();
     announcements.unshift({
       id: `ann-${Date.now()}`,
       audience,
@@ -38,7 +60,7 @@ const Announcements = () => {
       category: isMainPage ? category : undefined,
       pinned: isMainPage ? pinned : undefined,
       urgent: isMainPage ? urgent : undefined,
-      image: isMainPage && image.trim() ? image.trim() : null,
+      image: isMainPage && finalImage ? finalImage : null,
       title,
       body,
       date: new Date().toISOString().split("T")[0],
@@ -50,6 +72,8 @@ const Announcements = () => {
     setPinned(false);
     setUrgent(false);
     setImage("");
+    setUploadedPreview(null);
+    setImageError("");
     forceRender((n) => n + 1);
   };
 
@@ -105,16 +129,38 @@ const Announcements = () => {
               </select>
             </div>
             <div className="portal-field">
+              <label htmlFor="ann-image-file">
+                Image <span style={{ fontWeight: 400, color: "var(--muted)" }}>(optional — upload from your computer)</span>
+              </label>
+              <input id="ann-image-file" type="file" accept="image/*" onChange={handleImageFile} />
+            </div>
+            {imageBusy && <p className="portal-notice">Processing image…</p>}
+            {uploadedPreview && (
+              <img
+                src={uploadedPreview}
+                alt="Preview"
+                style={{ width: "160px", height: "100px", objectFit: "cover", borderRadius: "8px", marginBottom: "0.75rem" }}
+              />
+            )}
+            <div className="portal-field">
               <label htmlFor="ann-image">
-                Image URL <span style={{ fontWeight: 400, color: "var(--muted)" }}>(optional)</span>
+                Or image URL{" "}
+                <span style={{ fontWeight: 400, color: "var(--muted)" }}>
+                  (used only if no file is uploaded; leave both blank for a placeholder)
+                </span>
               </label>
               <input
                 id="ann-image"
                 value={image}
-                onChange={(e) => setImage(e.target.value)}
-                placeholder="https://… — leave blank to show a placeholder"
+                onChange={(e) => {
+                  setImage(e.target.value);
+                  setUploadedPreview(null);
+                  setImageError("");
+                }}
+                placeholder="https://…"
               />
             </div>
+            {imageError && <p className="portal-notice">{imageError}</p>}
             <div className="portal-field" style={{ display: "flex", gap: "1.5rem" }}>
               <label style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontWeight: 400 }}>
                 <input type="checkbox" checked={pinned} onChange={(e) => setPinned(e.target.checked)} />
@@ -145,7 +191,7 @@ const Announcements = () => {
             }}
           />
         </div>
-        <button type="submit" className="portal-link-btn">
+        <button type="submit" className="portal-link-btn" disabled={imageBusy}>
           Post announcement
         </button>
       </form>
@@ -156,19 +202,45 @@ const Announcements = () => {
           <p className="portal-empty">No announcements have been posted yet.</p>
         ) : (
           announcements.map((a) => (
-            <div key={a.id} style={{ borderTop: "1px solid #eef1ee", padding: "0.85rem 0" }}>
-              <div className="portal-subject-header">
-                <h3>{a.title}</h3>
-                <span style={{ fontSize: "0.78rem", color: "var(--muted)" }}>{a.date}</span>
+            <div
+              key={a.id}
+              style={{
+                display: "flex",
+                gap: "0.85rem",
+                borderTop: "1px solid #eef1ee",
+                padding: "0.85rem 0",
+              }}
+            >
+              {a.audience === "main_page" && (
+                <img
+                  src={a.image || ""}
+                  alt=""
+                  style={{
+                    width: "72px",
+                    height: "52px",
+                    objectFit: "cover",
+                    borderRadius: "6px",
+                    flexShrink: 0,
+                    background: a.image ? "#eef3ee" : "repeating-linear-gradient(45deg, #eef3ee, #eef3ee 6px, #f7faf7 6px, #f7faf7 12px)",
+                    visibility: a.image ? "visible" : "hidden",
+                  }}
+                />
+              )}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div className="portal-subject-header">
+                  <h3>{a.title}</h3>
+                  <span style={{ fontSize: "0.78rem", color: "var(--muted)" }}>{a.date}</span>
+                </div>
+                <p style={{ margin: "0 0 0.3rem" }}>{a.body}</p>
+                <span style={{ fontSize: "0.78rem", color: "var(--muted)" }}>
+                  {AUDIENCE_LABEL[a.audience]}
+                  {a.class ? ` — ${a.class}` : ""}
+                  {a.category ? ` — ${a.category}` : ""}
+                  {a.pinned ? " — Pinned" : ""}
+                  {a.urgent ? " — Urgent banner" : ""}
+                  {a.audience === "main_page" && !a.image ? " — No image (placeholder shown)" : ""}
+                </span>
               </div>
-              <p style={{ margin: "0 0 0.3rem" }}>{a.body}</p>
-              <span style={{ fontSize: "0.78rem", color: "var(--muted)" }}>
-                {AUDIENCE_LABEL[a.audience]}
-                {a.class ? ` — ${a.class}` : ""}
-                {a.category ? ` — ${a.category}` : ""}
-                {a.pinned ? " — Pinned" : ""}
-                {a.urgent ? " — Urgent banner" : ""}
-              </span>
             </div>
           ))
         )}

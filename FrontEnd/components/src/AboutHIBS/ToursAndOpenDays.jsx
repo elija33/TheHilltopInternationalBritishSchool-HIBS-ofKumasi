@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../ContactUs/ContactUs.css";
+import { addTourVisit, nextTourVisitId } from "../AdminPortal/tourVisitsStore";
 
 const MESSAGE_LIMIT = 2000;
 
@@ -26,6 +27,23 @@ const ToursAndOpenDays = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    addTourVisit({
+      id: nextTourVisitId(),
+      fullName,
+      email,
+      phone,
+      visitDate,
+      preferredTime,
+      message,
+      submittedAt: new Date().toISOString().split("T")[0],
+      status: "PENDING",
+    });
+    setFullName("");
+    setEmail("");
+    setPhone("");
+    setVisitDate("");
+    setPreferredTime("");
+    setMessage("");
     setSent(true);
   };
 

@@ -4,6 +4,7 @@ import "../StudentPortal/StudentPortal.css";
 import "./ParentPortal.css";
 import { parent, children } from "./mockData";
 import ChildSwitcher from "./ChildSwitcher";
+import hibsLogo from "../../image/HIB_n.jpeg";
 
 const TABS = [
   { to: "home", label: "Home" },
@@ -38,9 +39,12 @@ const ParentPortalLayout = () => {
   return (
     <div className="portal-shell">
       <div className="portal-header">
-        <div>
-          <h1>{parent.name}</h1>
-          <ChildSwitcher children={children} selectedChildId={childId} currentTab={currentTab} />
+        <div className="portal-header-brand">
+          <img src={hibsLogo} alt="HIBS logo" className="portal-header-logo" />
+          <div>
+            <h1>{parent.name}</h1>
+            <ChildSwitcher children={children} selectedChildId={childId} currentTab={currentTab} />
+          </div>
         </div>
         <button className="portal-logout" onClick={() => navigate("/")}>
           Log out

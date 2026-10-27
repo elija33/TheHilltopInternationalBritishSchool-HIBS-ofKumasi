@@ -34,7 +34,9 @@ const TABS = [
   { to: "carousel", label: "Carousel", Icon: IconLayers },
   { to: "photos", label: "Photos", Icon: IconUpload },
   { to: "teaching-staff", label: "Teaching Staff", Icon: IconPeople },
+  { to: "pta", label: "PTA", Icon: IconPeople },
   { to: "messages", label: "Messages", Icon: IconBell },
+  { to: "visits", label: "Tours & Visits", Icon: IconHome },
   { to: "settings", label: "Settings", Icon: IconGear },
 ];
 

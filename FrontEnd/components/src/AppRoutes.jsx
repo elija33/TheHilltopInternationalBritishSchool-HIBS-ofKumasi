@@ -9,6 +9,7 @@ import BoardOfDirectors from "./AboutHIBS/BoardOfDirectors";
 import TeachingStaff from "./AboutHIBS/TeachingStaff";
 import VisitingHIBS from "./AboutHIBS/VisitingHIBS";
 import ToursAndOpenDays from "./AboutHIBS/ToursAndOpenDays";
+import PTA from "./AboutHIBS/PTA";
 import AdministrativeStaff from "./Admission/AdministrativeStaff";
 import IGCSE from "./IGCSE/IGCSE";
 import ALevel from "./ALevel/ALevel";
@@ -55,6 +56,8 @@ import AdminCarousel from "./AdminPortal/Carousel";
 import AdminPhotos from "./AdminPortal/Photos";
 import AdminTeachingStaff from "./AdminPortal/TeachingStaffAdmin";
 import AdminMessages from "./AdminPortal/Messages";
+import AdminVisits from "./AdminPortal/Visits";
+import AdminPta from "./AdminPortal/Pta";
 import AdminApplications from "./AdminPortal/Applications";
 import AdminSettings from "./AdminPortal/Settings";
 import AdminSubAdmins from "./AdminPortal/SubAdmins";
@@ -68,6 +71,7 @@ import SubAdminParents from "./SubAdminPortal/Parents";
 import SubAdminClasses from "./SubAdminPortal/Classes";
 import SubAdminPhotos from "./SubAdminPortal/Photos";
 import SubAdminTeachingStaff from "./SubAdminPortal/TeachingStaff";
+import SubAdminPta from "./SubAdminPortal/Pta";
 import { getCurrentSubAdmin } from "./SubAdminPortal/useCurrentSubAdmin";
 import HeadmasterLogin from "./Login/HeadmasterLogin";
 import HeadmasterPortalLayout from "./HeadmasterPortal/HeadmasterPortalLayout";
@@ -96,6 +100,7 @@ const AppRoutes = () => {
       <Route path="/teaching-staff" element={<TeachingStaff />} />
       <Route path="/visiting-hibs" element={<VisitingHIBS />} />
       <Route path="/tours-and-open-days" element={<ToursAndOpenDays />} />
+      <Route path="/pta" element={<PTA />} />
       <Route path="/administrative-staff" element={<AdministrativeStaff />} />
       <Route path="/igcse" element={<IGCSE />} />
       <Route path="/a-level" element={<ALevel />} />
@@ -155,7 +160,9 @@ const AppRoutes = () => {
         <Route path="carousel" element={<AdminCarousel />} />
         <Route path="photos" element={<AdminPhotos />} />
         <Route path="teaching-staff" element={<AdminTeachingStaff />} />
+        <Route path="pta" element={<AdminPta />} />
         <Route path="messages" element={<AdminMessages />} />
+        <Route path="visits" element={<AdminVisits />} />
         <Route path="settings" element={<AdminSettings />} />
         <Route path="sub-admins" element={<AdminSubAdmins />} />
         <Route path="headmaster-approvals" element={<AdminHeadmasterApprovals />} />
@@ -189,6 +196,8 @@ const AppRoutes = () => {
         <Route path="announcements" element={<AdminAnnouncements />} />
         <Route path="photos" element={<SubAdminPhotos />} />
         <Route path="teaching-staff" element={<SubAdminTeachingStaff />} />
+        <Route path="pta" element={<SubAdminPta />} />
+        <Route path="visits" element={<AdminVisits />} />
       </Route>
 
       <Route path="/portal/headmaster" element={<HeadmasterPortalLayout />}>
