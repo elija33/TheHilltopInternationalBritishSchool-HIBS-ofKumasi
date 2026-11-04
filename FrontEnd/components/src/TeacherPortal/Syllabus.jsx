@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { fullName } from "../AdminPortal/teacherData";
 import { syllabusSubmissions, nextSyllabusSubmissionId } from "../AdminPortal/syllabusSubmissions";
+import { prepareSyllabusPdf } from "./syllabusFile";
 
 const STATUS_LABEL = {
   PENDING: "Awaiting headmaster approval.",
@@ -10,7 +11,10 @@ const STATUS_LABEL = {
 };
 
 const SyllabusCard = ({ subject, className, teacher }) => {
+  const [mode, setMode] = useState("text");
   const [content, setContent] = useState("");
+  const [file, setFile] = useState(null); // { dataUrl, fileName, converted }
+  const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [, forceRender] = useState(0);
 
@@ -23,12 +27,35 @@ const SyllabusCard = ({ subject, className, teacher }) => {
   const latest = submissionsForPair[submissionsForPair.length - 1];
   const blockedByPending = Boolean(latest && latest.status === "PENDING");
 
+  const handleFile = async (e) => {
+    const picked = e.target.files?.[0];
+    if (!picked) return;
+    setError("");
+    setBusy(true);
+    try {
+      const result = await prepareSyllabusPdf(picked);
+      setFile(result);
+    } catch (err) {
+      setFile(null);
+      setError(err.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
   const handleSave = (e) => {
     e.preventDefault();
-    if (!content.trim()) {
-      setError("Enter what this class will cover before submitting.");
+
+    if (mode === "text") {
+      if (!content.trim()) {
+        setError("Enter what this class will cover before submitting.");
+        return;
+      }
+    } else if (!file) {
+      setError("Upload a document before submitting.");
       return;
     }
+
     setError("");
     syllabusSubmissions.push({
       id: nextSyllabusSubmissionId(),
@@ -36,7 +63,10 @@ const SyllabusCard = ({ subject, className, teacher }) => {
       subject,
       teacherId: teacher.id,
       teacherName: fullName(teacher),
-      content: content.trim(),
+      contentType: mode,
+      content: mode === "text" ? content.trim() : null,
+      documentDataUrl: mode === "document" ? file.dataUrl : null,
+      documentName: mode === "document" ? file.fileName : null,
       submittedAt: new Date().toISOString().split("T")[0],
       status: "PENDING",
       decidedBy: null,
@@ -64,25 +94,76 @@ const SyllabusCard = ({ subject, className, teacher }) => {
         </p>
       )}
 
-      <textarea
-        rows={5}
-        value={content}
-        placeholder="What will this class cover this term?"
-        disabled={blockedByPending}
-        onChange={(e) => {
-          setContent(e.target.value);
-          setError("");
-        }}
-        style={{
-          width: "100%",
-          padding: "0.75rem",
-          borderRadius: "6px",
-          border: "1px solid #d7dcd7",
-          fontFamily: "inherit",
-          fontSize: "0.92rem",
-          boxSizing: "border-box",
-        }}
-      />
+      <div className="portal-toggle" style={{ marginBottom: "0.75rem" }}>
+        <label style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+          <input
+            type="radio"
+            name={`syllabus-mode-${subject}-${className}`}
+            checked={mode === "text"}
+            disabled={blockedByPending}
+            onChange={() => {
+              setMode("text");
+              setError("");
+            }}
+          />
+          Write it here
+        </label>
+        <label style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+          <input
+            type="radio"
+            name={`syllabus-mode-${subject}-${className}`}
+            checked={mode === "document"}
+            disabled={blockedByPending}
+            onChange={() => {
+              setMode("document");
+              setError("");
+            }}
+          />
+          Upload a document
+        </label>
+      </div>
+
+      {mode === "text" ? (
+        <textarea
+          rows={5}
+          value={content}
+          placeholder="What will this class cover this term?"
+          disabled={blockedByPending}
+          onChange={(e) => {
+            setContent(e.target.value);
+            setError("");
+          }}
+          style={{
+            width: "100%",
+            padding: "0.75rem",
+            borderRadius: "6px",
+            border: "1px solid #d7dcd7",
+            fontFamily: "inherit",
+            fontSize: "0.92rem",
+            boxSizing: "border-box",
+          }}
+        />
+      ) : (
+        <div>
+          <input
+            type="file"
+            accept="application/pdf,image/*,.doc,.docx,.txt,.ppt,.pptx"
+            disabled={blockedByPending || busy}
+            onChange={handleFile}
+          />
+          <p style={{ fontSize: "0.78rem", color: "var(--muted)", margin: "0.4rem 0 0" }}>
+            PDFs are uploaded as-is. Any other file type (images, Word, PowerPoint…) is
+            automatically converted to a PDF before it&rsquo;s submitted.
+          </p>
+          {busy && <p className="portal-notice">Preparing PDF…</p>}
+          {file && !busy && (
+            <p className="portal-success">
+              Ready: {file.fileName}
+              {file.converted ? " (converted to PDF)" : " (already a PDF)"}
+            </p>
+          )}
+        </div>
+      )}
       {error && <p className="portal-notice">{error}</p>}
 
       <p style={{ fontSize: "0.8rem", color: "var(--muted)", margin: "0.5rem 0 0" }}>
@@ -91,7 +172,12 @@ const SyllabusCard = ({ subject, className, teacher }) => {
         resubmit.
       </p>
 
-      <button type="submit" className="portal-link-btn" style={{ marginTop: "0.75rem" }} disabled={blockedByPending}>
+      <button
+        type="submit"
+        className="portal-link-btn"
+        style={{ marginTop: "0.75rem" }}
+        disabled={blockedByPending || busy}
+      >
         {blockedByPending ? "Awaiting approval" : "Save syllabus"}
       </button>
     </form>

@@ -5,6 +5,17 @@ const DocumentLink = ({ subject }) => {
   const [state, setState] = useState("idle");
   const [refreshing, setRefreshing] = useState(false);
 
+  // A real uploaded-and-converted PDF (see TeacherPortal/syllabusFile.js)
+  // opens for real; older demo entries with no actual file fall back to
+  // the simulated link behaviour below.
+  if (subject.documentDataUrl) {
+    return (
+      <a href={subject.documentDataUrl} target="_blank" rel="noreferrer" className="portal-link-btn">
+        Open document
+      </a>
+    );
+  }
+
   const handleOpen = (e) => {
     e.preventDefault();
     if (subject.expired && state !== "refreshed") {

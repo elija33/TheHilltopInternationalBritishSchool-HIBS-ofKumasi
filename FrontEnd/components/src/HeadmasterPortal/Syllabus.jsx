@@ -91,7 +91,15 @@ const Syllabus = () => {
                 </span>
               </div>
 
-              <p style={{ margin: "0 0 0.75rem", lineHeight: 1.6 }}>{s.content}</p>
+              {s.contentType === "document" ? (
+                <p style={{ margin: "0 0 0.75rem" }}>
+                  <a href={s.documentDataUrl} target="_blank" rel="noreferrer" className="portal-link-btn">
+                    Open {s.documentName}
+                  </a>
+                </p>
+              ) : (
+                <p style={{ margin: "0 0 0.75rem", lineHeight: 1.6 }}>{s.content}</p>
+              )}
 
               <p style={{ fontSize: "0.8rem", color: "var(--muted)", margin: "0 0 0.75rem" }}>
                 This is read-only here — approving publishes it exactly as submitted. If

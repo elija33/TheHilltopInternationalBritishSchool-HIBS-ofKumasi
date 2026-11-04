@@ -22,14 +22,20 @@ const Syllabus = () => {
           </div>
           <p style={{ color: "var(--muted)", margin: "0 0 0.5rem" }}>{s.teacher}</p>
 
-          {s.type === "none" || !s.content ? (
+          {s.type === "none" || (!s.content && !s.documentDataUrl) ? (
             <p className="portal-empty">No syllabus has been uploaded for {s.subject} yet.</p>
           ) : (
             <>
               <p style={{ fontSize: "0.8rem", color: "var(--muted)", marginBottom: "0.75rem" }}>
                 Last updated {s.updatedAt}
               </p>
-              <p style={{ margin: 0, lineHeight: 1.7 }}>{s.content}</p>
+              {s.type === "document" ? (
+                <a href={s.documentDataUrl} target="_blank" rel="noreferrer" className="portal-link-btn">
+                  Open document
+                </a>
+              ) : (
+                <p style={{ margin: 0, lineHeight: 1.7 }}>{s.content}</p>
+              )}
             </>
           )}
         </div>

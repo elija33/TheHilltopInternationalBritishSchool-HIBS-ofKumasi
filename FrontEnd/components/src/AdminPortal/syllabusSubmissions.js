@@ -40,15 +40,29 @@ export const syllabusSubmissions = [
 
 export const nextSyllabusSubmissionId = () => `ssub-${Date.now()}`;
 
-const mergeIntoSyllabusList = (list, subjectName, teacherName, content, date) => {
-  const existing = list.find((s) => s.subject === subjectName);
+// A submission is either written content (contentType "text") or an
+// uploaded file, already converted to PDF client-side before it ever
+// reached this queue (contentType "document", carrying documentDataUrl +
+// documentName) — see TeacherPortal/syllabusFile.js. A submission with no
+// contentType at all (the seeded demo ones below) is treated as "text",
+// the only kind that used to exist.
+const mergeIntoSyllabusList = (list, submission) => {
+  const isDocument = submission.contentType === "document";
+  const existing = list.find((s) => s.subject === submission.subject);
+  const fields = {
+    subject: submission.subject,
+    teacher: submission.teacherName,
+    updatedAt: submission.decidedAt,
+    type: isDocument ? "document" : "text",
+    content: isDocument ? null : submission.content,
+    documentDataUrl: isDocument ? submission.documentDataUrl : null,
+    documentName: isDocument ? submission.documentName : null,
+    expired: false,
+  };
   if (existing) {
-    existing.type = "text";
-    existing.content = content;
-    existing.updatedAt = date;
-    existing.expired = false;
+    Object.assign(existing, fields);
   } else {
-    list.push({ subject: subjectName, teacher: teacherName, updatedAt: date, type: "text", content });
+    list.push(fields);
   }
 };
 
@@ -58,19 +72,13 @@ const mergeIntoSyllabusList = (list, subjectName, teacherName, content, date) =>
 // record is never touched, and no other classmate's view is ever reached.
 const publishSyllabusToPortals = (submission) => {
   if (submission.class === demoStudent.currentClass) {
-    mergeIntoSyllabusList(
-      studentSyllabus,
-      submission.subject,
-      submission.teacherName,
-      submission.content,
-      submission.decidedAt,
-    );
+    mergeIntoSyllabusList(studentSyllabus, submission);
   }
   parentChildren
     .filter((c) => c.status === "active" && c.class === submission.class)
     .forEach((c) => {
       if (!c.syllabus) c.syllabus = [];
-      mergeIntoSyllabusList(c.syllabus, submission.subject, submission.teacherName, submission.content, submission.decidedAt);
+      mergeIntoSyllabusList(c.syllabus, submission);
     });
 };
 
