@@ -101,6 +101,14 @@ export const IconBell = () => (
   </svg>
 );
 
+export const IconCash = () => (
+  <svg {...base}>
+    <rect x="2" y="6" width="20" height="12" rx="2" />
+    <circle cx="12" cy="12" r="3" />
+    <path d="M6 9v.01M18 15v.01" />
+  </svg>
+);
+
 export const IconLogout = () => (
   <svg {...base}>
     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />

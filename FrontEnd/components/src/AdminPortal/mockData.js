@@ -97,6 +97,20 @@ export const subAdmins = [
   },
 ];
 
+// Accountants post tuition charges that flow straight to the Parent Portal
+// — see AccountantPortal/tuitionStore.js. Only the School Office (Admin) can
+// create an accountant account or grant/revoke their dashboard access; there
+// is no Sub Admin equivalent page for this, unlike Sub Admins/Teachers.
+export const accountants = [
+  {
+    id: "ac1",
+    name: "Kwaku Anane",
+    email: "k.anane@hibs.edu.gh",
+    status: "ACTIVE",
+    createdAt: "2026-03-01",
+  },
+];
+
 // A school-wide default. A real deployment should ship this OFF; it's
 // turned on here only for the demo, same as in the parent portal's mock data.
 export const arrearsPolicyEnabled = true;
@@ -197,17 +211,6 @@ export const announcements = [
   // Below: audience "main_page" is what the public homepage reads — each
   // carries the optional fields the homepage cards use (category, image,
   // pinned) that the other audiences don't need.
-  {
-    id: "mp1",
-    audience: "main_page",
-    urgent: true,
-    category: "Notice",
-    pinned: false,
-    image: null,
-    title: "School closes early this Friday",
-    body: "School closes early this Friday at 12:00 pm for staff training. Buses will run on the early-dismissal schedule.",
-    date: "2026-10-16",
-  },
   {
     id: "mp2",
     audience: "main_page",

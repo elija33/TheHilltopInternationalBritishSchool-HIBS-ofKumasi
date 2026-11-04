@@ -88,7 +88,6 @@ const quickLinks = [
 
 const sidebarPageLinks = [
   { label: "Housing & Dining", to: "/housing-and-dining" },
-  { label: "Clubs & Societies", to: "/clubs-and-societies" },
   { label: "Technology on Campus", to: "/technology-on-campus", active: true },
   { label: "Sports", to: "/sports" },
 ];

@@ -11,12 +11,12 @@ import VisitingHIBS from "./AboutHIBS/VisitingHIBS";
 import ToursAndOpenDays from "./AboutHIBS/ToursAndOpenDays";
 import PTA from "./AboutHIBS/PTA";
 import AdministrativeStaff from "./Admission/AdministrativeStaff";
+import AdmissionProcess from "./Admission/AdmissionProcess";
 import IGCSE from "./IGCSE/IGCSE";
 import ALevel from "./ALevel/ALevel";
 import ContactUs from "./ContactUs/ContactUs";
 import AllAnnouncements from "./News/AllAnnouncements";
 import FAQs from "./FAQs/FAQs";
-import ClubsAndSocieties from "./CampusLife/ClubsAndSocieties";
 import HousingAndDining from "./CampusLife/HousingAndDining";
 import TechnologyOnCampus from "./CampusLife/TechnologyOnCampus";
 import Sports from "./CampusLife/Sports";
@@ -34,6 +34,7 @@ import ParentHome from "./ParentPortal/Home";
 import ParentGrades from "./ParentPortal/Grades";
 import ParentAttendance from "./ParentPortal/Attendance";
 import ParentSyllabus from "./ParentPortal/Syllabus";
+import ParentTuition from "./ParentPortal/Tuition";
 import TeacherPortalLayout from "./TeacherPortal/TeacherPortalLayout";
 import TeacherHome from "./TeacherPortal/Home";
 import TeacherMyClasses from "./TeacherPortal/MyClasses";
@@ -55,12 +56,14 @@ import AdminAnnouncements from "./AdminPortal/Announcements";
 import AdminCarousel from "./AdminPortal/Carousel";
 import AdminPhotos from "./AdminPortal/Photos";
 import AdminTeachingStaff from "./AdminPortal/TeachingStaffAdmin";
+import AdminAdministrativeStaff from "./AdminPortal/AdministrativeStaff";
 import AdminMessages from "./AdminPortal/Messages";
 import AdminVisits from "./AdminPortal/Visits";
 import AdminPta from "./AdminPortal/Pta";
 import AdminApplications from "./AdminPortal/Applications";
 import AdminSettings from "./AdminPortal/Settings";
 import AdminSubAdmins from "./AdminPortal/SubAdmins";
+import AdminAccountants from "./AdminPortal/Accountants";
 import AdminHeadmasterApprovals from "./AdminPortal/HeadmasterApprovals";
 import SubAdminLogin from "./Login/SubAdminLogin";
 import SubAdminPortalLayout from "./SubAdminPortal/SubAdminPortalLayout";
@@ -71,6 +74,7 @@ import SubAdminParents from "./SubAdminPortal/Parents";
 import SubAdminClasses from "./SubAdminPortal/Classes";
 import SubAdminPhotos from "./SubAdminPortal/Photos";
 import SubAdminTeachingStaff from "./SubAdminPortal/TeachingStaff";
+import SubAdminAdministrativeStaff from "./SubAdminPortal/AdministrativeStaff";
 import SubAdminPta from "./SubAdminPortal/Pta";
 import { getCurrentSubAdmin } from "./SubAdminPortal/useCurrentSubAdmin";
 import HeadmasterLogin from "./Login/HeadmasterLogin";
@@ -80,6 +84,11 @@ import HeadmasterApprovals from "./HeadmasterPortal/Approvals";
 import HeadmasterMyClasses from "./HeadmasterPortal/MyClasses";
 import HeadmasterGrades from "./HeadmasterPortal/Grades";
 import HeadmasterSyllabus from "./HeadmasterPortal/Syllabus";
+import AccountantLogin from "./Login/AccountantLogin";
+import AccountantPortalLayout from "./AccountantPortal/AccountantPortalLayout";
+import AccountantHome from "./AccountantPortal/Home";
+import AccountantTuition from "./AccountantPortal/Tuition";
+import AccountantAnnouncements from "./AccountantPortal/Announcements";
 
 // All route definitions for the app, split out of App.jsx (which keeps the
 // site header, footer and application-modal chrome shared across every
@@ -102,11 +111,11 @@ const AppRoutes = () => {
       <Route path="/tours-and-open-days" element={<ToursAndOpenDays />} />
       <Route path="/pta" element={<PTA />} />
       <Route path="/administrative-staff" element={<AdministrativeStaff />} />
+      <Route path="/admission-process" element={<AdmissionProcess />} />
       <Route path="/igcse" element={<IGCSE />} />
       <Route path="/a-level" element={<ALevel />} />
       <Route path="/contact-us" element={<ContactUs />} />
       <Route path="/faqs" element={<FAQs />} />
-      <Route path="/clubs-and-societies" element={<ClubsAndSocieties />} />
       <Route path="/housing-and-dining" element={<HousingAndDining />} />
       <Route path="/technology-on-campus" element={<TechnologyOnCampus />} />
       <Route path="/sports" element={<Sports />} />
@@ -116,6 +125,7 @@ const AppRoutes = () => {
       <Route path="/login/admin" element={<AdminLogin />} />
       <Route path="/login/subadmin" element={<SubAdminLogin />} />
       <Route path="/login/headmaster" element={<HeadmasterLogin />} />
+      <Route path="/login/accountant" element={<AccountantLogin />} />
 
       <Route path="/portal/student" element={<StudentPortalLayout />}>
         <Route index element={<StudentHome />} />
@@ -132,6 +142,7 @@ const AppRoutes = () => {
         <Route path="grades" element={<ParentGrades />} />
         <Route path="attendance" element={<ParentAttendance />} />
         <Route path="syllabus" element={<ParentSyllabus />} />
+        <Route path="tuition" element={<ParentTuition />} />
       </Route>
 
       <Route path="/portal/teacher" element={<TeacherPortalLayout />}>
@@ -160,11 +171,13 @@ const AppRoutes = () => {
         <Route path="carousel" element={<AdminCarousel />} />
         <Route path="photos" element={<AdminPhotos />} />
         <Route path="teaching-staff" element={<AdminTeachingStaff />} />
+        <Route path="admin-staff" element={<AdminAdministrativeStaff />} />
         <Route path="pta" element={<AdminPta />} />
         <Route path="messages" element={<AdminMessages />} />
         <Route path="visits" element={<AdminVisits />} />
         <Route path="settings" element={<AdminSettings />} />
         <Route path="sub-admins" element={<AdminSubAdmins />} />
+        <Route path="accountants" element={<AdminAccountants />} />
         <Route path="headmaster-approvals" element={<AdminHeadmasterApprovals />} />
       </Route>
 
@@ -196,6 +209,7 @@ const AppRoutes = () => {
         <Route path="announcements" element={<AdminAnnouncements />} />
         <Route path="photos" element={<SubAdminPhotos />} />
         <Route path="teaching-staff" element={<SubAdminTeachingStaff />} />
+        <Route path="admin-staff" element={<SubAdminAdministrativeStaff />} />
         <Route path="pta" element={<SubAdminPta />} />
         <Route path="visits" element={<AdminVisits />} />
       </Route>
@@ -207,6 +221,13 @@ const AppRoutes = () => {
         <Route path="my-classes" element={<HeadmasterMyClasses />} />
         <Route path="grades" element={<HeadmasterGrades />} />
         <Route path="syllabus" element={<HeadmasterSyllabus />} />
+      </Route>
+
+      <Route path="/portal/accountant" element={<AccountantPortalLayout />}>
+        <Route index element={<AccountantHome />} />
+        <Route path="home" element={<AccountantHome />} />
+        <Route path="tuition" element={<AccountantTuition />} />
+        <Route path="announcements" element={<AccountantAnnouncements />} />
       </Route>
     </Routes>
   );

@@ -17,6 +17,7 @@ import {
   IconShield,
   IconBell,
   IconLayers,
+  IconCash,
   IconLogout,
 } from "./icons";
 
@@ -27,6 +28,7 @@ const TABS = [
   { to: "teachers", label: "Teachers", Icon: IconGraduationCap },
   { to: "parents", label: "Parents", Icon: IconHome },
   { to: "sub-admins", label: "Sub Admin", Icon: IconShield },
+  { to: "accountants", label: "Accountants", Icon: IconCash },
   { to: "headmaster-approvals", label: "Headmaster Approvals", Icon: IconStar },
   { to: "corrections", label: "Grade Corrections", Icon: IconEdit },
   { to: "publishing", label: "Publishing", Icon: IconUpload },
@@ -34,6 +36,7 @@ const TABS = [
   { to: "carousel", label: "Carousel", Icon: IconLayers },
   { to: "photos", label: "Photos", Icon: IconUpload },
   { to: "teaching-staff", label: "Teaching Staff", Icon: IconPeople },
+  { to: "admin-staff", label: "Administrative Staff", Icon: IconPeople },
   { to: "pta", label: "PTA", Icon: IconPeople },
   { to: "messages", label: "Messages", Icon: IconBell },
   { to: "visits", label: "Tours & Visits", Icon: IconHome },

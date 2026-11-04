@@ -22,7 +22,7 @@ const Footer = () => {
           <h3>Explore</h3>
           <Link to="/who">About HIBS</Link>
           <Link to="/a-level">Admissions</Link>
-          <Link to="/clubs-and-societies">Campus Life</Link>
+          <Link to="/housing-and-dining">Campus Life</Link>
           <Link to="/news">Announcements</Link>
         </div>
 

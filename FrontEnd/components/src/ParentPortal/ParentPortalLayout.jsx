@@ -11,6 +11,7 @@ const TABS = [
   { to: "grades", label: "Grades" },
   { to: "attendance", label: "Attendance" },
   { to: "syllabus", label: "Syllabus" },
+  { to: "tuition", label: "Tuition" },
 ];
 
 const ParentPortalLayout = () => {

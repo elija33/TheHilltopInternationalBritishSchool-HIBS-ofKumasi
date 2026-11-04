@@ -1,10 +1,305 @@
-.staff-field {
-  margin: 0 0 0.6rem;
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: #333;
+/* "Administrative Staff" page — reuses .hp-container/.hp-section-eyebrow
+   from Home/HomePage.css, plus its own admstaff-prefixed classes below. */
+
+.admstaff-hero {
+  position: relative;
+  background: var(--green-dark);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 2px,
+    transparent 2px,
+    transparent 26px
+  );
+  color: #fff;
+  padding: 2rem 0 3.5rem;
+  overflow: hidden;
 }
 
-.staff-field strong {
-  color: #16324f;
+.admstaff-breadcrumb {
+  position: relative;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 1.5rem;
+}
+
+.admstaff-breadcrumb a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
+
+.admstaff-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.admstaff-hero h1 {
+  position: relative;
+  margin: 0 0 1rem;
+  font-size: clamp(2.3rem, 4.5vw, 3.4rem);
+}
+
+.admstaff-hero > .hp-container > p {
+  position: relative;
+  max-width: 640px;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+}
+
+/* ---------- Staff cards ---------- */
+.admstaff-grid-section {
+  padding: 4rem 0 4.5rem;
+  background: var(--white);
+}
+
+.admstaff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+@media (max-width: 1000px) {
+  .admstaff-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .admstaff-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admstaff-card {
+  background: var(--white);
+  border: 1px solid #eef1ee;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.06);
+}
+
+.admstaff-card-photo {
+  background: var(--green-dark);
+  background-image: linear-gradient(160deg, var(--green-dark), var(--green));
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admstaff-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 4px solid #d49b00;
+  background: #fdf3cf;
+  color: var(--green-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.6rem;
+  overflow: hidden;
+}
+
+.admstaff-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admstaff-card-body {
+  padding: 1.5rem;
+}
+
+.admstaff-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.65rem;
+}
+
+.admstaff-badge {
+  display: inline-block;
+  background: #e6f2e9;
+  color: var(--green-dark);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+}
+
+.admstaff-badge.unconfirmed {
+  background: #fde3e3;
+  color: #9a1c1c;
+}
+
+.admstaff-card-body h3 {
+  margin: 0 0 0.35rem;
+  color: var(--green-dark);
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+.admstaff-also-teaches {
+  margin: 0;
+  color: var(--green);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.admstaff-divider {
+  height: 1px;
+  background: #eef1ee;
+  margin: 0.9rem 0;
+}
+
+.admstaff-qualifications {
+  margin: 0 0 1.1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.admstaff-qualifications li {
+  position: relative;
+  padding-left: 1.3rem;
+  margin-bottom: 0.55rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.admstaff-qualifications li::before {
+  content: "🎓";
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  font-size: 0.8rem;
+}
+
+.admstaff-qualifications-empty {
+  margin: 0 0 1.1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.admstaff-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.admstaff-btn {
+  flex: 1;
+  text-align: center;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid var(--green-dark);
+  color: var(--green-dark);
+  background: var(--white);
+}
+
+.admstaff-btn.primary {
+  background: var(--green-dark);
+  color: #fff;
+  border-color: var(--green-dark);
+}
+
+.admstaff-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---------- Who to contact ---------- */
+.admstaff-contact-wrap {
+  padding: 4.5rem 0;
+  background: #f7f5ef;
+}
+
+.admstaff-contact-wrap h2 {
+  margin: 0.4rem 0 0.4rem;
+  color: var(--green-dark);
+  font-size: 1.85rem;
+}
+
+.admstaff-contact-sub {
+  margin: 0 0 2rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.admstaff-contact-card {
+  background: var(--white);
+  border: 1px solid #eef1ee;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.admstaff-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid #eef1ee;
+}
+
+.admstaff-contact-row:last-child {
+  border-bottom: none;
+}
+
+.admstaff-contact-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #eef3ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+
+.admstaff-contact-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.admstaff-contact-text h4 {
+  margin: 0 0 0.2rem;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.admstaff-contact-text p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.admstaff-contact-link {
+  flex-shrink: 0;
+  color: var(--green-dark);
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.admstaff-contact-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 560px) {
+  .admstaff-contact-row {
+    flex-wrap: wrap;
+  }
+  .admstaff-contact-link {
+    margin-left: calc(44px + 1rem);
+  }
 }

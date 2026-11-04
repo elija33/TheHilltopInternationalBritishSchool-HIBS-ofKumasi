@@ -19,7 +19,6 @@ const infoCards = [
 
 const sidebarLinks = [
   { label: "Housing & Dining", to: "/housing-and-dining", active: true },
-  { label: "Clubs & Societies", to: "/clubs-and-societies" },
   { label: "Technology on Campus", to: "/technology-on-campus" },
   { label: "Sports", to: "/sports" },
 ];

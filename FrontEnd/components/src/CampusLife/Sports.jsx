@@ -5,7 +5,6 @@ import "./Sports.css";
 
 const sidebarLinks = [
   { label: "Housing & Dining", to: "/housing-and-dining" },
-  { label: "Clubs & Societies", to: "/clubs-and-societies" },
   { label: "Technology on Campus", to: "/technology-on-campus" },
   { label: "Sports", to: "/sports", active: true },
 ];
@@ -13,17 +12,14 @@ const sidebarLinks = [
 const sportsCards = [
   {
     title: "Inter-House Sports Competitions",
-    to: "/clubs-and-societies",
     body: "Every student belongs to a house, and houses compete throughout the year in athletics, football and other events, building school spirit and teamwork.",
   },
   {
     title: "Physical Education",
-    to: "/clubs-and-societies",
     body: "Physical education is a compulsory part of the curriculum for every student, reflecting our belief that a sound body makes a sound mind.",
   },
   {
     title: "Sports Clubs & Teams",
-    to: "/clubs-and-societies",
     body: "With parental and school consent, students may join after-school sports clubs and teams, from recreational sessions to competitive fixtures against other schools.",
   },
 ];
@@ -66,9 +62,7 @@ const Sports = () => {
           {sportsCards.map((card) => (
             <div className="sports-card" key={card.title}>
               <div className="sports-card-image" />
-              <Link to={card.to} className="sports-card-title">
-                {card.title}
-              </Link>
+              <span className="sports-card-title">{card.title}</span>
               <p>{card.body}</p>
             </div>
           ))}

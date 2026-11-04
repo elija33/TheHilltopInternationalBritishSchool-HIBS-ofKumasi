@@ -26,6 +26,7 @@ const TABS = [
   { to: "announcements", label: "Announcements", Icon: IconMegaphone },
   { to: "photos", label: "Photos", Icon: IconUpload },
   { to: "teaching-staff", label: "Teaching Staff", Icon: IconPeople },
+  { to: "admin-staff", label: "Administrative Staff", Icon: IconPeople },
   { to: "pta", label: "PTA", Icon: IconPeople },
   { to: "visits", label: "Tours & Visits", Icon: IconHome },
 ];

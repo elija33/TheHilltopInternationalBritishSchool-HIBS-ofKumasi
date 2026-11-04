@@ -122,6 +122,9 @@ const App = () => {
                 </a>
                 <ul className="hp-dropdown">
                   <li>
+                    <Link to="/admission-process">Admission Process</Link>
+                  </li>
+                  <li>
                     <Link to="/a-level">A Level</Link>
                   </li>
                   <li>
@@ -140,9 +143,6 @@ const App = () => {
                 <ul className="hp-dropdown">
                   <li>
                     <Link to="/housing-and-dining">Housing & Dining</Link>
-                  </li>
-                  <li>
-                    <Link to="/clubs-and-societies">Clubs &amp; Societies</Link>
                   </li>
                   <li>
                     <Link to="/technology-on-campus">Technology on Campus</Link>

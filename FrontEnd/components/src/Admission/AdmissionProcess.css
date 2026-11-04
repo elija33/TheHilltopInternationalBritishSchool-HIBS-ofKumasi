@@ -1,0 +1,362 @@
+/* "Admission Process" page — reuses .hp-container/.hp-section-eyebrow/
+   .hp-hero-cta-primary/.hp-hero-cta-secondary from Home/HomePage.css and
+   .admstaff-btn from ./AdministrativeStaff.css, plus its own
+   adp-prefixed classes below. */
+
+.adp-hero {
+  position: relative;
+  background: var(--green-dark);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 2px,
+    transparent 2px,
+    transparent 26px
+  );
+  color: #fff;
+  padding: 2rem 0 4rem;
+  overflow: hidden;
+}
+
+.adp-breadcrumb {
+  position: relative;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 1.5rem;
+}
+
+.adp-breadcrumb a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
+
+.adp-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.adp-hero h1 {
+  position: relative;
+  margin: 0 0 1rem;
+  font-size: clamp(2.3rem, 4.5vw, 3.4rem);
+  line-height: 1.15;
+}
+
+.adp-hero-highlight {
+  color: #ffd83b;
+}
+
+.adp-hero-subtitle {
+  position: relative;
+  max-width: 600px;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 1.75rem;
+}
+
+.adp-hero-actions {
+  position: relative;
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- Admission Process ---------- */
+.adp-process-section {
+  padding: 4.5rem 0 5rem;
+  background: var(--white);
+}
+
+.adp-process-section h2 {
+  margin: 0.3rem 0 0.4rem;
+  color: var(--green-dark);
+  font-size: 1.85rem;
+}
+
+.adp-process-intro {
+  margin: 0 0 2rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.adp-notice-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #faf6e8;
+  border: 1px solid #f0e4a8;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.adp-notice-icon {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--green-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.adp-notice-card h3 {
+  margin: 0 0 0.25rem;
+  color: var(--green-dark);
+  font-size: 1rem;
+}
+
+.adp-notice-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.adp-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 3rem;
+}
+
+.adp-step {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+
+.adp-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--green-dark);
+  color: #fff;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.adp-step h3 {
+  margin: 0 0 0.35rem;
+  color: var(--green-dark);
+  font-size: 0.98rem;
+}
+
+.adp-step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  padding: 0 0.5rem;
+}
+
+.adp-step-connector {
+  flex: 0.4;
+  height: 2px;
+  margin-top: 19px;
+  background-image: linear-gradient(to right, #d49b00 60%, transparent 40%);
+  background-size: 10px 2px;
+  background-repeat: repeat-x;
+}
+
+@media (max-width: 760px) {
+  .adp-steps {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .adp-step-connector {
+    display: none;
+  }
+}
+
+.adp-path-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 760px) {
+  .adp-path-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.adp-path-card {
+  background: var(--white);
+  border: 1px solid #eef1ee;
+  border-radius: 16px;
+  padding: 1.75rem;
+}
+
+.adp-path-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+
+.adp-path-badge.new {
+  background: #e6f2e9;
+  color: var(--green-dark);
+}
+
+.adp-path-badge.transfer {
+  background: #fdf3cf;
+  color: #8a5a00;
+}
+
+.adp-path-card h3 {
+  margin: 0 0 0.4rem;
+  color: var(--green-dark);
+  font-size: 1.15rem;
+}
+
+.adp-path-card > p {
+  margin: 0 0 1.1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.adp-checklist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.adp-checklist li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.adp-checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e6f2e9;
+  color: var(--green-dark);
+  font-size: 0.68rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adp-contact-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  background: var(--white);
+  border: 1px solid #eef1ee;
+  border-radius: 16px;
+  padding: 1.75rem;
+}
+
+.adp-contact-avatar {
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 3px solid #d49b00;
+  background: #fdf3cf;
+  color: var(--green-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  overflow: hidden;
+}
+
+.adp-contact-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.adp-contact-body {
+  flex: 1;
+  min-width: 220px;
+}
+
+.adp-contact-body h3 {
+  margin: 0.1rem 0 0.3rem;
+  color: var(--green-dark);
+  font-size: 1.1rem;
+}
+
+.adp-contact-role {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.adp-contact-more {
+  color: var(--green-dark);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.adp-contact-more:hover {
+  text-decoration: underline;
+}
+
+.adp-contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.adp-contact-actions .admstaff-btn {
+  white-space: nowrap;
+}
+
+/* ---------- Final CTA ---------- */
+.adp-final-cta {
+  background: var(--green-dark);
+  padding: 3.5rem 0;
+}
+
+.adp-final-cta-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.adp-final-cta-inner h2 {
+  margin: 0 0 0.5rem;
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+.adp-final-cta-inner > div:first-child p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+}
+
+.adp-final-cta-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
