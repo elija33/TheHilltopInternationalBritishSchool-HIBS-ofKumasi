@@ -6,7 +6,7 @@ import { gradeSubmissions, nextSubmissionId } from "../AdminPortal/gradeSubmissi
 
 // Generic assessment template — this demo has no per-subject assessment
 // calendar, so every subject+class pair gets the same placeholder to grade.
-const ASSESSMENT = { name: "Class Test 1", weight: 20, max: 50 };
+const ASSESSMENT = { name: "Class Test 1", weight: 20, max: 100 };
 
 const pairKey = (subject, cls) => `${subject}::${cls}`;
 
