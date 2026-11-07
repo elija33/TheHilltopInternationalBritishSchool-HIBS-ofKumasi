@@ -4,11 +4,17 @@ import "./VisitingHIBS.css";
 import hilltopSquare2 from "../../image/hilltop-square2.jpg";
 import hilltop1 from "../../image/hilltop-1.jpg";
 import room1 from "../../image/room1.jpg";
+import locationMap from "../../image/location-map.jpg";
+
+const DIRECTIONS_URL =
+  "https://www.google.com/maps/search/?api=1&query=1+Cecilia+Agyei-Amoako+Road%2C+Kumasi";
 
 const visitCards = [
   {
     title: "Location & Directions",
-    to: "/contact-us",
+    to: DIRECTIONS_URL,
+    external: true,
+    image: locationMap,
     body: "Find directions and parking information for our campus on Cecilia Agyei Amoako Road, Daban, near Dr. Asafo Adjei Hospital, off Ricky Boakye Guinness Depot.",
   },
   {
@@ -94,9 +100,20 @@ const VisitingHIBS = () => {
               ) : (
                 <div className="visiting-info-image" />
               )}
-              <Link to={card.to} className="visiting-info-title">
-                {card.title}
-              </Link>
+              {card.external ? (
+                <a
+                  href={card.to}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="visiting-info-title"
+                >
+                  {card.title}
+                </a>
+              ) : (
+                <Link to={card.to} className="visiting-info-title">
+                  {card.title}
+                </Link>
+              )}
               <p>{card.body}</p>
             </div>
           ))}

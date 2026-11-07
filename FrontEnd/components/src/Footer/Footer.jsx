@@ -31,7 +31,7 @@ const Footer = () => {
           <Link to="/login/parent">Parent Portal</Link>
           <Link to="/login/student">Student Portal</Link>
           <Link to="/faqs">FAQs</Link>
-          <Link to="/#jobs">Jobs</Link>
+          <Link to="/#jobs">Careers</Link>
         </div>
 
         <div className="footer-column">

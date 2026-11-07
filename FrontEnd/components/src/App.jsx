@@ -42,7 +42,6 @@ const App = () => {
               <Link to="/login/student">Students</Link>
               <Link to="/#alumni">Alumni</Link>
               <Link to="/login/parent">Parents</Link>
-              <Link to="/#jobs">Jobs</Link>
               <Link to="/igcse">IGCSE</Link>
               <div className="hp-portal-login">
                 <button type="button">Portal Login &rarr;</button>
@@ -158,9 +157,9 @@ const App = () => {
               <Link to="/faqs" className="hp-nav-link">
                 FAQs
               </Link>
-              <Link to="/#media" className="hp-nav-link">
+              {/* <Link to="/#media" className="hp-nav-link">
                 Media
-              </Link>
+              </Link> */}
               <Link to="/contact-us" className="hp-nav-link">
                 Contact
               </Link>
